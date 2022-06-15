@@ -4,7 +4,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import Typed from 'typed.js'
 import favicon from '../../../assets/images/icons/logoHomepage.ico'
 import './HomePage.css'
-import Favicon from 'react-favicon'
+
 
 
 
@@ -41,7 +41,7 @@ export default function HomePage() {
             <Helmet>
                 <title>Bắt đầu với Chemiscare</title>
             </Helmet>
-            <Favicon url={favicon} />
+            {/* <Favicon url={favicon} /> */}
             <div className="h-[100vh] bg-[#F6EBDC] flex">
                 <div className="w-[50%] h-full px-[5px] pt-[20px] flex flex-wrap partFirst">
                     <div className="flex items-center grow h-[30px] justify-between">
