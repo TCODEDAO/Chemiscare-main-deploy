@@ -1,0 +1,17 @@
+.container {
+    box-sizing: border-box;
+}
+
+.avatarImage {
+    border-radius: 50%;
+}
+
+.avatatext {
+    border-radius: 50%;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: 700;
+}
