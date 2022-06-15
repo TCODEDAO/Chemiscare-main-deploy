@@ -1,0 +1,122 @@
+*,
+*:before,
+*:after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+
+.gradientBoxQuestion {
+    height: 140px;
+    width: 600px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 10%;
+    left: 50%;
+    border-radius: 80px;
+    margin-top: 50px;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.gradientBoxQuestion:before {
+    content: "";
+    height: 500%;
+    width: 150%;
+    position: absolute;
+    background: conic-gradient(#fd004c, #fe9000, #fff020, #3edf4b, #3363ff, #b102b7, #fd004c);
+    left: -25%;
+    top: -100%;
+    animation: spin 2.5s infinite linear;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+
+
+.gradientBoxQuestion .gradientBoxQuestionContent {
+    position: absolute;
+    background-color: #1c1b29;
+    height: 92%;
+    width: 97.5%;
+    top: 4.4%;
+    left: 1.4%;
+    color: #ffffff;
+    font-size: 20px;
+    border-radius: 80px;
+}
+
+.progress {
+    background-color: #d8d8d8;
+    border-radius: 30px;
+    position: relative;
+    top: 44%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 50px;
+    width: 500px;
+    z-index: 2;
+}
+
+.progress-done {
+    background: linear-gradient(to left, #F2709C, #FF9472);
+    box-shadow: 0 3px 3px -5px #F2709C, 0 2px 5px #F2709C;
+    border-radius: 30px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    opacity: 1;
+    transition: 1s ease 3s;
+    z-index: 2;
+}
+
+.requestRotate {
+    display: none;
+}
+
+@media screen and (orientation:portrait) {
+    .requestRotate {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 46px;
+        font: 600;
+        color: #fff;
+        background-color: #1c1b29;
+        height: 100vh;
+        width: 100vw;
+    }
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
+
+
+    .responsiveAnswerBox {
+        width: 200px !important;
+        height: 80px !important;
+        margin-left: 12px !important;
+        margin-right: 12px !important;
+
+    }
+
+    .responsiveAnswerBoxGroup {
+        top: 48%;
+        gap: 0 !important;
+    }
+
+    .progress {
+        display: none !important;
+    }
+
+    .hideInMoblie {
+        display: none;
+    }
+}

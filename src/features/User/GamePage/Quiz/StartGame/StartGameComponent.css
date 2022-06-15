@@ -1,0 +1,274 @@
+.responsiveBackGroundGame {
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+#SpeechBubble {
+    position: absolute;
+    transform-origin: 0% 100%;
+    text-align: center;
+    background-color: #bbb;
+    color: white;
+    border-radius: 10px;
+    max-width: 522px;
+    padding: 10px;
+    transform: scale(0);
+    animation-fill-mode: forwards;
+}
+
+@media screen and (min-width: 1279px) and (min-height: 400px) and (max-height: 600px) {
+    #SpeechBubble {
+        top: 201px;
+    }
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
+    .responsiveBackGroundGame {
+        height: 667px;
+        width: 375px;
+    }
+
+    #Rectangle {
+        left: -40px;
+        top: 146px;
+    }
+
+    #SpeechBubble {
+        width: 310px;
+        top: 240px;
+    }
+
+    .responsiveStartBtn {
+        font-size: 10px;
+        font-weight: 700;
+        top: 424px;
+    }
+}
+
+@media only screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
+    .responsiveStartBtn {
+        font-size: 10px;
+        font-weight: 700;
+        top: 526px;
+    }
+
+    #SpeechBubble {
+        width: 310px;
+        left: 56px;
+        top: 355px;
+    }
+}
+
+@media only screen and (device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) {
+    .responsiveStartBtn {
+        font-size: 10px;
+        font-weight: 700;
+        top: 494px;
+    }
+
+    #SpeechBubble {
+        width: 310px;
+        left: 56px;
+        top: 332px;
+    }
+}
+
+@media only screen and (device-width: 393px) and (device-height: 851px) {
+    #Rectangle {
+        left: -40px;
+        top: 152px;
+    }
+
+    .responsiveStartBtn {
+        font-size: 10px;
+        font-weight: 700;
+        top: 492px;
+    }
+
+    #SpeechBubble {
+        width: 310px;
+        top: 336px;
+    }
+}
+
+#SpeechBubble::before {
+    content: '';
+    display: block;
+    width: 0;
+    position: absolute;
+    bottom: -20px;
+    left: 12px;
+    border-style: solid;
+    border-width: 15px;
+    border-color: #bbb transparent transparent #bbb;
+    transform: rotate(3deg);
+}
+
+@media only screen and (device-width: 360px) and (device-height: 740px) {
+    #Rectangle {
+        left: -40px;
+        top: 154px;
+    }
+
+    .responsiveStartBtn {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        top: 60%;
+        left: 51%;
+    }
+
+    #SpeechBubble {
+        margin-top: -84px;
+    }
+}
+
+@media only screen and (device-width: 412px) and (device-height: 915px) {
+    #Rectangle {
+        left: -40px;
+        top: 154px;
+    }
+
+    .responsiveStartBtn {
+        padding-top: 24px;
+        padding-bottom: 24px;
+        top: 524px;
+    }
+
+    #SpeechBubble {
+        width: 310px;
+        top: 364px;
+    }
+}
+
+@media only screen and (device-width: 820px) and (device-height: 1180px) {
+    #Rectangle {
+        left: 30px;
+        top: 148px;
+    }
+
+    .responsiveStartBtn {
+        padding-top: 24px;
+        padding-bottom: 24px;
+        top: 648px;
+    }
+
+    #SpeechBubble {
+        width: 310px;
+        top: 498px;
+        left: 122px;
+    }
+}
+
+@media only screen and (device-width: 768px) and (device-height: 1024px) {
+    #SpeechBubble {
+        margin-top: -74px;
+        margin-left: 50px;
+    }
+}
+
+@media only screen and (device-width: 912px) and (device-height: 1368px) {
+    #SpeechBubble {
+        margin-top: -76px;
+        margin-left: 50px;
+    }
+}
+
+@media only screen and (device-width: 540px) and (device-height: 720px) {
+    #SpeechBubble {
+        width: 310px;
+        top: 268px;
+    }
+}
+
+@media only screen and (device-width: 280px) and (device-height: 653px) {
+    #SpeechBubble {
+        font-size: 10px;
+        margin-top: -94px;
+    }
+
+    .responsiveStartBtn {
+        left: 66%;
+        margin-top: 32px;
+        margin-bottom: 10px;
+    }
+
+    #Rectangle {
+        left: -40px;
+        top: 100px;
+    }
+}
+
+@media only screen and (device-width: 412px) and (device-height: 914px) {
+    .responsiveStartBtn {
+        font-size: 10px;
+        font-weight: 700;
+        top: 534px;
+    }
+
+    #SpeechBubble {
+        width: 310px;
+        top: 362px;
+    }
+}
+
+@media only screen and (min-width: 667px) and (max-width: 1023px) {
+    .responsiveStartBtn {
+        font-size: 10px;
+        font-weight: 700;
+        top: 534px;
+    }
+
+    #SpeechBubble {
+        width: 310px;
+        top: 362px;
+    }
+}
+
+@media only screen and (min-height: 601px) and (min-width: 1300px) {
+
+
+    #SpeechBubble {
+
+        top: 214px;
+    }
+}
+
+/* Here the scale changes from 0 to 1. To add the bounciness 
+effect, the scale is set to 1.25 midway through the animation
+to give the animation a nicer effect. */
+@keyframes expand-bounce {
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1.25);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.ripples {
+    position: absolute;
+    background-color: #fff;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    border-radius: 50%;
+    animation: animate 1s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0.5;
+    }
+
+    100% {
+        width: 500px;
+        height: 500px;
+        opacity: 0;
+    }
+}

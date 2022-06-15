@@ -7,7 +7,7 @@ import './HomePage.css'
 
 
 
-
+import Favicon from 'react-favicon'
 // import { notifyInfo } from '../Alert/AlertComponents'
 export default function HomePage() {
 
@@ -41,11 +41,11 @@ export default function HomePage() {
             <Helmet>
                 <title>Bắt đầu với Chemiscare</title>
             </Helmet>
-            {/* <Favicon url={favicon} /> */}
+            <Favicon url={favicon} />
             <div className="h-[100vh] bg-[#F6EBDC] flex">
                 <div className="w-[50%] h-full px-[5px] pt-[20px] flex flex-wrap partFirst">
                     <div className="flex items-center grow h-[30px] justify-between">
-                        <Link to="/" className="flex items-center px-[20px] logo">
+                        <Link to="/learn" className="flex items-center px-[20px] logo">
                             <i className="fa-solid fa-atom text-2xl logoIcon"></i>
                             <span className="font-bold text-xl logoName  ">Chemiscare</span>
                         </Link>
@@ -86,8 +86,14 @@ export default function HomePage() {
                             <i className="fa-solid fa-bars text-[30px] p-4 pr-0 hover:text-[#ff4b2b]"></i>
                             <ul className="justify-between grow absolute top-[100%] right-1 flex-col bg-[#f8593d] text-white rounded-[4px] hidden">
                                 <li className="w-[200px]">
-                                    <Link className="px-6 block py-4 boder-bot" to="/forum" >
+                                    <Link className="px-6 block py-4 boder-bot" to="/learn" >
                                         <i className="text-[18px] fa-solid fa-house"></i>
+                                        <span className="text-sm text-[16px] pl-1  ">Trang Chủ</span>
+                                    </Link>
+                                </li>
+                                <li className="w-[200px]">
+                                    <Link className="px-6 block py-4 boder-bot" to="/forum" >
+                                        <i className="text-[18px] fa-solid fa-people-group"></i>
                                         <span className="text-sm text-[16px] pl-1  ">Diễn Đàng</span>
                                     </Link>
                                 </li>

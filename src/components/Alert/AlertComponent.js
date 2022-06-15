@@ -1,4 +1,4 @@
-import { toast } from 'react-toastify'
+import { toast } from "react-toastify"
 
 
 const notifySuccess = (content) =>
@@ -45,15 +45,15 @@ const notifyErorr = (content) =>
         progress: undefined,
         theme: 'colored',
     })
-const notifyWelcome = (content) =>
-    toast(`👋 ${content}`, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-    })
+const notifyWelcome = (content) => toast(`👋 ${content}`, {
+    position: 'top-right',
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'colored',
+})
 
 export { notifySuccess, notifyWarn, notifyInfo, notifyErorr, notifyWelcome }

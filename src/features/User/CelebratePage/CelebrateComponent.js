@@ -8,7 +8,7 @@ const Navigation = lazy(() => import('../../../components/Navigation/NavigationC
 const Footer = lazy(() => import('../../../components/Footer/FooterComponent'))
 export default function CelebratePage() {
     const navigate = useNavigate()
-    const currentUser = useSelector((state) => state?.auth?.login?.currentUser)
+    const currentUser = useSelector((state) => state.auth && state.auth.login && state.auth.login.currentUser)
     useEffect(() => {
         if (!currentUser) {
             navigate('/auth')

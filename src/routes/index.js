@@ -4,12 +4,20 @@ const HomePage = lazy(() => import('../features/User/HomePage/HomePage'))
 const AuthPage = lazy(() => import('../features/User/AuthPage/AuthPage'))
 const CelebratePage = lazy(() => import('../features/User/CelebratePage/CelebrateComponent'))
 const RulePage = lazy(() => import('../features/User/RulePage/RuleComponent'))
+const LearnPage = lazy(() => import('../features/User/LearnPage/LearnPage'))
+const DetailUserInfomation = lazy(() => import('../features/User/AuthPage/DetailUserInfomation'))
+
+//Game
+const StartGameComponent = lazy(() => import('../features/User/GamePage/Quiz/StartGame/StartGameComponent'))
+
 const publicRoutes = [
     { id: 0, path: '/', index: true, component: HomePage },
     { id: 1, path: '/auth', index: true, component: AuthPage },
     { id: 2, path: '/celebrate', index: true, component: CelebratePage },
-    { id: 3, path: '/rules', index: true, component: RulePage }
-
+    { id: 3, path: '/rules', index: true, component: RulePage },
+    { id: 4, path: '/learn', index: true, component: LearnPage },
+    { id: 5, path: '/auth/detail', index: true, component: DetailUserInfomation },
+    { id: 6, path: '/learn/game/start', index: true, component: StartGameComponent }
 ]
 
 export { publicRoutes }

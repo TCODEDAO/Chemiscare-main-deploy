@@ -42,9 +42,18 @@ function NavBarLearnPage({ currentUser }) {
                     <li className="" >
                         <Link
                             className="p-4 text-[18px] text-[#868991] hover:text-[#d54253]"
+                            to="/learn"
+                        >
+                            <i className="fa-solid fa-house"></i>
+                            <span className="pl-1">Trang Chủ</span>
+                        </Link>
+                    </li>
+                    <li className="" >
+                        <Link
+                            className="p-4 text-[18px] text-[#868991] hover:text-[#d54253]"
                             to="/forum"
                         >
-                            <i className="fa-solid fa-file-lines"></i>
+                            <i className="fa-solid fa-people-group"></i>
                             <span className="pl-1">Diễn Đàn</span>
                         </Link>
                     </li>
@@ -88,9 +97,20 @@ function NavBarLearnPage({ currentUser }) {
                             <li className="w-[200px]" >
                                 <Link
                                     className="px-6 block py-4 boder-bot hover:text-[#d54253]"
-                                    to="/forum"
+                                    to="/learn"
                                 >
                                     <i className="text-[18px] fa-solid fa-house"></i>
+                                    <span className="text-sm text-[16px] pl-1">
+                                        Trang Chủ
+                                    </span>
+                                </Link>
+                            </li>
+                            <li className="w-[200px]" >
+                                <Link
+                                    className="px-6 block py-4 boder-bot hover:text-[#d54253]"
+                                    to="/forum"
+                                >
+                                    <i className="text-[18px] fa-solid fa-people-group"></i>
                                     <span className="text-sm text-[16px] pl-1">
                                         Diễn Đàn
                                     </span>

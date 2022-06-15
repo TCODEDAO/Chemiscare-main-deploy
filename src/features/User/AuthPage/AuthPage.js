@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { notifyInfo, notifySuccess, notifyWarn } from '../../../components/Alert/AlertComponent'
 import { Link } from 'react-router-dom'
-// import Favicon from 'react-favicon'
+import Favicon from 'react-favicon'
 //component
 // import AlertAuthStatus from './AlertAuthStatus'
 
@@ -86,15 +86,7 @@ export default function AuthPage() {
         }
     }
 
-    // const notifyRequiredLogin = useSelector(
-    //     (state) => state.alert.learnPage.message,
-    // )
-    // useEffect(() => {
-    //     if (notifyRequiredLogin && notifyRequiredLogin !== null) {
-    //         notifyInfo(notifyRequiredLogin)
-    //         return
-    //     }
-    // }, [])
+
 
     return (
         <>
@@ -103,7 +95,7 @@ export default function AuthPage() {
                 <title>Login</title>
                 <link rel="icon" href={favicon} />
             </Helmet>
-            {/* <Favicon url={favicon} /> */}
+            <Favicon url={favicon} />
 
 
             <div className="body">

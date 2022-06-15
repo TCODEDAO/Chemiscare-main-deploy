@@ -51,35 +51,22 @@ const logOutUser = async (dispatch, navigate, accessToken, axiosJWT, id) => {
         dispatch(logOutFailed())
     }
 }
-// const detailUserInfomation = async (
-//     dispatch,
-//     navigate,
-//     accessToken,
-//     axiosJWT,
-//     id,
-//     data,
-// ) => {
-//     try {
-//         const res = await axiosJWT.post(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/auth/detailUser`, {
-//             userId: id,
-//             ...data
-//         }, {
-//             headers: { token: `Bearer ${accessToken}` },
 
-//         })
+const updateDetailInfomation = async (dispatch, navigate, axiosJWT, currentUser, data) => {
+    try {
 
-//         await axiosJWT.put(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/auth/userDetailUpdate`, {
-//             detailId: res.data.detailId,
-//             userId: id
-//         }, { headers: { token: `Bearer ${accessToken}` } })
-//         // dispatch(updateDetailInfoSuccess())
-//         dispatch(loginRequireLearnPage('Vui lòng đăng nhập lại để hoàn thành cập nhật thông tin!'))
-//         navigate('/auth')
-//     } catch (err) {
-//         dispatch(loginRequireLearnPage('Có lỗi xảy ra, xin hãy thử đăng nhập lại!'))
-//         navigate('/auth')
+        const res = await axiosJWT.post(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/users/detail/${currentUser?._id}`, data, { headers: { token: `Bearer ${currentUser?.accessToken}` } })
+        const dataResponse = res.data
+        const { isSuccess, message } = dataResponse
+        const newUser = { ...dataResponse.user }
 
-//         // dispatch(updateDetailInfoFailed())
-//     }
-// }
-export { registerUser, loginUser, logOutUser }
+        await dispatch(loginSuccess({ ...newUser, accessToken: currentUser?.accessToken }))
+        notifySuccess(res.data.message)
+        setTimeout(() => { navigate('/learn') }, 1000)
+    } catch (err) {
+        console.log(err)
+        notifyErorr(err)
+        navigate('/auth')
+    }
+}
+export { registerUser, loginUser, logOutUser, updateDetailInfomation }

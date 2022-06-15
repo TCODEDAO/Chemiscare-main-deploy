@@ -1,0 +1,21 @@
+@import url(https://fonts.googleapis.com/css?family=Sigmar+One);
+
+.congrats {
+    width: 550px;
+    height: 100px;
+    padding: 20px 10px;
+    text-align: center;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+}
+
+.h1Congrats {
+    transform-origin: 50% 50%;
+    font-size: 50px;
+    font-family: 'Sigmar One', cursive;
+    cursor: pointer;
+    z-index: 2;
+    text-align: center;
+    width: 100%;
+}
