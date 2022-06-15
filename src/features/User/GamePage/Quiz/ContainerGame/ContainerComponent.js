@@ -6,13 +6,13 @@ import ScoreComponent from './ScoreComponent'
 import './GameComponent.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { loginRequireLearnPage } from '../../../../redux/reducers/AlertSlice'
 import { notifyErorr } from '../../../../components/Alert/AlertComponents'
 import { questionsReturn } from './renderData'
-import { upCounter } from '../../../../redux/reducers/QuizSlice'
+import { timeIncrease } from '../../../../../redux/User/QuizSlice'
 import { createNewResultQuiz } from '../../../../api/apiQuestion'
 import { createAxios } from '../../../../utils/axiosJWT'
 import { checkTokenSuccess } from '../../../../redux/reducers/AuthSlice'
+import { notifyInfo } from '../../../../../components/Alert/AlertComponent'
 const parse = require('html-react-parser')
 
 export default function QuestionComponent() {
@@ -139,7 +139,7 @@ export default function QuestionComponent() {
     useEffect(() => {
 
         if (!currentUser) {
-            dispatch(loginRequireLearnPage('Bạn cần đăng nhập để vào học!'))
+            notifyInfo('Bạn cần đăng nhập để vào học!')
             navigate('/auth')
         }
 
@@ -171,7 +171,7 @@ export default function QuestionComponent() {
 
         let timer = setInterval(() => {
 
-            dispatch(upCounter())
+            dispatch(timeIncrease())
             minutes.current = (Math.floor((totalTime - counter) / 60))
             sec.current = (totalTime - minutes.current * 60 - counter)
 
