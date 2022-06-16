@@ -15,7 +15,7 @@ const refreshToken = async () => {
         console.log(err)
     }
 }
-export const createAxios = (currentUser, dispatch, statusSuccess) => {
+export const createAxios = (currentUser, dispatch) => {
     const newInstance = axios.create()
     newInstance.interceptors.request.use(
         async (config) => {

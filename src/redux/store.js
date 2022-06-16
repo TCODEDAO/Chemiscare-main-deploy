@@ -8,9 +8,11 @@ import { configureStore } from '@reduxjs/toolkit'
 //Slice
 import AuthSlice from "./User/AuthSlice"
 import QuizSlice from "./User/QuizSlice"
+import QuestionManagementSlice from "./Admin/QuestionManagementSlice";
 const rootReducer = combineReducers({
     auth: AuthSlice,
-    quiz: QuizSlice
+    quiz: QuizSlice,
+    questionManagement: QuestionManagementSlice
 })
 
 const persistConfig = {

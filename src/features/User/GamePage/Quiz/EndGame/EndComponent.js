@@ -19,8 +19,8 @@ export default function Realistic() {
     const navigate = useNavigate()
     const [isBoardShow, setIsBoardShow] = useState(false)
     const currentUser = useSelector((state) => state?.auth?.login.currentUser)
-    const score = useSelector((state) => state.quiz.score.currentScore)
-    const timePlay = useSelector((state) => state.quiz.time.counter)
+    const score = useSelector((state) => state?.quiz?.score?.currentScore)
+    const timePlay = useSelector((state) => state?.quiz?.time?.counter)
     useEffect(() => {
         if (!currentUser) {
             notifyInfo('Bạn cần đăng nhập để vào học!')

@@ -6,13 +6,11 @@ import ScoreComponent from './ScoreComponent'
 import './GameComponent.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { notifyErorr } from '../../../../components/Alert/AlertComponents'
+import { notifyErorr, notifyInfo } from '../../../../../components/Alert/AlertComponent'
 import { questionsReturn } from './renderData'
 import { timeIncrease } from '../../../../../redux/User/QuizSlice'
 import { createNewResultQuiz } from '../../../../api/apiQuestion'
-import { createAxios } from '../../../../utils/axiosJWT'
-import { checkTokenSuccess } from '../../../../redux/reducers/AuthSlice'
-import { notifyInfo } from '../../../../../components/Alert/AlertComponent'
+import { createAxios } from '../../../../../utils/axiosJWT'
 const parse = require('html-react-parser')
 
 export default function QuestionComponent() {
@@ -106,7 +104,7 @@ export default function QuestionComponent() {
 
         }
         if (quizNumberCount > 10) {
-            let axiosJWT = createAxios(currentUser, dispatch, checkTokenSuccess)
+            let axiosJWT = createAxios(currentUser, dispatch)
 
             createNewResultQuiz(currentUser, dispatch, axiosJWT, {
                 score: score,
@@ -194,7 +192,7 @@ export default function QuestionComponent() {
 
     return (
         <>
-            <div className='requestRotate'>Bạn cần xoay ngang màn hình</div>
+            <div className='requestRotate'>Bạn cần xoay ngang màn hình để hoc!</div>
             <>
 
                 {quizNumberCount < 11 ? isCountDown ?
@@ -214,7 +212,7 @@ export default function QuestionComponent() {
                             <ScoreComponent min={minutes.current} sec={sec.current} />
                             <div className="gradientBoxQuestion  flex justify-center">
                                 <div className='gradientBoxQuestionContent flex justify-center items-center'>
-                                    <span className='text-white inline-block max-w-[500px] text-[16px] select-none'>{parse(refQuestion.current[quizNumberCount]?.questionContent)}</span>
+                                    <span className='text-white inline-block max-w-[500px] text-[16px] select-none' dangerouslySetInnerHTML={{ __html: refQuestion.current[quizNumberCount]?.questionContent }}></span>
                                 </div>
                             </div>
 

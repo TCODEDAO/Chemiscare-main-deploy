@@ -18,7 +18,8 @@ const quizSlice = createSlice({
         round: {
             currentRound: 1,
         },
-
+        task: { currentTask: 1 },
+        result: []
     },
     reducers: {
         getQuestionStart: (state) => {
@@ -42,11 +43,19 @@ const quizSlice = createSlice({
         setRound: (state, action) => {
             state.round.currentRound = action.payload
         },
+        setTask: (state, action) => {
+            state.task.currentTask = action.payload
+        },
+        setResult: (state, action) => {
+            state.result = action.payload
+        },
         clearDataToNewRound: (state) => {
             state.score.currentScore = 0
             state.time.counter = 0
+            state.task.currentTask = 0
 
-        }
+        },
+
     }
 })
 
@@ -57,8 +66,8 @@ export const {
     socreIncrease,
     timeIncrease,
     setRound,
-    clearDataToNewRound
-
+    clearDataToNewRound,
+    setResult
 } = quizSlice.actions
 
 export default quizSlice.reducer

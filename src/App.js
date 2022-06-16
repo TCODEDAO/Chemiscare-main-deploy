@@ -5,7 +5,7 @@ import React, { useState, useEffect, Suspense } from 'react'
 import 'react-toastify/dist/ReactToastify.css'
 
 // Routes
-import { publicRoutes } from './routes/index'
+import { publicRoutes, privateRoutes } from './routes/index'
 import './App.css';
 import NotFound from './components/NotFound/NotFoundComponent'
 import { ToastContainer } from 'react-toastify'
@@ -20,6 +20,18 @@ function App() {
       <Suspense fallback={<LoadingComponent />} >
         <Routes>
           {publicRoutes.map((route) => {
+            const Page = route.component
+
+            return (
+              <Route
+                path={route.path}
+                element={<Page />}
+                key={route.id}
+                index={route.index}
+              />
+            )
+          })}
+          {privateRoutes.map((route) => {
             const Page = route.component
 
             return (

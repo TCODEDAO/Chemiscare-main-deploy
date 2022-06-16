@@ -1,12 +1,11 @@
-import React, { memo, useEffect, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { memo } from 'react'
+import { useSelector } from 'react-redux'
 
-function ScoreComponent({ min, sec }) {
-    const dispatch = useDispatch()
+function ScoreComponent({ min, sec, level }) {
     const currentScore = useSelector((state) => state.quiz?.score?.currentScore)
     const currentUser = useSelector((state) => state.auth?.login?.currentUser)
 
-    console.log(currentScore)
+
 
     return (
         <div className="z-[2] absolute hideInMoblie text-white w-[100px] h-[100px] bg-[#2A3132] top-[2%] right-[1%] w-[206px] h-[192px] flex flex-col justify-around items-center rounded-3xl">
@@ -23,7 +22,7 @@ function ScoreComponent({ min, sec }) {
                 {currentUser.fullName}
             </div>
 
-            <div className="pb-1">Cấp độ: 1</div>
+            <div className="pb-1">Cấp độ: {level}</div>
         </div>
     )
 }

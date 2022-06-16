@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { notifyErorr, notifySuccess } from '../../components/Alert/AlertComponent'
 import { loginFailed, loginStart, loginSuccess, logOutFailed, logOutStart, logOutSuccess, registerFailed, registerStart, registerSuccess } from '../../redux/User/AuthSlice'
+import { createUserLearningProcess } from './apiQuestion'
 
 
 const loginUser = async (user, dispatch, navigate) => {
@@ -59,6 +60,8 @@ const updateDetailInfomation = async (dispatch, navigate, axiosJWT, currentUser,
         const dataResponse = res.data
         const { isSuccess, message } = dataResponse
         const newUser = { ...dataResponse.user }
+
+        await createUserLearningProcess(currentUser, axiosJWT)
 
         await dispatch(loginSuccess({ ...newUser, accessToken: currentUser?.accessToken }))
         notifySuccess(res.data.message)

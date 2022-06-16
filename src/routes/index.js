@@ -10,6 +10,11 @@ const DetailUserInfomation = lazy(() => import('../features/User/AuthPage/Detail
 //Game
 const StartGameComponent = lazy(() => import('../features/User/GamePage/Quiz/StartGame/StartGameComponent'))
 
+
+
+
+//Admin
+const QuestionComponentManagement = lazy(() => import('../features/Admin/QuestionManagementPage/QuestionComponentManagement'))
 const publicRoutes = [
     { id: 0, path: '/', index: true, component: HomePage },
     { id: 1, path: '/auth', index: true, component: AuthPage },
@@ -17,7 +22,9 @@ const publicRoutes = [
     { id: 3, path: '/rules', index: true, component: RulePage },
     { id: 4, path: '/learn', index: true, component: LearnPage },
     { id: 5, path: '/auth/detail', index: true, component: DetailUserInfomation },
-    { id: 6, path: '/learn/game/start', index: true, component: StartGameComponent }
+    { id: 6, path: '/learn/game/start', index: true, component: StartGameComponent },
 ]
-
-export { publicRoutes }
+const privateRoutes = [
+    { id: 0, path: '/admin/question', index: true, component: QuestionComponentManagement }
+]
+export { publicRoutes, privateRoutes }
