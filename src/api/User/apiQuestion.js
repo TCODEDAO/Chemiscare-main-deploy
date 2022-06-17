@@ -34,35 +34,34 @@ const createUserLearningProcess = async (currentUser, axiosJWT) => {
 }
 const getResultQuizById = async (currentUser, dispatch, axiosJWT) => {
     try {
-        const res = await axiosJWT.post(
-            `${process.env.REACT_APP_URL_API_REQUEST}/api/v1/users/resultById/${currentUser._id}`,
-            currentUser._id,
+        const res = await axiosJWT.get(
+            `${process.env.REACT_APP_URL_API_REQUEST}/api/v1/result/${currentUser._id}`,
+
             {
                 headers: { token: `Bearer ${currentUser?.accessToken}` },
             },
         )
-        dispatch(setResult(res.data))
+        dispatch(setResult(res.data.result))
 
     } catch (err) {
-        notifyErorr("Lấy kết quả không thành công!")
+        console.log(err)
+        notifyErorr("Lấy kết quả không thành công, vui lòng tải lại trang!")
     }
 }
 const createNewResultQuiz = async (currentUser, axiosJWT, data) => {
 
     try {
-        axiosJWT.post(
-            `${process.env.REACT_APP_URL_API_REQUEST}/api/v1/result`,
+        await axiosJWT.post(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/result`,
             {
                 userId: currentUser._id,
-                isCompleteRender: true,
                 ...data,
             },
             {
                 headers: { token: `Bearer ${currentUser?.accessToken}` },
-            },
-        )
+            })
         notifySuccess('Lưu kết quả thành công!')
     } catch (err) {
+        console.log(err)
         notifyErorr('Lưu kết quả không thành công!')
 
     }

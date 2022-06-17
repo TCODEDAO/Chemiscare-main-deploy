@@ -23,51 +23,52 @@ export default function NotFound() {
                     </span>
                     <span className="nav">
                         <ul className="flex justify-center grow">
-                            <li className="">
-                                <a
+                            <li className="" >
+                                <Link
                                     className="p-4 text-[18px] text-[#fff] hover:text-[#d54253]"
-                                    href="# "
+                                    to="/learn"
                                 >
-                                    <i className="fa-solid fa-file-lines"></i>
-                                    <span className="">Diễn Đàn</span>
-                                </a>
+                                    <i className="fa-solid fa-house"></i>
+                                    <span className="pl-1">Trang Chủ</span>
+                                </Link>
                             </li>
                             <li className="">
-                                <a
+                                <Link
                                     className="p-4 text-[18px] text-[#fff] hover:text-[#d54253]"
-                                    href="# "
+                                    to="/forum"
+                                >
+                                    <i className="fa-solid fa-people-group"></i>
+                                    <span className="">Diễn Đàn</span>
+                                </Link>
+                            </li>
+                            <li className="">
+                                <Link
+                                    className="p-4 text-[18px] text-[#fff] hover:text-[#d54253]"
+                                    to="/celebrate"
                                 >
                                     <i className="fa-solid fa-calendar"></i>
                                     <span className="">Lịch Thi</span>
-                                </a>
+                                </Link>
                             </li>
                             <li className="">
-                                <a
+                                <Link
                                     className="p-4 text-[18px] text-[#fff] hover:text-[#d54253]"
-                                    href="# "
+                                    to="/rules"
                                 >
                                     <i className="fa-solid fa-scale-balanced"></i>
                                     <span className="">Thể Lệ</span>
-                                </a>
+                                </Link>
                             </li>
                             <li className="">
-                                <a
+                                <Link
                                     className="p-4 text-[18px] text-[#fff] hover:text-[#d54253]"
-                                    href="# "
+                                    to="/learn/rate"
                                 >
                                     <i className="fa-solid fa-ranking-star"></i>
                                     <span className="">Xếp Hạng</span>
-                                </a>
+                                </Link>
                             </li>
-                            <li className="">
-                                <a
-                                    className="p-4 pr-0 text-[18px] text-[#fff] hover:text-[#d54253]"
-                                    href="# "
-                                >
-                                    <i className="fa-solid fa-circle-question"></i>
-                                    <span className="">Hỏi Đáp</span>
-                                </a>
-                            </li>
+
                         </ul>
                     </span>
                     <div className="relative navIcon hidden">
@@ -106,17 +107,7 @@ export default function NotFound() {
                                     </span>
                                 </a>
                             </li>
-                            <li className="w-[200px]">
-                                <a
-                                    className="px-6 block py-4 hover:text-[#d54253]"
-                                    href="# "
-                                >
-                                    <i className="text-[18px] fa-solid fa-circle-question"></i>
-                                    <span className="text-sm text-[16px]">
-                                        Hỏi Đáp
-                                    </span>
-                                </a>
-                            </li>
+
                         </ul>
                     </div>
                 </div>

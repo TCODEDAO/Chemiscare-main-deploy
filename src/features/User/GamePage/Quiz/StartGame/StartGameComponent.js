@@ -28,7 +28,7 @@ export default function HomeComponent() {
 
         fixNavigate.addEventListener('click', (e) => {
             ripplesAnimateBtn(e.target, e)
-            timeOut1 = setTimeout(() => navigate('/learn/game'), 2000)
+            timeOut1 = setTimeout(() => navigate('/learn/game/content'), 2000)
         })
         fixRectangle.addEventListener('load', () => {
             timeOut2 = setTimeout(() => {
@@ -43,7 +43,7 @@ export default function HomeComponent() {
                 'click',
                 (e) => {
                     ripplesAnimateBtn(e.target, e)
-                    timeOut1 = setTimeout(() => navigate('/learn/game'), 1000)
+                    timeOut1 = setTimeout(() => navigate('/learn/game/content'), 1000)
                 },
                 false,
             )

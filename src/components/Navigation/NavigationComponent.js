@@ -25,9 +25,7 @@ function NavBarLearnPage({ currentUser }) {
         }
         return
     }
-    const devFeature = () => {
-        notifyInfo('Tính năng đang được phát triển!')
-    }
+
     return (
 
         <div className="fixed h-[96px] bg-[#1f232b] top-0 left-0 right-0 z-[9]">
@@ -75,18 +73,11 @@ function NavBarLearnPage({ currentUser }) {
                             <span className="pl-1">Thể Lệ</span>
                         </Link>
                     </li>
-                    <Link to="/learn/rate" className=" hover:text-[#d54253]">
-                        <i className="fa-solid fa-ranking-star text-[18px] text-[#868991]"></i>
-                        <span className="text-[#868991]   text-[18px]">Xếp Hạng</span>
-                    </Link>
-                    <li className="" onClick={devFeature}>
-                        <a
-                            className="p-4 text-[18px] text-[#868991] hover:text-[#d54253]"
-                            href="# "
-                        >
-                            <i className="fa-solid fa-circle-question"></i>
-                            <span className="pl-1">Hỏi Đáp</span>
-                        </a>
+                    <li>
+                        <Link to="/learn/rate" className=" text-[#868991] text-[18px] hover:text-[#d54253]">
+                            <i className="fa-solid fa-ranking-star"></i>
+                            <span className="pl-1">Xếp Hạng</span>
+                        </Link>
                     </li>
                 </ul>
                 <div className="flex items-center">
@@ -149,17 +140,7 @@ function NavBarLearnPage({ currentUser }) {
                                     </span>
                                 </Link>
                             </li>
-                            <li className="w-[200px]" onClick={devFeature}>
-                                <a
-                                    className="px-6 block py-4 hover:text-[#d54253]"
-                                    href="# "
-                                >
-                                    <i className="text-[18px] fa-solid fa-circle-question"></i>
-                                    <span className="text-sm text-[16px] pl-1">
-                                        Hỏi Đáp
-                                    </span>
-                                </a>
-                            </li>
+
                         </ul>
                     </div>
                     {/* <!-- <span className="cursor-pointer px-5 text-[18px] text-[#868991] hover:text-[#d54253]">Đăng nhập</span> */}
@@ -190,9 +171,6 @@ function NavBarLearnPage({ currentUser }) {
                                 </span>
                             </li>
 
-                            <li className="py-2 hover:text-[#d54253]" onClick={devFeature}>
-                                Lịch sử
-                            </li>
                             <li className={`py-2 hover:text-[#d54253] ${currentUser?.isAdmin === false && "border-b-[1px]"} border-[#51535a] border-solid`}>
                                 <Link to="/learn/rate">Xếp hạng của tôi</Link>
                             </li>

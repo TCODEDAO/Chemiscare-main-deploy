@@ -1,10 +1,11 @@
 import React, { useCallback, useRef, useEffect, useState } from 'react'
 import ReactCanvasConfetti from 'react-canvas-confetti'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { animated, useTransition, config } from 'react-spring'
 import { notifyInfo } from '../../../../../components/Alert/AlertComponent'
+import { clearDataToNewRound } from '../../../../../redux/User/QuizSlice'
 import './EndComponent.css'
 const canvasStyles = {
     position: 'fixed',
@@ -21,6 +22,8 @@ export default function Realistic() {
     const currentUser = useSelector((state) => state?.auth?.login.currentUser)
     const score = useSelector((state) => state?.quiz?.score?.currentScore)
     const timePlay = useSelector((state) => state?.quiz?.time?.counter)
+    const dispatch = useDispatch()
+
     useEffect(() => {
         if (!currentUser) {
             notifyInfo('Bạn cần đăng nhập để vào học!')
@@ -117,6 +120,7 @@ export default function Realistic() {
         }, 1000)
         setIsBoardShow(true)
         return () => {
+            dispatch(clearDataToNewRound())
             clearTimeout(timeOut)
         }
     }, [])

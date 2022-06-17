@@ -67,7 +67,8 @@ export const {
     timeIncrease,
     setRound,
     clearDataToNewRound,
-    setResult
+    setResult,
+    setTask
 } = quizSlice.actions
 
 export default quizSlice.reducer

@@ -10,7 +10,7 @@ const DetailUserInfomation = lazy(() => import('../features/User/AuthPage/Detail
 //Game
 const StartGameComponent = lazy(() => import('../features/User/GamePage/Quiz/StartGame/StartGameComponent'))
 
-
+const ContainerGameComponent = lazy(() => import('../features/User/GamePage/Quiz/ContainerGame/ContainerComponent'))
 
 
 //Admin
@@ -23,6 +23,8 @@ const publicRoutes = [
     { id: 4, path: '/learn', index: true, component: LearnPage },
     { id: 5, path: '/auth/detail', index: true, component: DetailUserInfomation },
     { id: 6, path: '/learn/game/start', index: true, component: StartGameComponent },
+    { id: 7, path: '/learn/game/content', index: true, component: ContainerGameComponent },
+
 ]
 const privateRoutes = [
     { id: 0, path: '/admin/question', index: true, component: QuestionComponentManagement }
