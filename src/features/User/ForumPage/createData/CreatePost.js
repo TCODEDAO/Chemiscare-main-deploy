@@ -76,7 +76,7 @@ export default function CreatePost() {
                                 }
                                 axios(configAxios)
                                     .then(function (response) {
-                                        console.log(JSON.stringify(response.data))
+                                        success(response.data.link)
                                     })
                                     .catch(function (error) {
                                         console.log(error)
