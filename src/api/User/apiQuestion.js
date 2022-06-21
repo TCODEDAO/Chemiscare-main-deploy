@@ -1,5 +1,5 @@
 import { notifyErorr, notifySuccess } from "../../components/Alert/AlertComponent"
-import { getQuestionFailed, getQuestionSuccess, setResult } from "../../redux/User/QuizSlice"
+import { getQuestionFailed, getQuestionSuccess, setHistoryResult, setResult, setRound } from "../../redux/User/QuizSlice"
 
 
 const getQuestionAndAnswers = async (currentUser, dispatch, axiosJWT, navigate) => {
@@ -32,7 +32,8 @@ const createUserLearningProcess = async (currentUser, axiosJWT) => {
     }
 
 }
-const getResultQuizById = async (currentUser, dispatch, axiosJWT) => {
+const getResultQuizById = async (currentUser, dispatch, axiosJWT, currentRound) => {
+
     try {
         const res = await axiosJWT.get(
             `${process.env.REACT_APP_URL_API_REQUEST}/api/v1/result/${currentUser._id}`,
@@ -41,11 +42,64 @@ const getResultQuizById = async (currentUser, dispatch, axiosJWT) => {
                 headers: { token: `Bearer ${currentUser?.accessToken}` },
             },
         )
-        dispatch(setResult(res.data.result))
+
+        dispatch(setResult(await res.data.result.filter(result => result.round === currentRound)))
 
     } catch (err) {
         console.log(err)
         notifyErorr("Lấy kết quả không thành công, vui lòng tải lại trang!")
+    }
+}
+const getAllResultQuizById = async (currentUser, dispatch, axiosJWT) => {
+
+    try {
+        const res = await axiosJWT.get(
+            `${process.env.REACT_APP_URL_API_REQUEST}/api/v1/result/${currentUser._id}`,
+
+            {
+                headers: { token: `Bearer ${currentUser?.accessToken}` },
+            },
+        )
+
+        dispatch(setHistoryResult(await res.data.result))
+
+    } catch (err) {
+        console.log(err)
+        notifyErorr("Lấy kết quả không thành công, vui lòng tải lại trang!")
+    }
+}
+const getRound = async (dispatch, axiosJWT, currentUser) => {
+    try {
+        const res = await axiosJWT.get(
+            `${process.env.REACT_APP_URL_API_REQUEST}/api/v1/result/learningProcess/${currentUser._id}`,
+
+            {
+                headers: { token: `Bearer ${currentUser?.accessToken}` },
+            },
+        )
+        await getResultQuizById(currentUser, dispatch, axiosJWT, res?.data?.process?.currentRound)
+        await dispatch(setRound(res?.data?.process?.currentRound))
+    } catch (err) {
+        notifyErorr('Lấy tiến trình học không thành công, vui lòng tải lại trang!')
+    }
+}
+const increaseRound = async (dispatch, axiosJWT, currentUser, currentRound) => {
+    try {
+        const res = await axiosJWT.patch(
+            `${process.env.REACT_APP_URL_API_REQUEST}/api/v1/result/learningProcess/round/${currentUser._id}`, {
+            round: currentRound + 1
+        },
+
+            {
+                headers: { token: `Bearer ${currentUser?.accessToken}` },
+            },
+        )
+        notifySuccess('Nộp bài thành công!')
+        await dispatch(setRound(res?.data?.data?.currentRound))
+        await getResultQuizById(currentRound, dispatch, axiosJWT, res?.data?.data?.currentRound)
+        window.location.reload()
+    } catch (err) {
+        notifyErorr('Nộp bài không thành công, vui lòng tải lại trang!')
     }
 }
 const createNewResultQuiz = async (currentUser, axiosJWT, data) => {
@@ -69,4 +123,4 @@ const createNewResultQuiz = async (currentUser, axiosJWT, data) => {
 
 
 
-export { getQuestionAndAnswers, createUserLearningProcess, createNewResultQuiz, getResultQuizById, }
+export { getQuestionAndAnswers, createUserLearningProcess, createNewResultQuiz, getResultQuizById, getRound, increaseRound, getAllResultQuizById }

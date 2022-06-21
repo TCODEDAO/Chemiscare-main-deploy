@@ -1,0 +1,267 @@
+html {
+    font-family: 'Roboto', sans-serif;
+}
+
+.top_100-8 {
+    top: calc(100% + 8px);
+}
+
+.avt ul {
+    transform-origin: top right;
+    animation: scale ease-in 0.1s;
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.avt:hover ul {
+    display: block;
+}
+
+.avt ul::before {
+    content: '';
+    height: 8px;
+    position: absolute;
+    top: -8px;
+    left: 0;
+    right: 0;
+}
+
+html {
+    font-family: 'Roboto', sans-serif;
+}
+
+.top_100-8 {
+    top: calc(100% + 8px);
+}
+
+.avt ul {
+    transform-origin: top right;
+    animation: scale ease-in 0.1s;
+}
+
+.navIcon ul {
+    animation: scale ease-in 0.1s;
+    transform-origin: top right;
+}
+
+.navIcon:hover ul {
+    display: flex;
+}
+
+.boder-bot {
+    position: relative;
+}
+
+.boder-bot::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    border-bottom: 1px solid #fafafa;
+    width: 80%;
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.avt:hover ul {
+    display: block;
+}
+
+.avt ul::before {
+    content: "";
+    height: 8px;
+    position: absolute;
+    top: -8px;
+    left: 0;
+    right: 0;
+}
+
+.board_header div:first-child {
+    border-top-left-radius: 12px;
+}
+
+.board_header div:last-child {
+    border-top-right-radius: 12px;
+}
+
+.boardBody:last-child div:first-child {
+    border-bottom-left-radius: 12px;
+}
+
+.boardBody:last-child div:last-child {
+    border-bottom-right-radius: 12px;
+}
+
+.rank-item:last-child {
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.rank-item::before {
+    content: "";
+    border-bottom: 1px solid #27272a;
+    width: 76%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+@media screen and (max-width: 1070px) {
+    .nav {
+        display: none;
+    }
+
+    .navIcon {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 741px) and (max-width: 1070px) {
+    .boardHeaderItem {
+        width: 25%;
+        font-size: 14px;
+    }
+
+    .boardBodyItem {
+        width: 25%;
+    }
+
+    .boardWrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .boardMain {
+        width: calc(100% - 40px);
+    }
+
+    .textFooterCenter {
+        display: none;
+    }
+
+    .boardWrapperRank {
+        margin-top: 40px;
+        justify-content: space-around;
+    }
+
+    .contentFooter {
+        justify-content: space-around;
+    }
+
+    .boardRank {
+        width: calc(50% - 40px);
+    }
+
+    .boardRank ul,
+    .boardRank ul li {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 740px) {
+    .boardWrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-grow: 1;
+    }
+
+    .board_header {
+        flex-grow: 1;
+    }
+
+    .boardHeaderItem {
+        width: 25%;
+        font-size: 14px;
+    }
+
+    .boardBodyItem {
+        width: 25%;
+    }
+
+    .examButtonInMobile {
+        display: block;
+    }
+
+    .board_header div:nth-child(2) {
+        border-top-left-radius: 12px;
+    }
+
+    .boardBody:last-child div:nth-child(2) {
+        border-bottom-left-radius: 12px;
+    }
+
+    .examButton,
+    .serial,
+    .searchIcon,
+    .socialFooter,
+    .textFooterCenter {
+        display: none;
+    }
+
+    .contentFooter {
+        justify-content: center;
+    }
+
+    .boardWrapperRank {
+        margin-top: 40px;
+    }
+
+    .boardMain {
+        width: calc(100% - 8px);
+    }
+
+    .fixHidenMoblie {
+        display: block !important;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .avt {
+        margin-left: 8px;
+    }
+
+    .logoIcon {
+        font-size: 36px;
+    }
+
+    .logoName {
+        font-size: 32px;
+    }
+
+    .navIcon {
+        font-size: 32px !important;
+    }
+}
+
+@media screen and (max-width: 280px) {
+    .logoIcon {
+        font-size: 32px;
+    }
+
+    .logoName {
+        font-size: 28px;
+    }
+
+    .navIcon {
+        font-size: 28px !important;
+    }
+}

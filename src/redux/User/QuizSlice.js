@@ -19,7 +19,8 @@ const quizSlice = createSlice({
             currentRound: 1,
         },
         task: { currentTask: 1 },
-        result: []
+        result: [],
+        allResultHistory: []
     },
     reducers: {
         getQuestionStart: (state) => {
@@ -49,6 +50,9 @@ const quizSlice = createSlice({
         setResult: (state, action) => {
             state.result = action.payload
         },
+        setHistoryResult: (state, action) => {
+            state.allResultHistory = action.payload
+        },
         clearDataToNewRound: (state) => {
             state.score.currentScore = 0
             state.time.counter = 0
@@ -68,7 +72,9 @@ export const {
     setRound,
     clearDataToNewRound,
     setResult,
-    setTask
+    setTask,
+    setHistoryResult
+
 } = quizSlice.actions
 
 export default quizSlice.reducer

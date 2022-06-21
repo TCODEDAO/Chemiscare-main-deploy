@@ -1,0 +1,56 @@
+.show-dialog {
+    animation: showDiaLogThread 0.5s ease-in-out;
+}
+
+@keyframes showDiaLogThread {
+    from {
+        bottom: -376px;
+    }
+
+    to {
+        bottom: 222px;
+    }
+}
+
+input:focus~.floating-label,
+input:not(:focus):valid~.floating-label {
+    top: 8px;
+    bottom: 10px;
+    left: 20px;
+    font-size: 11px;
+    opacity: 1;
+}
+
+.inputText {
+    font-size: 14px;
+    width: 100%;
+    min-width: 300px;
+    overflow-y: scroll;
+    height: 100%;
+    padding: 0 20px;
+    border: 1px solid #636e72;
+    border-radius: 12px;
+
+}
+
+.floating-label {
+    position: absolute;
+    pointer-events: none;
+    left: 20px;
+    top: 18px;
+    font-size: 18px;
+    transition: 0.2s ease all;
+}
+
+.threadInput {
+    position: relative;
+    margin: 0 10%;
+    top: 44%;
+    height: 16%;
+    /* transform: translate(-50%, -50%); */
+}
+
+body .rc-md-editor .rc-md-navigation {
+    background-color: #fff !important;
+    border-bottom: none !important;
+}

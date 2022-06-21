@@ -1,5 +1,5 @@
 import { memo } from "react"
-
+import './FooterComponent.css'
 function FooterComponent() {
     return (
         <div className="py-[20px] bg-[#16191f] absolute bottom-0 left-0 right-0 border-[#353945] border-t-[1px] text-[#777e90]">

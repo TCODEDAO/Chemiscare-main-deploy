@@ -8,7 +8,7 @@ import { createAxios } from '../../utils/axiosJWT'
 import { logOutUser } from '../../api/User/apiAuth'
 import { notifyErorr, notifyInfo, notifySuccess } from '../Alert/AlertComponent'
 // import { notifyErorr, notifyInfo, notifySuccess } from '../Alert/AlertComponents'
-
+import './NavigationComponent.css'
 function NavBarLearnPage({ currentUser }) {
     const accessToken = currentUser?.accessToken
     const dispatch = useDispatch()
@@ -81,7 +81,6 @@ function NavBarLearnPage({ currentUser }) {
                     </li>
                 </ul>
                 <div className="flex items-center">
-                    <i className="fa-solid fa-magnifying-glass text-[#868991] px-5 py-5 cursor-pointer hover:text-[#d54253] text-[18px] searchIcon"></i>
                     <div className="relative navIcon hidden">
                         <i className="fa-solid fa-bars text-[30px]  hover:text-[#d54253] text-[#868991]"></i>
                         <ul className="justify-between grow absolute top-[100%] right-1 flex-col bg-[#3d4048] text-white rounded-[4px] hidden">

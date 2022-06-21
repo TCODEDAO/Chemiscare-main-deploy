@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
-import React, { useState, useEffect, Suspense } from 'react'
+import React, { Suspense } from 'react'
 
 //Notify
 import 'react-toastify/dist/ReactToastify.css'
@@ -9,7 +9,6 @@ import { publicRoutes, privateRoutes } from './routes/index'
 import './App.css';
 import NotFound from './components/NotFound/NotFoundComponent'
 import { ToastContainer } from 'react-toastify'
-import FullPageLoader from './components/Loading/FullPageLoader';
 import LoadingComponent from './components/Loading/LoadingComponent';
 
 function App() {

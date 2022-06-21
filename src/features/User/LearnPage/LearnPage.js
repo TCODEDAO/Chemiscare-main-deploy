@@ -13,7 +13,7 @@ import { createAxios } from '../../../utils/axiosJWT'
 import { notifyInfo, notifyWelcome } from '../../../components/Alert/AlertComponent'
 
 import { setTask } from '../../../redux/User/QuizSlice'
-import { getResultQuizById } from '../../../api/User/apiQuestion'
+import { getAllResultQuizById, getResultQuizById, getRound, increaseRound } from '../../../api/User/apiQuestion'
 
 
 
@@ -23,15 +23,15 @@ const Footer = lazy(() => import('../../../components/Footer/FooterComponent'))
 export default function LearnPage() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const currentUser = useSelector((state) => state.auth.login.currentUser)
+    const currentUser = useSelector((state) => state?.auth?.login?.currentUser)
 
 
     const axiosJWT = createAxios(currentUser, dispatch)
+    const currentRound = useSelector(state => state?.quiz?.round?.currentRound)
 
 
 
-
-    useEffect(() => {
+    useEffect(async () => {
 
         if (!currentUser) {
             navigate('/auth')
@@ -45,7 +45,8 @@ export default function LearnPage() {
         }
 
         if (currentUser) {
-            getResultQuizById(currentUser, dispatch, axiosJWT)
+            await getRound(dispatch, axiosJWT, currentUser)
+            getAllResultQuizById(currentUser, dispatch, axiosJWT)
             notifyWelcome(`Chào mừng bạn!`)
             return
         }
@@ -54,8 +55,14 @@ export default function LearnPage() {
 
         }
     }, [])
+    const handleSubmitTaskAndNextRound = () => {
+        increaseRound(dispatch, axiosJWT, currentUser, currentRound)
 
-    const userProcess = useSelector(state => state?.quiz?.result)
+    }
+
+    const userProcess = useSelector(state => state?.quiz?.allResultHistory)
+    const currentUserProcess = useSelector(state => state?.quiz?.result)
+
     return (
         <>
             <Helmet>
@@ -68,7 +75,8 @@ export default function LearnPage() {
                     <div className="flex justify-between flex-wrap mb-[100px]">
                         <div className="boardWrapper">
                             <div className="boardMain">
-                                <p className="text-white font-bold text-2xl leading-5 mb-[20px]">Đề thi dành cho học sinh lớp {currentUser?.grade?.split(" ")[1]}</p>
+                                <p className="text-white font-bold text-2xl leading-5 mb-[20px] inline-block">Đề thi dành cho học sinh lớp {currentUser?.detailUserInfomation?.grade}</p>
+                                {currentRound < 4 ? Boolean(currentUserProcess[0] && currentUserProcess[1] && currentUserProcess[2]) && <button className='inline-block m-4 text-white bg-[#54a0ff] hover:bg-[#1dd1a1]  outline-none rounded-3xl transition-all duration-300 p-3' onClick={handleSubmitTaskAndNextRound}>Nộp bài</button> : <div className='text-white'>Vui lòng xem lịch thi để biết thêm thông tin về vòng thi mới!</div>}
                                 <div className="flex text-white mb-[4px] board_header">
                                     <div className="w-[140px] py-4 bg-[#353945] border-r-[1px] uppercase border-[#111827] text-center font-bold boardHeaderItem serial">STT</div>
                                     <div className="w-[200px] py-4 bg-[#353945] border-r-[1px] uppercase border-[#111827] text-center font-bold boardHeaderItem">Bài Thi</div>
@@ -79,31 +87,31 @@ export default function LearnPage() {
                                     <div className="flex text-[#111827] boardBody">
                                         <div className="flex items-center justify-center w-[140px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem serial  ">1</div>
                                         <div className="flex items-center justify-center w-[200px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem">
-                                            {userProcess[0]?.isCompleteRender === true ? <button className="bg-[#3f3f46] text-white disabled:opacity-25 rounded-md examButton " disabled>Bạn đã hoàn thành bài 1, vui lòng chờ bài mới.</button> : <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton" onClick={() => {
+                                            {(currentUserProcess[0]?.isCompleteRender === true || currentRound > 3) ? <button className="bg-[#3f3f46] text-white disabled:opacity-25 rounded-md examButton " disabled>Bạn đã hoàn thành bài 1, vui lòng chờ bài mới.</button> : <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton" onClick={() => {
                                                 dispatch(setTask(1))
                                                 navigate('/learn/game/start')
                                             }}>Làm bài 1 </button>}
-                                            {userProcess[0]?.isCompleteRender === true ? <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButtonInMobile hidden fixHidenMoblie" disabled>Bạn đã hoàn thành bài 1, vui lòng chờ bài mới.</button> : <button className="examButtonInMobile hidden bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton fixHidenMoblie" onClick={() => {
+                                            {(currentUserProcess[0]?.isCompleteRender === true || currentRound > 3) ? <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButtonInMobile hidden fixHidenMoblie" disabled>Bạn đã hoàn thành bài 1, vui lòng chờ bài mới.</button> : <button className="examButtonInMobile hidden bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton fixHidenMoblie" onClick={() => {
                                                 dispatch(setTask(1))
                                                 navigate('/learn/game/start')
                                             }}>Làm </button>}
 
                                         </div>
 
-                                        <div className="flex items-center justify-center w-[140px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem">{userProcess[0]?.score}</div>
-                                        <div className="flex items-center justify-center w-[180px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem ">{userProcess[0]?.time && `${userProcess[0]?.time} giây`}</div>
+                                        <div className="flex items-center justify-center w-[140px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem">{currentUserProcess[0]?.score}</div>
+                                        <div className="flex items-center justify-center w-[180px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem ">{currentUserProcess[0]?.time && `${currentUserProcess[0]?.time} giây`}</div>
                                     </div>
 
                                     <div className="flex text-[#111827] boardBody">
                                         <div className="flex items-center justify-center w-[140px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem serial  ">2</div>
                                         <div className="flex items-center justify-center w-[200px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem">
-                                            {userProcess[1]?.isCompleteRender === true ? <button className="bg-[#3f3f46] text-white disabled:opacity-25 rounded-md examButton " disabled>Bạn đã hoàn thành bài 2, vui lòng chờ bài mới.</button> : <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton" onClick={() => {
+                                            {(currentUserProcess[1]?.isCompleteRender === true || currentRound > 3) ? <button className="bg-[#3f3f46] text-white disabled:opacity-25 rounded-md examButton " disabled>Bạn đã hoàn thành bài 2, vui lòng chờ bài mới.</button> : <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton" onClick={() => {
                                                 dispatch(setTask(2))
                                                 navigate('/learn/game/start')
 
 
                                             }}>Làm bài 2</button>}
-                                            {userProcess[1]?.isCompleteRender === true ? <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButtonInMobile hidden fixHidenMoblie" disabled>Bạn đã hoàn thành bài 2, vui lòng chờ bài mới.</button> : <button className="examButtonInMobile hidden bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton fixHidenMoblie" onClick={() => {
+                                            {(currentUserProcess[1]?.isCompleteRender === true || currentRound > 3) ? <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButtonInMobile hidden fixHidenMoblie" disabled>Bạn đã hoàn thành bài 2, vui lòng chờ bài mới.</button> : <button className="examButtonInMobile hidden bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton fixHidenMoblie" onClick={() => {
                                                 dispatch(setTask(2))
                                                 navigate('/learn/game/start')
 
@@ -112,26 +120,26 @@ export default function LearnPage() {
 
                                         </div>
 
-                                        <div className="flex items-center justify-center w-[140px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem">{userProcess[1]?.score}</div>
-                                        <div className="flex items-center justify-center w-[180px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem ">{userProcess[1]?.time && `${userProcess[1]?.time} giây`}</div>
+                                        <div className="flex items-center justify-center w-[140px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem">{currentUserProcess[1]?.score}</div>
+                                        <div className="flex items-center justify-center w-[180px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem ">{currentUserProcess[1]?.time && `${currentUserProcess[1]?.time} giây`}</div>
                                     </div>
 
                                     <div className="flex text-[#111827] boardBody">
                                         <div className="flex items-center justify-center w-[140px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem serial  rounded-bl-[12px]">1</div>
                                         <div className="flex items-center justify-center w-[200px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem">
-                                            {userProcess[2]?.isCompleteRender === true ? <button className="bg-[#3f3f46] text-white disabled:opacity-25 rounded-md examButton " disabled>Bạn đã hoàn thành bài 3, vui lòng chờ bài mới.</button> : <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton" onClick={() => {
+                                            {(currentUserProcess[2]?.isCompleteRender === true || currentRound > 3) ? <button className="bg-[#3f3f46] text-white disabled:opacity-25 rounded-md examButton " disabled>Bạn đã hoàn thành bài 3, vui lòng chờ bài mới.</button> : <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton" onClick={() => {
                                                 dispatch(setTask(3))
                                                 navigate('/learn/game/start')
                                             }}>Làm bài 3 </button>}
-                                            {userProcess[2]?.isCompleteRender === true ? <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButtonInMobile hidden fixHidenMoblie" disabled>Bạn đã hoàn thành bài 1, vui lòng chờ bài mới.</button> : <button className="examButtonInMobile hidden bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton fixHidenMoblie" onClick={() => {
+                                            {(currentUserProcess[2]?.isCompleteRender === true || currentRound > 3) ? <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButtonInMobile hidden fixHidenMoblie" disabled>Bạn đã hoàn thành bài 1, vui lòng chờ bài mới.</button> : <button className="examButtonInMobile hidden bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton fixHidenMoblie" onClick={() => {
                                                 dispatch(setTask(3))
                                                 navigate('/learn/game/start')
                                             }}>Làm </button>}
 
                                         </div>
 
-                                        <div className="flex items-center justify-center w-[140px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem">{userProcess[2]?.score}</div>
-                                        <div className="flex items-center justify-center w-[180px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem rounded-br-[12px]">{userProcess[2]?.time && `${userProcess[2]?.time} giây`}</div>
+                                        <div className="flex items-center justify-center w-[140px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem">{currentUserProcess[2]?.score}</div>
+                                        <div className="flex items-center justify-center w-[180px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem rounded-br-[12px]">{currentUserProcess[2]?.time && `${currentUserProcess[2]?.time} giây`}</div>
                                     </div>
                                     <div className="flex text-[#111827] boardBody">
                                     </div>
@@ -140,34 +148,25 @@ export default function LearnPage() {
                             </div>
                             <div className="mt-[40px] boardMain">
                                 <p className="text-white font-bold text-2xl leading-5 mb-[20px]">Lịch sử thi các vòng</p>
+
                                 <div className="flex text-white mb-[4px] board_header">
                                     <div className="w-[140px] py-4 bg-[#353945] border-r-[1px] uppercase border-[#111827] text-center font-bold boardHeaderItem serial">STT</div>
                                     <div className="w-[200px] py-4 bg-[#353945] border-r-[1px] uppercase border-[#111827] text-center font-bold boardHeaderItem">Vòng</div>
                                     <div className="w-[140px] py-4 bg-[#353945] border-r-[1px] uppercase border-[#111827] text-center font-bold boardHeaderItem">thời gian</div>
                                     <div className="w-[180px] py-4 bg-[#353945] border-r-[1px] uppercase border-[#111827] text-center font-bold boardHeaderItem">điểm</div>
                                 </div>
+
                                 <div>
-                                    <div className="flex text-[#111827] boardBody ">
-                                        <> <div className="flex items-center justify-center w-[140px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem serial">1</div>
-                                            <div className="flex items-center justify-center w-[200px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem ">1</div>
-                                            <div className="flex items-center justify-center w-[140px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem "></div>
-                                            <div className="flex items-center justify-center w-[180px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem "></div></>
+                                    {userProcess.map((userProcess, index) => (
+                                        <div className="flex text-[#111827] boardBody " key={userProcess._id}>
+                                            <> <div className="flex items-center justify-center w-[140px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem serial">{index + 1}</div>
+                                                <div className="flex items-center justify-center w-[200px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem ">{userProcess.round}</div>
+                                                <div className="flex items-center justify-center w-[140px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem ">{userProcess.time} giây</div>
+                                                <div className="flex items-center justify-center w-[180px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem ">{userProcess.score}</div></>
+                                        </div>
+                                    ))}
 
-                                    </div>
-                                    <div className="flex text-[#111827] boardBody ">
-                                        <> <div className="flex items-center justify-center w-[140px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem serial">1</div>
-                                            <div className="flex items-center justify-center w-[200px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem ">1</div>
-                                            <div className="flex items-center justify-center w-[140px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem "></div>
-                                            <div className="flex items-center justify-center w-[180px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem "></div></>
 
-                                    </div>
-                                    <div className="flex text-[#111827] boardBody ">
-                                        <> <div className="flex items-center justify-center w-[140px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem serial">1</div>
-                                            <div className="flex items-center justify-center w-[200px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem ">1</div>
-                                            <div className="flex items-center justify-center w-[140px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem "></div>
-                                            <div className="flex items-center justify-center w-[180px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem "></div></>
-
-                                    </div>
 
                                 </div>
                             </div>

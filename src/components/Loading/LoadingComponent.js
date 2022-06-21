@@ -3,7 +3,7 @@ const loadAnimate = require('../../assets/images/gif/noBgLoad.gif')
 function LoadingComponent() {
     return (
         <div className="w-screen h-screen flex justify-center items-center bg-white">
-            <img src={loadAnimate} alt="loading..." />
+            <img src={loadAnimate} alt="Đang tải..." />
         </div>
     )
 }
