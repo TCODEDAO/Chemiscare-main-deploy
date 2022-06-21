@@ -4,7 +4,7 @@ import { lazy, useEffect, useState, useRef } from 'react'
 
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { notifyInfo } from '../../../../components/Alert/AlertComponent'
+import { notifyErorr, notifyInfo } from '../../../../components/Alert/AlertComponent'
 
 //Editor
 import { Editor } from '@tinymce/tinymce-react';
@@ -43,6 +43,37 @@ export default function CreatePost() {
     }
 
 
+    const handle_upload_image = (blobInfo, progress) => new Promise((resolve, reject) => {
+
+        //logic upload
+        const file = blobInfo.blob()
+        const data = new window.FormData()
+        const reader = new FileReader()
+        reader.onload = async () => {
+            data.append('image', reader.result.split(',')[1])
+
+            const option = {
+                onUploadProgress: (e) => {
+                    progress(e.loaded / e.total * 100);
+                }
+            }
+
+            axios.post('https://api.imgur.com/3/image', data, {
+                headers: {
+                    'Authorization': 'Client-ID fa3112521384151',
+                }, option
+            })
+                .then(function (response) {
+                    resolve(response.data.data.link)
+                })
+                .catch(function () {
+                    notifyErorr("Tải ảnh lên không thành công, vui lòng xem lại phần mở rộng của ảnh.")
+                    reject({ message: "Tải ảnh lên không thành công, vui lòng xem lại phần mở rộng của ảnh.", remove: true });
+                })
+        }
+        reader.readAsDataURL(file)
+        //--------------------------------------------
+    })
     return (
         <>
 
@@ -58,33 +89,9 @@ export default function CreatePost() {
                         height: 500,
                         menubar: true,
                         automatic_uploads: true,
+
                         images_upload_url: 'postAcceptor.php',
-                        images_upload_handler: async function (blobInfo, success, failure) {
-                            const file = blobInfo.blob()
-                            const data = new window.FormData()
-                            const reader = new FileReader()
-                            reader.onload = async () => {
-                                data.append('image', reader.result.split(',')[1])
-                                const configAxios = {
-                                    method: 'post',
-                                    url: 'https://api.imgur.com/3/image',
-                                    headers: {
-                                        'Authorization': 'Client-ID fa3112521384151',
-
-                                    },
-                                    data: data
-                                }
-                                axios(configAxios)
-                                    .then(function (response) {
-                                        success(response.data.link)
-                                    })
-                                    .catch(function (error) {
-                                        console.log(error)
-                                    })
-                            }
-                            reader.readAsDataURL(file)
-
-                        },
+                        images_upload_handler: handle_upload_image,
                         branding: false,
                         language: 'vi',
                         language_url: '/langs/vi.js',
@@ -94,7 +101,7 @@ export default function CreatePost() {
                             'advlist', 'autolink', 'lists', 'link', 'charmap', 'preview', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
                             'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount', 'image', 'emoticons', 'code'
                         ],
-                        toolbar: 'undo redo | blocks |  charmap emoticons | ' +
+                        toolbar: 'undo redo | image code | blocks |  charmap emoticons | preview  | ' +
                             'bold italic forecolor | alignleft aligncenter ' +
                             'alignright alignjustify | bullist numlist outdent indent | ' +
                             'removeformat | help'
