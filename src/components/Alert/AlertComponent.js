@@ -23,10 +23,10 @@ const notifyWarn = (content) =>
         progress: undefined,
         theme: 'colored',
     })
-const notifyInfo = (content) =>
+const notifyInfo = (content, time) =>
     toast.info(` ${content}`, {
         position: 'top-right',
-        autoClose: 5000,
+        autoClose: time || 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

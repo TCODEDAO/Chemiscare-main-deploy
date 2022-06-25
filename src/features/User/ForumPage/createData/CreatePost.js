@@ -1,15 +1,19 @@
 
-import { lazy, useEffect, useState, useRef } from 'react'
+import { lazy, useEffect, useState, useRef, useCallback } from 'react'
 
 
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { notifyErorr, notifyInfo } from '../../../../components/Alert/AlertComponent'
+import { notifyErorr, notifyInfo, notifySuccess } from '../../../../components/Alert/AlertComponent'
 
 //Editor
 import { Editor } from '@tinymce/tinymce-react';
 import axios from 'axios';
 
+//util
+import ConfirmCreatePost from '../../../../utils/ConfirmCreatePost';
+import { createPostUser } from '../../../../api/User/apiPost';
+import { createAxios } from '../../../../utils/axiosJWT';
 
 
 // Lazy
@@ -20,11 +24,14 @@ export default function CreatePost() {
     const [content, setContent] = useState('')
     const [title, setTitle] = useState('')
 
+    const [isConfirmSubmitShow, setIsConfirmSubmitShow] = useState(false)
+    const socket = useSelector(state => state?.socket?.socket)
 
 
-
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const currentUser = useSelector((state) => state.auth.login.currentUser)
+    let axiosJWT = createAxios(currentUser, dispatch)
     useEffect(() => {
 
         if (!currentUser) {
@@ -36,9 +43,9 @@ export default function CreatePost() {
 
 
     const editorRef = useRef(null)
-    const log = () => {
+    const saveContent = () => {
         if (editorRef.current) {
-            console.log(editorRef.current.getContent())
+            setContent(editorRef.current.getContent())
         }
     }
 
@@ -74,12 +81,47 @@ export default function CreatePost() {
         reader.readAsDataURL(file)
         //--------------------------------------------
     })
+
+    window.onbeforeunload = function (event) {
+        event.preventDefault()
+        return "Bạn có muốn thực hiện hành động này? Dữ liệu của bạn về bài viết đang chỉnh sửa sẽ không được lưu!"
+
+    }
+    const handleSubmitPost = useCallback(
+        (thread) => {
+            saveContent()
+            const data = {
+                userId: currentUser._id,
+                title: title,
+                content: content,
+                thread: thread
+            }
+            createPostUser(currentUser, socket, axiosJWT, data)
+            handleHideConfirm()
+            setContent('')
+            setTitle('')
+            navigate('/forum')
+        }
+        , [title, content, currentUser])
+
+    const handleShowConfirm = () => {
+        setIsConfirmSubmitShow(true)
+    }
+    const handleHideConfirm = () => {
+        setIsConfirmSubmitShow(false)
+    }
     return (
         <>
 
             <Navigation currentUser={currentUser} />
-            <div className='h-full w-full relative mt-[106px]'>
-                <button className='relative left-[80%] mt-[1%] mb-[10px] bg-[#f4742577] text-white rounded-3xl p-2 ' style={{ backgroundColor: ` ${Boolean(title) && Boolean(content) && '#f47425'} ` }}>Xuất bản</button>
+
+            <div className='h-full w-full relative mt-[70px]'>
+                {isConfirmSubmitShow && <ConfirmCreatePost handleSubmitPost={handleSubmitPost} handleHideConfirm={handleHideConfirm} />}
+                <button className='relative left-[80%] mt-[1%] mb-[10px] bg-[#f4742577] text-white rounded-3xl p-2 ' style={{ backgroundColor: ` ${Boolean(title) && Boolean(content) && '#f47425'} ` }} onClick={() => {
+                    if (Boolean(title) && Boolean(content)) {
+                        handleShowConfirm()
+                    }
+                }}>Xuất bản</button>
                 <input value={title} onChange={e => setTitle(e.target.value)} type="text" placeholder='Tiêu đề' className=' p-2 outline-none border-none w-full placeholder:text-[40px] placeholder:font-semibold text-[40px] ' maxLength={50} />
                 <Editor
                     apiKey='r3u127an0pxiu2t96wuv3b8z7fqx3sf9huowyykivlqdew00'
@@ -87,9 +129,14 @@ export default function CreatePost() {
                     initialValue=""
                     init={{
                         height: 500,
+
                         menubar: true,
                         automatic_uploads: true,
-
+                        setup: function (editor) {
+                            editor.on('init', () => {
+                                notifySuccess('Tải công cụ biên tập thành công')
+                            })
+                        },
                         images_upload_url: 'postAcceptor.php',
                         images_upload_handler: handle_upload_image,
                         branding: false,
@@ -106,8 +153,8 @@ export default function CreatePost() {
                             'alignright alignjustify | bullist numlist outdent indent | ' +
                             'removeformat | help'
                     }}
+                    onEditorChange={setContent}
                 />
-                <button onClick={log}>Log editor content</button>
                 <Footer />
             </div>
 

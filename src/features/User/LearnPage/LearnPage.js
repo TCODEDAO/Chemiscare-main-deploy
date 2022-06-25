@@ -75,7 +75,8 @@ export default function LearnPage() {
                     <div className="flex justify-between flex-wrap mb-[100px]">
                         <div className="boardWrapper">
                             <div className="boardMain">
-                                <p className="text-white font-bold text-2xl leading-5 mb-[20px] inline-block">Đề thi dành cho học sinh lớp {currentUser?.detailUserInfomation?.grade}</p>
+                                <p className="text-white font-bold text-2xl leading-5 mb-[20px] block">Đề thi dành cho học sinh lớp {currentUser?.detailUserInfomation?.grade}</p>
+                                <p className='text-white font-bold text-2xl leading-5 mb-[20px] inline-block'>Vòng thi hiện tại: {currentRound}</p>
                                 {currentRound < 4 ? Boolean(currentUserProcess[0] && currentUserProcess[1] && currentUserProcess[2]) && <button className='inline-block m-4 text-white bg-[#54a0ff] hover:bg-[#1dd1a1]  outline-none rounded-3xl transition-all duration-300 p-3' onClick={handleSubmitTaskAndNextRound}>Nộp bài</button> : <div className='text-white'>Vui lòng xem lịch thi để biết thêm thông tin về vòng thi mới!</div>}
                                 <div className="flex text-white mb-[4px] board_header">
                                     <div className="w-[140px] py-4 bg-[#353945] border-r-[1px] uppercase border-[#111827] text-center font-bold boardHeaderItem serial">STT</div>

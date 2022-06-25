@@ -1,38 +1,58 @@
-import React, { lazy, useEffect } from 'react'
+import React, { lazy, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllPost } from '../../../../api/User/apiPost'
+import { adminDeletePost, getAllPost, getAllPostApproved } from '../../../../api/User/apiPost'
 import { createAxios } from '../../../../utils/axiosJWT'
 import moment from 'moment'
 import 'moment/locale/vi'
-import { notifyErorr } from '../../../../components/Alert/AlertComponent'
+import xss from 'xss'
+import { Link } from 'react-router-dom'
+
 
 
 moment.locale('vi')
 const loadAnimate = require('../../../../assets/images/gif/noBgLoad.gif')
-const PostExcerpt = ({ post }) => {
+const PostExcerpt = ({ post, currentUser, socket, axiosJWT }) => {
+
+    const [showBox, setShowBox] = useState(false)
     return (
-        <li className="my-[8px] w-[100%] rounded-[16px] p-[24px] border-solid border-[#2a2c34] border-[1px] bg-[#1e2029]">
+        <li className="my-[8px] w-[100%] rounded-[16px] p-[24px] border-solid border-[#2a2c34] border-[1px] bg-[#1e2029]" onClick={(e) => {
+            e.stopPropagation()
+            setShowBox(false)
+
+        }}>
             <div className="flex justify-between">
                 <div className="flex items-center cursor-pointer">
                     <div className="mr-[4px]">
-                        <img className="w-[28px] h-[28px] object-cover rounded-[50%]" src={post?.userId.avatar} alt="" />
+                        <img className="w-[28px] h-[28px] object-cover rounded-[50%]" src={post?.userId?.avatar} alt="" />
                     </div>
-                    <p className="font-medium p-white-forum hover:text-[#d54253] ml-2">{post?.userId.fullName}</p>
+                    <p className="font-medium p-white-forum hover:text-[#d54253] ml-2">{post?.userId?.fullName}</p>
                 </div>
                 <div>
-                    <i className="cursor-pointer fa-regular fa-bookmark  p-white-forum mr-[8px]"></i>
-                    <i className="cursor-pointer fa-solid fa-bookmark  p-white-forum mr-[8px] text-[#d54253]" style={{ display: 'none' }}></i>
-                    <i className="cursor-pointer fa-solid fa-ellipsis  p-white-forum"></i>
+                    {/* <i className="cursor-pointer fa-regular fa-bookmark  p-white-forum mr-[8px]"></i> */}
+                    {/* <i className="cursor-pointer fa-solid fa-bookmark  p-white-forum mr-[8px] text-[#d54253]" style={{ display: 'none' }}></i> */}
+                    {(currentUser?.isAdmin || currentUser?._id === post?._id) && <i className="cursor-pointer fa-solid fa-ellipsis hover:text-[#d54253] p-white-forum" onClick={(e) => {
+
+                        e.stopPropagation()
+                        setShowBox(!showBox)
+                    }}></i>}
+                    {showBox && <div>
+                        <ul className='min-w-[100px] p-2 bg-[#757575] left-[34%] rounded-xl z-[9999] absolute '>
+                            <li className='text-[#ffffffde] p-2 text-center cursor-pointer select-none hover:bg-[#cccccc4f] rounded-xl ' onClick={() => {
+                                adminDeletePost(currentUser, axiosJWT, post?._id, socket)
+                            }}>Xóa</li>
+                        </ul>
+                    </div>}
+
                 </div>
             </div>
             <div className="mt-[8px] mb-[16px]">
                 <div>
-                    <p className="text-[20px] p-white-forum font-[700] hover:text-[#d54253] cursor-pointer">{post?.title}</p>
-                    <p className="mt-[4px] p-white-forum leading-[1.6] text-[15px] font-light">{post.content.slice(0, 100)}...</p>
+                    <Link to={`/forum/post/${post?._id}`}><p className="text-[20px] p-white-forum font-[700] hover:text-[#d54253] cursor-pointer">{post?.title}</p></Link>
+                    <Link to={`/forum/post/${post?._id}`}><p className="mt-[4px] p-white-forum leading-[1.6] text-[15px] font-light" dangerouslySetInnerHTML={{ __html: xss(post?.content?.slice(0, 100)) }}></p></Link>
                 </div>
             </div>
             <div className="flex items-center">
-                <p className=" p-white-forum">{moment(post.createdAt).fromNow()}</p>
+                <p className=" p-white-forum">{moment(post?.createdAt).fromNow()}</p>
                 <i className=" fa-solid fa-circle text-[4px]  p-white-forum mx-[8px]"></i>
 
             </div>
@@ -42,6 +62,7 @@ const PostExcerpt = ({ post }) => {
 
 
 export default function PostListComponent() {
+    const socket = useSelector(state => state?.socket?.socket)
 
     const currentUser = useSelector(state => state?.auth?.login?.currentUser)
     const postList = useSelector(state => state?.post?.posts)
@@ -50,7 +71,36 @@ export default function PostListComponent() {
     let axiosJWT = createAxios(currentUser, dispatch)
     useEffect(() => {
         if (currentUser) {
-            getAllPost(currentUser, dispatch, axiosJWT)
+            getAllPostApproved(currentUser, dispatch, axiosJWT)
+        }
+        if (socket) {
+            socket.on('ApprovedSuccessPostAdminFromServer', data => {
+                getAllPostApproved(currentUser, dispatch, axiosJWT)
+            })
+        }
+        if (socket) {
+            socket.on('RemoveSuccessPostAdminFromClientFromServer', data => {
+                getAllPostApproved(currentUser, dispatch, axiosJWT)
+            })
+        }
+        if (socket) {
+            socket.on('RemoveSuccessPostAdminRealFromServer', data => {
+                getAllPostApproved(currentUser, dispatch, axiosJWT)
+
+            })
+        }
+
+        return () => {
+            if (socket) {
+                socket.off('RemoveSuccessPostAdminFromClientFromServer', data => {
+                    getAllPostApproved(currentUser, dispatch, axiosJWT)
+                })
+            }
+            if (socket) {
+                socket.on('ApprovedSuccessPostAdminFromServer', data => {
+                    getAllPostApproved(currentUser, dispatch, axiosJWT)
+                })
+            }
         }
     }, [])
 
@@ -63,7 +113,7 @@ export default function PostListComponent() {
         content = <div className='flex justify-center items-baseline'>   <img src={loadAnimate} width="80" alt="" /></div>
     } else if (postStatus === 'success') {
         content = postList.map((post, index) => (
-            <PostExcerpt post={post} key={index} />
+            <PostExcerpt post={post} key={index} currentUser={currentUser} socket={socket} axiosJWT={axiosJWT} />
         ))
     } else if (postStatus === 'failed') {
         content = <div className='text-white' onLoad={() => {

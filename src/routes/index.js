@@ -15,10 +15,12 @@ const ContainerGameComponent = lazy(() => import('../features/User/GamePage/Quiz
 //Forum
 const ForumComponent = lazy(() => import('../features/User/ForumPage/ForumPage'))
 //Posts
+const SinglePostComponent = lazy(() => import("../features/User/ForumPage/SinglePost/SinglePostComponent"))
 const CreatePost = lazy(() => import('../features/User/ForumPage/createData/CreatePost'))
 
 //Admin
 const QuestionComponentManagement = lazy(() => import('../features/Admin/QuestionManagementPage/QuestionComponentManagement'))
+const PostsCensor = lazy(() => import('../features/Admin/ForumManagementPage/CensorPost'))
 const publicRoutes = [
     { id: 0, path: '/', index: true, component: HomePage },
     { id: 1, path: '/auth', index: true, component: AuthPage },
@@ -29,12 +31,14 @@ const publicRoutes = [
     { id: 6, path: '/learn/game/start', index: true, component: StartGameComponent },
     { id: 7, path: '/learn/game/content', index: true, component: ContainerGameComponent },
     { id: 8, path: '/forum', index: true, component: ForumComponent },
-    { id: 9, path: '/forum/user/create', index: true, component: CreatePost }
+    { id: 9, path: '/forum/user/create', index: true, component: CreatePost },
+    { id: 10, path: '/forum/post/:postId', index: true, component: SinglePostComponent }
 
 
 
 ]
 const privateRoutes = [
-    { id: 0, path: '/admin/question', index: true, component: QuestionComponentManagement }
+    { id: 0, path: '/admin/question', index: true, component: QuestionComponentManagement },
+    { id: 1, path: '/admin/forum/posts', index: true, component: PostsCensor }
 ]
 export { publicRoutes, privateRoutes }

@@ -28,7 +28,7 @@ function NavBarLearnPage({ currentUser }) {
 
     return (
 
-        <div className="fixed h-[96px] bg-[#1f232b] top-0 left-0 right-0 z-[9]">
+        <div className="fixed h-[70px] bg-[#1f232b] top-0 left-0 right-0 z-[9]">
             <div className="max-w-[1092px] w-[100%] h-full flex items-center justify-between mx-auto">
                 <Link to="/" className="flex items-center">
                     <i className="fa-solid fa-atom text-[40px] text-white mr-1 logoIcon"></i>
@@ -173,8 +173,11 @@ function NavBarLearnPage({ currentUser }) {
                             <li className={`py-2 hover:text-[#d54253] ${currentUser?.isAdmin === false && "border-b-[1px]"} border-[#51535a] border-solid`}>
                                 <Link to="/learn/rate">Xếp hạng của tôi</Link>
                             </li>
-                            {currentUser?.isAdmin && <li className={`py-2 hover:text-[#d54253] border-b-[1px] border-[#51535a] border-solid`}>
+                            {currentUser?.isAdmin && <li className={`py-2 hover:text-[#d54253] `}>
                                 <Link to="/admin/question">Quản lí câu hỏi</Link>
+                            </li>}
+                            {currentUser?.isAdmin && <li className={`py-2 hover:text-[#d54253] border-b-[1px] border-[#51535a] border-solid`}>
+                                <Link to="/admin/forum/posts">Quản lí bài viết</Link>
                             </li>}
                             <li
                                 className="py-2 hover:text-[#d54253]"

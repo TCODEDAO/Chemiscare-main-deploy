@@ -9,13 +9,18 @@ import { configureStore } from '@reduxjs/toolkit'
 import AuthSlice from "./User/AuthSlice"
 import QuizSlice from "./User/QuizSlice"
 import PostSlice from "./User/PostSlice";
-
+import SocketSlice from "./socketSlice";
 import QuestionManagementSlice from "./Admin/QuestionManagementSlice"
+import ForumManagementSlice from "./Admin/ForumManagementSlice";
+
+
 const rootReducer = combineReducers({
     auth: AuthSlice,
     quiz: QuizSlice,
     post: PostSlice,
-    questionManagement: QuestionManagementSlice
+    socket: SocketSlice,
+    forumManagementSlice: ForumManagementSlice,
+    questionManagement: QuestionManagementSlice,
 })
 
 const persistConfig = {

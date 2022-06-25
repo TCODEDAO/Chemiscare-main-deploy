@@ -1,11 +1,14 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice, isFulfilled } from "@reduxjs/toolkit"
 
 const postSlice = createSlice({
     name: 'post',
     initialState: {
         posts: [],
         status: 'loading',
-        message: ''
+        message: '',
+        thread: {
+            content: []
+        },
     },
     reducers: {
         getPostStart: (state) => {
@@ -13,12 +16,29 @@ const postSlice = createSlice({
         },
         getPostSuccess: (state, action) => {
             state.status = 'success'
-            state.posts = [...action.payload, ...state.posts]
+
+            state.posts = action.payload
+
+        },
+        addPostSuccess: (state, action) => {
+            state.posts = [...state.posts, action.payload]
         },
         getPostFailed: (state) => {
             state.status = 'failed'
+        },
+
+        getThreadSuccess: (state, action) => {
+            state.thread.content = action.payload
+        },
+        setThread: (state, action) => {
+            console.log('action.payload: ', action.payload)
+
+
+            state.thread.content = [...state.thread.content, action.payload.data]
+
 
         }
+
     },
 
 })
@@ -26,8 +46,10 @@ const postSlice = createSlice({
 export const {
     getPostStart,
     getPostSuccess,
-    getPostFailed
-
+    getPostFailed,
+    getThreadSuccess,
+    setThread,
+    addPostSuccess,
 } = postSlice.actions
 
 export default postSlice.reducer
