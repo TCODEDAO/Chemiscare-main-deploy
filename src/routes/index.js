@@ -1,4 +1,5 @@
 import { lazy } from "react"
+import CreatePost from '../features/User/ForumPage/CreateData/CreatePost'
 
 
 
@@ -20,7 +21,7 @@ const ContainerGameComponent = lazy(() => import('../features/User/GamePage/Quiz
 const ForumComponent = lazy(() => import('../features/User/ForumPage/ForumPage'))
 //Posts
 const SinglePostComponent = lazy(() => import("../features/User/ForumPage/SinglePost/SinglePostComponent"))
-const CreatePost = lazy(() => import('../features/User/ForumPage/CreateData/CreatePost'))
+
 
 //Admin
 const QuestionComponentManagement = lazy(() => import('../features/Admin/QuestionManagementPage/QuestionComponentManagement'))
