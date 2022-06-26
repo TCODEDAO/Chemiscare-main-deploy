@@ -107,16 +107,20 @@ function CensorPost() {
                                         <div className="flex items-center">
                                             <span className="mx-[14px] font-semibold cursor-pointer text-white" onClick={() => {
                                                 adminDeletePostReal(currentUser, axiosJWT, post._id, socket)
+                                                getAllPost(currentUser, dispatch, axiosJWT)
                                             }}>Xóa</span>
                                             <hr className="border-[#2a2c34] border-[1px] border-solid h-[16px] w-[1px] bg-[#2a2c34]" />
                                             <span className="mx-[14px] font-semibold mr-0 text-[#d54253] cursor-pointer" onClick={() => {
                                                 adminAprrovedPost(currentUser, axiosJWT, post._id, socket)
+                                                getAllPost(currentUser, dispatch, axiosJWT)
                                             }}>Duyệt</span>
                                         </div>
                                     </div>
                                     <div className="mt-[16px] flex">
                                         <div>
-                                            <p className="text-[20px] font-[700] hover:text-[#d54253] text-white cursor-pointer">{post?.title}</p>
+                                            <p className="text-[20px] font-[700] hover:text-[#d54253] text-white cursor-pointer" onClick={() => {
+                                                navigate(`/forum/post/${post?._id}`)
+                                            }}>{post?.title}</p>
                                             <p className="mt-[4px] leading-[1.6] text-[15px] text-white font-light" dangerouslySetInnerHTML={{ __html: xss(post?.content?.slice(0, 100)) }}></p>
                                         </div>
                                     </div>

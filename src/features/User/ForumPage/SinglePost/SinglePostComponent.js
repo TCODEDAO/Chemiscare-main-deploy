@@ -11,6 +11,10 @@ import 'moment/locale/vi'
 import './SinglePostComponent.css'
 import Avatar from '../../../../components/Avatar/AvatarComponent';
 import xss from 'xss'
+import CreateCommentComponent from '../CreateData/CreateCommentComponent';
+import CommentList from '../Comment/CommentList';
+import { addOneComment } from '../../../../redux/User/ReactionSlice';
+import { notifyInfo } from '../../../../components/Alert/AlertComponent';
 moment.locale('vi')
 const Navigation = lazy(() => import('../../../../components/Navigation/NavigationComponent'))
 const Footer = lazy(() => import('../../../../components/Footer/FooterComponent'))
@@ -20,13 +24,19 @@ function SinglePostComponent() {
     const dispatch = useDispatch()
     const currentUser = useSelector(state => state?.auth?.login?.currentUser)
     let axiosJWT = createAxios(currentUser, dispatch)
-
+    const socket = useSelector(state => state?.socket?.socket)
+    useEffect(() => {
+        if (!currentUser) {
+            navigate('/auth')
+            notifyInfo('Bạn cần đăng nhập để tiếp tục')
+        }
+    }, [])
     useEffect(() => {
         getPostById(currentUser, dispatch, axiosJWT, postId, navigate)
     }, [])
 
     const post = useSelector(state => state?.post?.posts?.filter(post => post._id === postId))
-    console.log(post, document.querySelector('.partLeft'))
+
 
     //ref
     const contentWrapperRef = useRef(null)
@@ -54,11 +64,15 @@ function SinglePostComponent() {
             })
         })
     }
+
+    //comment
+    const commentCount = useSelector(state => state?.reaction?.count?.comments)
     useEffect(() => {
 
 
         partLeft.current.style.marginLeft = `233px`
     }, [partLeft, contentWrapperRef, comment_Wrapper])
+
     return (
 
         <div className="pt-[100px] pb-[80px] bg-[#13161B] relative min-h-[100vh] content_Wrapper " ref={el => contentWrapperRef.current = el}>
@@ -69,16 +83,16 @@ function SinglePostComponent() {
                         <p className="text-[18px] font-medium text-center text-[#fff]">{post[0]?.userId.fullName}</p>
                         <hr className="h-[1px] bg-[#2a2c34] mt-[10px] mb-[24px]" />
                         <div className="flex justify-around">
-                            <span className="flex flex-col items-center cursor-pointer text-[#fff]">
-                                <i className="text-[20px] mb-[4px] fa-regular fa-heart post_Reaction"></i>
-                                <i className="text-[20px] mb-[4px] fa-solid fa-heart post_Reaction__active text-[#d54253]" style={{ display: "none" }}></i>
-                                10
-                            </span>
+
                             <span className="flex flex-col items-center cursor-pointer text-[#fff]">
                                 <i className="text-[20px] mb-[4px] fa-regular fa-comment comment_Icon__open" onClick={() => {
+                                    if (socket) {
+
+                                        socket.emit('join_room_comment', postId)
+                                    }
                                     comment_Wrapper.current.style.display = 'block'
                                 }}></i>
-                                20
+                                {commentCount}
                             </span>
                         </div>
                     </div>
@@ -89,8 +103,8 @@ function SinglePostComponent() {
                         <div className="my-[20px] flex items-center justify-between">
                             <div className="flex items-center">
                                 <div className="mr-[4px]">
-                                    {post[0]?.userId?.avatar === true ? <img className="w-[50px] h-[50px] object-cover rounded-[50%]"
-                                        src={post?.userId?.avatar}
+                                    {post[0]?.userId?.avatar ? <img className="w-[50px] h-[50px] object-cover rounded-[50%]"
+                                        src={post[0]?.userId?.avatar}
                                         alt="" /> : <Avatar name={post[0]?.userId?.fullName}
                                             size="50px" />}
                                 </div>
@@ -122,137 +136,16 @@ function SinglePostComponent() {
                 <div className="fixed w-[100%] top-0 bottom-0 z-10 right-0 bg-[rgba(0,0,0,0.2)] comment_Wrapper hidden" ref={el => comment_Wrapper.current = el}>
                     <div className="comment_Content w-[50%] bg-[rgb(30,32,41)] absolute right-0 top-0 bottom-0 pt-[50px] pb-[60px] px-[40px] overflow-y-auto">
                         <div className="w-full text-right">
-                            <i className="comment_Icon__close fa-solid fa-xmark text-[24px] cursor-pointer py-[10px] pl-[10px]" onClick={() => {
+                            <i className="comment_Icon__close text-white fa-solid fa-xmark text-[24px] cursor-pointer py-[10px] pl-[10px]" onClick={() => {
                                 comment_Wrapper.current.style.display = 'none'
                             }}></i>
                         </div>
                         <div>
-                            <p className="text-[20px] font-medium mb-[40px] text-white">3 bình luận</p>
+                            <p className="text-[20px] font-medium mb-[40px] text-white">{commentCount} bình luận</p>
                             <div className="">
-                                <div className="mb-[10px]">
-                                    <div className="flex items-end mb-[8px]">
-                                        <div className="mr-[8px]">
-                                            <img className="w-[40px] h-[40px] object-cover rounded-[50%]"
-                                                src="https://images.unsplash.com/photo-1650902153035-ecee8f4e8bb4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-                                                alt="" />
-                                        </div>
-                                        <div className="grow">
-                                            <input
-                                                className="w-full font-light bg-[transparent] py-[8px] outline-none border-solid border-[#2a2c34] border-b-[1.4px]"
-                                                type="text" placeholder="Viết bình luận của bạn..." />
-                                        </div>
-                                    </div>
-                                    <div className="flex justify-end">
-                                        <span className="px-[20px] py-[8px] font-medium cursor-pointer text-white">HỦY</span>
-                                        <span
-                                            className="px-[20px] py-[8px] text-white font-medium bg-[#ccc] cursor-pointer rounded-[20px]">BÌNH
-                                            LUẬN</span>
-                                    </div>
-                                </div>
-                                <ul className="">
-                                    <li className="flex my-[20px]">
-                                        <div className="mr-[8px]">
-                                            <img className="w-[36px] h-[36px] object-cover rounded-[50%]"
-                                                src="https://images.unsplash.com/photo-1650902153035-ecee8f4e8bb4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="" />
-                                        </div>
-                                        <div className="maxWidthClassName">
-                                            <div className="bg-[#353945] px-[12px] py-[10px] rounded-[16px] mb-[8px]">
-                                                <p className="font-medium mb-[4px]">Nguyễn Phúc Thanh</p>
-                                                <p className="font-light break-words">Hay lắm bạn bạn bạn bạn bạn bạn bạnHay lắm
-                                                    bạn bạn bạn bạn bạn bạn bạnHay lắm bạn bạn bạn bạn bạn bạn bạn!!!</p>
-                                            </div>
-                                            <div className="flex items-center text-[14px] justify-between mb-[8px]">
-                                                <div className="flex items-center">
-                                                    <p className="cursor-pointer hover:text-[#d54253] opacity-[0.9]">Thích</p>
-                                                    <i className="opacity-[0.9] fa-solid fa-circle text-[4px] mx-[8px]"></i>
-                                                    <p className="cursor-pointer hover:text-[#d54253] opacity-[0.9]">Trả lời</p>
-                                                </div>
-                                                <p className="opacity-[0.9] font-light">15 phút trước</p>
-                                            </div>
-                                            <div className="my-[8px] hidden">
-                                                <div className="flex items-end mb-[8px]">
-                                                    <div className="mr-[8px]">
-                                                        <img className="w-[36px] h-[36px] object-cover rounded-[50%]"
-                                                            src="https://images.unsplash.com/photo-1650902153035-ecee8f4e8bb4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-                                                            alt="" />
-                                                    </div>
-                                                    <div className="grow">
-                                                        <input
-                                                            className="w-full font-light bg-[transparent] py-[8px] outline-none border-solid border-[#2a2c34] border-b-[1.4px]"
-                                                            type="text" placeholder="Viết bình luận của bạn..." />
-                                                    </div>
-                                                </div>
-                                                <div className="justify-end flex">
-                                                    <span className="px-[20px] py-[8px] font-medium cursor-pointer">HỦY</span>
-                                                    <span className="px-[20px] py-[8px] font-medium bg-[#ccc] cursor-pointer rounded-[20px]">TRẢ LỜI</span>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <div className="flex items-center cursor-pointer mb-8px">
-                                                    <p className="font-medium mr-[8px]">Xem 2 câu trả lời</p>
-                                                    <i className="fa-solid fa-angle-down"></i>
-                                                </div>
-                                                <ul className="">
-                                                    <li className="flex my-[20px]">
-                                                        <div className="mr-[8px]">
-                                                            <img className="w-[36px] h-[36px] object-cover rounded-[50%]"
-                                                                src="https://images.unsplash.com/photo-1650902153035-ecee8f4e8bb4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-                                                                alt="" />
-                                                        </div>
-                                                        <div className="maxWidthClassName">
-                                                            <div className="bg-[#353945] px-[12px] py-[10px] rounded-[16px] mb-[8px]">
-                                                                <p className="font-medium mb-[4px]">Nguyễn Phúc Thanh</p>
-                                                                <p className="font-light break-words">Hay lắm bạn bạn bạn bạn bạn bạn bạnHay lắm
-                                                                    bạn bạn bạn bạn bạn bạn bạnHay lắm bạn bạn bạn bạn bạn bạn bạn!!!</p>
-                                                            </div>
-                                                            <div className="flex items-center text-[14px] justify-between mb-[8px]">
-                                                                <div className="flex items-center">
-                                                                    <p className="cursor-pointer hover:text-[#d54253] opacity-[0.9]">Thích</p>
-                                                                    <i className="opacity-[0.9] fa-solid fa-circle text-[4px] mx-[8px]"></i>
-                                                                    <p className="cursor-pointer hover:text-[#d54253] opacity-[0.9]">Trả lời</p>
-                                                                </div>
-                                                                <p className="opacity-[0.9] font-light">15 phút trước</p>
-                                                            </div>
-                                                            <div className="my-[12px] hidden">
-                                                                <div className="flex items-end mb-[8px]">
-                                                                    <div className="mr-[8px]">
-                                                                        <img className="w-[40px] h-[40px] object-cover rounded-[50%]"
-                                                                            src="https://images.unsplash.com/photo-1650902153035-ecee8f4e8bb4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-                                                                            alt="" />
-                                                                    </div>
-                                                                    <div className="grow">
-                                                                        <input
-                                                                            className="w-full font-light bg-[transparent] py-[8px] outline-none border-solid border-[#2a2c34] border-b-[1.4px]"
-                                                                            type="text" placeholder="Viết bình luận của bạn..." />
-                                                                    </div>
-                                                                </div>
-                                                                <div className="flex justify-end">
-                                                                    <span className="px-[20px] py-[8px] font-medium cursor-pointer">HỦY</span>
-                                                                    <span
-                                                                        className="px-[20px] py-[8px] font-medium bg-[#ccc] cursor-pointer rounded-[20px]">TRẢ LỜI</span>
-                                                                </div>
-                                                            </div>
-                                                            <div>
-                                                                <div className="flex items-center cursor-pointer mb-8px">
-                                                                    <p className="font-medium mr-[8px]">Xem 2 câu trả lời</p>
-                                                                    <i className="fa-solid fa-angle-down"></i>
-                                                                </div>
-                                                            </div>
-                                                            <ul>
-                                                                <li>
-                                                                    <ul className="">
-                                                                        <li className="flex my-[20px]">
-                                                                        </li>
-                                                                    </ul>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
+                                <CreateCommentComponent currentUser={currentUser} postId={postId} socket={socket} />
+                                <CommentList postId={postId} postAuthorId={post[0]?.userId?._id} />
+
                             </div>
                         </div>
                     </div>

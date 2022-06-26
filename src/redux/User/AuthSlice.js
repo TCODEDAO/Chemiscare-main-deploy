@@ -19,6 +19,7 @@ const authSlice = createSlice({
             isError: false,
             isSuccess: false,
         },
+        user: null
     },
     reducers: {
         loginStart: (state) => {
@@ -61,6 +62,9 @@ const authSlice = createSlice({
             state.logout.isSuccess = false
             state.logout.isFetching = false
         },
+        setUser: (state, action) => {
+            state.user = action.payload
+        }
     }
 })
 
@@ -74,6 +78,7 @@ export const {
     registerFailed,
     registerStart,
     registerSuccess,
+    setUser
 
 } = authSlice.actions
 

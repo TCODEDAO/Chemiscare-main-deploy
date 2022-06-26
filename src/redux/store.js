@@ -12,6 +12,7 @@ import PostSlice from "./User/PostSlice";
 import SocketSlice from "./socketSlice";
 import QuestionManagementSlice from "./Admin/QuestionManagementSlice"
 import ForumManagementSlice from "./Admin/ForumManagementSlice";
+import ReactionSlice from "./User/ReactionSlice";
 
 
 const rootReducer = combineReducers({
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
     quiz: QuizSlice,
     post: PostSlice,
     socket: SocketSlice,
+    reaction: ReactionSlice,
     forumManagementSlice: ForumManagementSlice,
     questionManagement: QuestionManagementSlice,
 })

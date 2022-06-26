@@ -20,7 +20,8 @@ const quizSlice = createSlice({
         },
         task: { currentTask: 1 },
         result: [],
-        allResultHistory: []
+        allResultHistory: [],
+        resultAllUser: []
     },
     reducers: {
         getQuestionStart: (state) => {
@@ -59,7 +60,13 @@ const quizSlice = createSlice({
             state.task.currentTask = 0
 
         },
+        setResultAllUser: (state, action) => {
+            state.resultAllUser = action.payload
 
+        },
+        addResultAllUser: (state, action) => {
+            state.resultAllUser = [action.payload, ...state.resultAllUser]
+        }
     }
 })
 
@@ -73,7 +80,9 @@ export const {
     clearDataToNewRound,
     setResult,
     setTask,
-    setHistoryResult
+    setHistoryResult,
+    setResultAllUser,
+    addResultAllUser
 
 } = quizSlice.actions
 

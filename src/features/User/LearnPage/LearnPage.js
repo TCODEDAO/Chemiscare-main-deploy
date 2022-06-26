@@ -69,7 +69,7 @@ export default function LearnPage() {
                 <link rel="shortcut icon" href={favicon} type="image/x-icon" />
                 <title>Học Tập</title>
             </Helmet>
-            <div className="py-[60px] bg-[#13161B] mt-[86px] relative min-h-[100vh]">
+            <div className="py-[60px] bg-[#13161B] mt-[70px] relative min-h-[100vh]">
                 <Navigation currentUser={currentUser} />
                 <div className="max-w-[1092px] w-[100%] mx-auto">
                     <div className="flex justify-between flex-wrap mb-[100px]">
@@ -172,7 +172,7 @@ export default function LearnPage() {
                                 </div>
                             </div>
                         </div>
-                        <div className="boardWrapper boardWrapperRank">
+                        {/* <div className="boardWrapper boardWrapperRank">
                             <div className="boardRank">
                                 <p className="text-white font-bold text-2xl leading-5 mb-[20px]">Xếp hạng</p>
                                 <ul className="">
@@ -214,7 +214,7 @@ export default function LearnPage() {
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <Footer />

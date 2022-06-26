@@ -28,7 +28,7 @@ function NavBarLearnPage({ currentUser }) {
 
     return (
 
-        <div className="fixed h-[70px] bg-[#1f232b] top-0 left-0 right-0 z-[9]">
+        <div className="fixed h-[70px] bg-[#1f232b] top-0 left-0 right-0 z-[99]">
             <div className="max-w-[1092px] w-[100%] h-full flex items-center justify-between mx-auto">
                 <Link to="/" className="flex items-center">
                     <i className="fa-solid fa-atom text-[40px] text-white mr-1 logoIcon"></i>
@@ -42,8 +42,8 @@ function NavBarLearnPage({ currentUser }) {
                             className="p-4 text-[18px] text-[#868991] hover:text-[#d54253]"
                             to="/learn"
                         >
-                            <i className="fa-solid fa-house"></i>
-                            <span className="pl-1">Trang Chủ</span>
+                            <i className="fas fa-graduation-cap"></i>
+                            <span className="pl-1">Học tập</span>
                         </Link>
                     </li>
                     <li className="" >
@@ -89,9 +89,9 @@ function NavBarLearnPage({ currentUser }) {
                                     className="px-6 block py-4 boder-bot hover:text-[#d54253]"
                                     to="/learn"
                                 >
-                                    <i className="text-[18px] fa-solid fa-house"></i>
+                                    <i className="text-[18px] fas fa-graduation-cap"></i>
                                     <span className="text-sm text-[16px] pl-1">
-                                        Trang Chủ
+                                        Học tập
                                     </span>
                                 </Link>
                             </li>
@@ -172,6 +172,9 @@ function NavBarLearnPage({ currentUser }) {
 
                             <li className={`py-2 hover:text-[#d54253] ${currentUser?.isAdmin === false && "border-b-[1px]"} border-[#51535a] border-solid`}>
                                 <Link to="/learn/rate">Xếp hạng của tôi</Link>
+                            </li>
+                            <li className={`py-2 hover:text-[#d54253] ${currentUser?.isAdmin === false && "border-b-[1px]"} border-[#51535a] border-solid`}>
+                                <Link to="/user/userPage">Trang cá nhân</Link>
                             </li>
                             {currentUser?.isAdmin && <li className={`py-2 hover:text-[#d54253] `}>
                                 <Link to="/admin/question">Quản lí câu hỏi</Link>

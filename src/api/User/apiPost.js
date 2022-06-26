@@ -2,6 +2,7 @@ import axios from 'axios'
 import { notifyErorr, notifySuccess } from '../../components/Alert/AlertComponent'
 import { adminGetPostsSuccess, adminGetThreadSuccess } from '../../redux/Admin/ForumManagementSlice'
 import { addPostSuccess, getPostFailed, getPostStart, getPostSuccess, getThreadSuccess, setThread, } from '../../redux/User/PostSlice'
+import { setComments, setCountComments } from '../../redux/User/ReactionSlice'
 
 
 const getAllPost = async (currentUser, dispatch, axiosJWT) => {
@@ -33,13 +34,20 @@ const getAllPostApproved = async (currentUser, dispatch, axiosJWT) => {
     }
 }
 
-const getPostById = async (currentUser, dispatch, axiosJWT, id, navigate) => {
+const getPostById = async (currentUser, dispatch, axiosJWT, id, navigate, page) => {
     try {
         const res = await axiosJWT.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/forum/posts/${id}`, {
             headers: { token: `Bearer ${currentUser?.accessToken}` },
         })
-
-        // dispatch(addPostSuccess(res.data.data))
+        const comments = await axiosJWT.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/reaction/comments/${id}?limit=${page * 5}`, {
+            headers: { token: `Bearer ${currentUser?.accessToken}` },
+        })
+        const commentReply = comments.data.comments.reduce((previousValue, currentValue) => {
+            return previousValue + currentValue.reply.length
+        }, 1)
+        dispatch(setCountComments(commentReply))
+        dispatch(setComments(comments.data.comments))
+        dispatch(addPostSuccess(res.data.data))
     } catch (err) {
         console.log(err)
         notifyErorr(err.response.data.message)

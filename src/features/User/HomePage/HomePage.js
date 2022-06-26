@@ -52,8 +52,8 @@ export default function HomePage() {
                         <ul className="flex justify-between grow nav">
                             <li className="" >
                                 <Link className=" hover:text-[#ff4b2b]" to="/learn">
-                                    <i className="fa-solid fa-house navItemIcon"></i>
-                                    <span className="text-sm navItemName pl-1  ">Trang chủ</span>
+                                    <i className="fas fa-graduation-cap navItemIcon"></i>
+                                    <span className="text-sm navItemName pl-1  ">Học Tập</span>
                                 </Link>
                             </li>
                             <li className="" >
@@ -87,8 +87,8 @@ export default function HomePage() {
                             <ul className="justify-between grow absolute top-[100%] right-1 flex-col bg-[#f8593d] text-white rounded-[4px] hidden">
                                 <li className="w-[200px]">
                                     <Link className="px-6 block py-4 boder-bot" to="/learn" >
-                                        <i className="text-[18px] fa-solid fa-house"></i>
-                                        <span className="text-sm text-[16px] pl-1  ">Trang Chủ</span>
+                                        <i className="text-[18px] fas fa-graduation-cap"></i>
+                                        <span className="text-sm text-[16px] pl-1  ">Học Tập</span>
                                     </Link>
                                 </li>
                                 <li className="w-[200px]">

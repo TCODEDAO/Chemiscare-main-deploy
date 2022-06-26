@@ -15,7 +15,7 @@ const PostExcerpt = ({ post, currentUser, socket, axiosJWT }) => {
 
     const [showBox, setShowBox] = useState(false)
     return (
-        <li className="my-[8px] w-[100%] rounded-[16px] p-[24px] border-solid border-[#2a2c34] border-[1px] bg-[#1e2029]" onClick={(e) => {
+        <li className="my-[8px] list-none w-[100%] rounded-[16px] p-[24px] border-solid border-[#2a2c34] border-[1px] bg-[#1e2029]" onClick={(e) => {
             e.stopPropagation()
             setShowBox(false)
 
@@ -25,7 +25,7 @@ const PostExcerpt = ({ post, currentUser, socket, axiosJWT }) => {
                     <div className="mr-[4px]">
                         <img className="w-[28px] h-[28px] object-cover rounded-[50%]" src={post?.userId?.avatar} alt="" />
                     </div>
-                    <p className="font-medium p-white-forum hover:text-[#d54253] ml-2">{post?.userId?.fullName}</p>
+                    <p className="font-medium p-white-forum text-white hover:text-[#d54253] ml-2">{post?.userId?.fullName}</p>
                 </div>
                 <div>
                     {/* <i className="cursor-pointer fa-regular fa-bookmark  p-white-forum mr-[8px]"></i> */}
@@ -36,7 +36,7 @@ const PostExcerpt = ({ post, currentUser, socket, axiosJWT }) => {
                         setShowBox(!showBox)
                     }}></i>}
                     {showBox && <div>
-                        <ul className='min-w-[100px] p-2 bg-[#757575] left-[34%] rounded-xl z-[9999] absolute '>
+                        <ul className='min-w-[100px] p-2 bg-[#757575] left-[50%] translate-x-[-50%] rounded-xl z-[9999] absolute '>
                             <li className='text-[#ffffffde] p-2 text-center cursor-pointer select-none hover:bg-[#cccccc4f] rounded-xl ' onClick={() => {
                                 adminDeletePost(currentUser, axiosJWT, post?._id, socket)
                             }}>Xóa</li>
@@ -47,13 +47,13 @@ const PostExcerpt = ({ post, currentUser, socket, axiosJWT }) => {
             </div>
             <div className="mt-[8px] mb-[16px]">
                 <div>
-                    <Link to={`/forum/post/${post?._id}`}><p className="text-[20px] p-white-forum font-[700] hover:text-[#d54253] cursor-pointer">{post?.title}</p></Link>
-                    <Link to={`/forum/post/${post?._id}`}><p className="mt-[4px] p-white-forum leading-[1.6] text-[15px] font-light" dangerouslySetInnerHTML={{ __html: xss(post?.content?.slice(0, 100)) }}></p></Link>
+                    <Link to={`/forum/post/${post?._id}`}><p className="text-[20px] text-white p-white-forum font-[700] hover:text-[#d54253] cursor-pointer">{post?.title}</p></Link>
+                    <Link to={`/forum/post/${post?._id}`}><p className="mt-[4px] text-white p-white-forum leading-[1.6] text-[15px] font-light" dangerouslySetInnerHTML={{ __html: xss(post?.content?.slice(0, 100)) }}></p></Link>
                 </div>
             </div>
             <div className="flex items-center">
-                <p className=" p-white-forum">{moment(post?.createdAt).fromNow()}</p>
-                <i className=" fa-solid fa-circle text-[4px]  p-white-forum mx-[8px]"></i>
+                <p className=" text-white p-white-forum">{moment(post?.createdAt).fromNow()}</p>
+                <i className="text-white fa-solid fa-circle text-[4px]  p-white-forum mx-[8px]"></i>
 
             </div>
         </li>
@@ -61,11 +61,17 @@ const PostExcerpt = ({ post, currentUser, socket, axiosJWT }) => {
 }
 
 
-export default function PostListComponent() {
+export default function PostListComponent({ filter }) {
     const socket = useSelector(state => state?.socket?.socket)
 
     const currentUser = useSelector(state => state?.auth?.login?.currentUser)
-    const postList = useSelector(state => state?.post?.posts)
+    const postList = useSelector(state => {
+        if (filter) {
+            return state?.post?.posts.filter(state => state?.userId?._id === filter)
+        } else {
+            return state?.post?.posts
+        }
+    })
 
     const dispatch = useDispatch()
     let axiosJWT = createAxios(currentUser, dispatch)
@@ -97,7 +103,7 @@ export default function PostListComponent() {
                 })
             }
             if (socket) {
-                socket.on('ApprovedSuccessPostAdminFromServer', data => {
+                socket.off('ApprovedSuccessPostAdminFromServer', data => {
                     getAllPostApproved(currentUser, dispatch, axiosJWT)
                 })
             }

@@ -9,8 +9,8 @@ import './ForumPage.css'
 
 import { notifyErorr, notifyInfo } from '../../../components/Alert/AlertComponent'
 import { createAxios } from '../../../utils/axiosJWT'
-import CreateThreadComponent from './createData/CreateThreadComponent'
-import { getAllThreadApproved } from '../../../api/User/apiPost'
+import CreateThreadComponent from './CreateData/CreateThreadComponent'
+import { getAllThreadApproved, getPostById } from '../../../api/User/apiPost'
 
 const Navigation = lazy(() => import('../../../components/Navigation/NavigationComponent'))
 const Footer = lazy(() => import('../../../components/Footer/FooterComponent'))
@@ -81,6 +81,7 @@ export default function BlogComponent() {
         }
 
     }, [socket])
+
     return (
         <>
             <div className=" bg-[#13161B] mt-[70px] relative min-h-[100vh] ">

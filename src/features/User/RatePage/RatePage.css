@@ -8,6 +8,18 @@ html {
     font-family: "Roboto", sans-serif;
 }
 
+::selection {
+    background: #d54253;
+}
+
+::-moz-selection {
+    background: #d54253;
+}
+
+::-webkit-selection {
+    background: #d54253;
+}
+
 .top_100-8 {
     top: calc(100% + 8px);
 }
@@ -63,24 +75,24 @@ html {
 }
 
 .board_header div:first-child {
-    border-top-left-radius: 12px;
+    border-top-left-radius: 8px;
 }
 
 .board_header div:last-child {
-    border-top-right-radius: 12px;
+    border-top-right-radius: 8px;
 }
 
 .boardBody:last-child div:first-child {
-    border-bottom-left-radius: 12px;
+    border-bottom-left-radius: 8px;
 }
 
 .boardBody:last-child div:last-child {
-    border-bottom-right-radius: 12px;
+    border-bottom-right-radius: 8px;
 }
 
 .rank-item:last-child {
-    border-bottom-right-radius: 12px;
-    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
 }
 
 .rank-item::before {
@@ -100,22 +112,9 @@ html {
     .navIcon {
         display: block;
     }
-
-    .bodyWrapper {
-        padding: 0 8px;
-    }
 }
 
 @media screen and (min-width: 741px) and (max-width: 1070px) {
-    .boardHeaderItem {
-        width: 25%;
-        font-size: 14px;
-    }
-
-    .boardBodyItem {
-        width: 25%;
-    }
-
     .boardWrapper {
         display: flex;
         flex-wrap: wrap;
@@ -168,20 +167,12 @@ html {
         flex-grow: 1;
     }
 
-    .boardHeaderItem {
-        width: 25%;
-        font-size: 14px;
-    }
-
-    .boardBodyItem {
-        width: 25%;
-    }
-
     .examButtonInMobile {
         display: block;
     }
 
     .examButton,
+    .serial,
     .searchIcon,
     .socialFooter,
     .textFooterCenter {
@@ -195,19 +186,15 @@ html {
     .boardWrapperRank {
         margin-top: 30px;
         width: 100%;
-        padding: 0;
+        padding-right: 30px;
     }
 
     .boardTest {
         width: 100%;
     }
 
-    .boardRank {
-        width: 100%;
-    }
-
-    .containerAll {
-        margin-top: 40px;
+    .boardMain {
+        width: calc(100% - 8px);
     }
 }
 
