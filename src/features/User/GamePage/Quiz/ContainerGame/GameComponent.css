@@ -61,7 +61,7 @@
     transform: translateX(-50%);
     height: 50px;
     width: 500px;
-    z-index: 2;
+    z-index: 3;
 }
 
 .progress-done {
