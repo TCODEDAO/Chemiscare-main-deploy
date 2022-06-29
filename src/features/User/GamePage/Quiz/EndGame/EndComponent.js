@@ -3,7 +3,7 @@ import ReactCanvasConfetti from 'react-canvas-confetti'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { animated, useTransition, config } from 'react-spring'
+import { animated, useTransition, config } from '@react-spring/web'
 import { notifyInfo } from '../../../../../components/Alert/AlertComponent'
 import { clearDataToNewRound } from '../../../../../redux/User/QuizSlice'
 import './EndComponent.css'

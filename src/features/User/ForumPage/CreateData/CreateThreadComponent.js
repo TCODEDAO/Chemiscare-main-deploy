@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useState } from 'react'
-import { useSpring, animated, config } from 'react-spring'
+import { useSpring, animated, config } from '@react-spring/web'
 import { useDispatch, useSelector } from 'react-redux'
 
 import './CreateThreadComponent.css'

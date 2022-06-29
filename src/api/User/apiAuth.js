@@ -17,7 +17,9 @@ const loginUser = async (user, dispatch, navigate) => {
     } catch (err) {
         dispatch(loginFailed())
         console.log(err)
-        // notifyErorr(err.response.data.message)
+        notifyErorr(err.response.data.message)
+
+
     }
 }
 const registerUser = async (user, dispatch) => {

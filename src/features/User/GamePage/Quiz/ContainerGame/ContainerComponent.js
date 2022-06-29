@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useSpring, useTransition, animated, config } from 'react-spring'
+import { useSpring, useTransition, animated, config } from '@react-spring/web'
 import EndComponent from '../EndGame/EndComponent'
 import AnswerComponent from './AnswerComponent'
 import ScoreComponent from './ScoreComponent'

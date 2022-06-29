@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { animated, config, useSpring } from 'react-spring'
+import { animated, config, useSpring } from '@react-spring/web'
 import { createAxios } from '../utils/axiosJWT'
 import { getAllThreadApproved } from '../api/User/apiPost'
 import { useNavigate } from 'react-router-dom'
