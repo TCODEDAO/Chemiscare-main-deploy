@@ -7,6 +7,7 @@ import { createAxios } from '../../../utils/axiosJWT'
 import { createNewQuestion, getAllQuestion } from '../../../api/Admin/apiQuestion'
 import { useNavigate } from 'react-router-dom'
 import { notifyInfo } from '../../../components/Alert/AlertComponent'
+import { checkIsAdmin } from '../../../api/User/apiAuth'
 
 const Navigation = lazy(() => import('../../../components/Navigation/NavigationComponent'))
 const Footer = lazy(() => import('../../../components/Footer/FooterComponent'))
@@ -20,10 +21,17 @@ export default function QuestionComponentManagement() {
     const axiosJWT = createAxios(currentUser, dispatch)
     const questions = useSelector(state => state?.questionManagement?.questionList)
 
-    useEffect(() => {
-        if (!currentUser || currentUser.isAdmin === false) {
+    useEffect(async () => {
+        if (!currentUser) {
             navigate('/auth')
             notifyInfo('Bạn cần đăng nhập để vào học!')
+        }
+        if (currentUser) {
+            const isAdmin = await checkIsAdmin(currentUser)
+            if (isAdmin == false) {
+                navigate('/learn')
+                notifyInfo('Bạn không có quyền truy cần vào trang này!')
+            }
         }
         getAllQuestion(currentUser, dispatch, axiosJWT)
     }, [])

@@ -101,7 +101,7 @@ export default function LearnPage() {
                                                 dispatch(setTask(1))
                                                 navigate('/learn/game/start')
                                             }}>Làm bài 1 </button>}
-                                            {(currentUserProcess[0]?.isCompleteRender === true || currentRound > 3) ? <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButtonInMobile hidden fixHidenMoblie" disabled>Bạn đã hoàn thành bài 1.</button> : <button className="examButtonInMobile hidden bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton fixHidenMoblie" onClick={() => {
+                                            {(currentUserProcess[0]?.isCompleteRender === true || currentRound > 3) ? <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md disabled:opacity-25 hover:bg-[#4e4e57] examButtonInMobile hidden fixHidenMoblie" disabled>Bạn đã hoàn thành bài 1.</button> : <button className="examButtonInMobile hidden bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton fixHidenMoblie" onClick={() => {
                                                 dispatch(setTask(1))
                                                 navigate('/learn/game/start')
                                             }}>Làm </button>}
@@ -121,7 +121,7 @@ export default function LearnPage() {
 
 
                                             }}>Làm bài 2</button>}
-                                            {(currentUserProcess[1]?.isCompleteRender === true || currentRound > 3) ? <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButtonInMobile hidden fixHidenMoblie" disabled>Bạn đã hoàn thành bài 2.</button> : <button className="examButtonInMobile hidden bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton fixHidenMoblie" onClick={() => {
+                                            {(currentUserProcess[1]?.isCompleteRender === true || currentRound > 3) ? <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md disabled:opacity-25 hover:bg-[#4e4e57] examButtonInMobile hidden fixHidenMoblie" disabled>Bạn đã hoàn thành bài 2.</button> : <button className="examButtonInMobile hidden bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton fixHidenMoblie" onClick={() => {
                                                 dispatch(setTask(2))
                                                 navigate('/learn/game/start')
 
@@ -141,7 +141,7 @@ export default function LearnPage() {
                                                 dispatch(setTask(3))
                                                 navigate('/learn/game/start')
                                             }}>Làm bài 3 </button>}
-                                            {(currentUserProcess[2]?.isCompleteRender === true || currentRound > 3) ? <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButtonInMobile hidden fixHidenMoblie" disabled>Bạn đã hoàn thành bài 3.</button> : <button className="examButtonInMobile hidden bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton fixHidenMoblie" onClick={() => {
+                                            {(currentUserProcess[2]?.isCompleteRender === true || currentRound > 3) ? <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md disabled:opacity-25 hover:bg-[#4e4e57] examButtonInMobile hidden fixHidenMoblie disabled:opacity-25" disabled>Bạn đã hoàn thành bài 3.</button> : <button className="examButtonInMobile hidden bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton fixHidenMoblie" onClick={() => {
                                                 dispatch(setTask(3))
                                                 navigate('/learn/game/start')
                                             }}>Làm </button>}
@@ -187,7 +187,7 @@ export default function LearnPage() {
 
                     </div>
                 </div>
-                {loading && <div className='flex bg-[#ffffff3e] fixed top-0 right-0 left-0 bottom-0 justify-center items-center z-[999999]'><img src={loadingGif} alt="" width="20%" /></div>}
+                {loading && <div className='flex bg-[#ffffff3e] fixed top-0 right-0 left-0 bottom-0 justify-center items-center z-[999999]'><img src={loadingGif} alt="" width="8%" /></div>}
 
                 <Footer />
             </div>

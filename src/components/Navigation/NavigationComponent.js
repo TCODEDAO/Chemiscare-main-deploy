@@ -163,7 +163,7 @@ function NavBarLearnPage({ currentUser }) {
                                     </span>
                                 </div>
                                 <span className="leading-[20px] text-[16px]">
-                                    <span className="hover:text-[#d54253]">
+                                    <span className="hover:text-[#d54253] min-w-[100px] block">
                                         {currentUser?.fullName}
                                     </span>
                                     {/* <span className="cursor-text text-[12px] text-[#868991] overflow-hidden block max-w-[200px] min-w-[150px]">@gmail.com</span> */}

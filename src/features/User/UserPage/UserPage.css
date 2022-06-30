@@ -167,3 +167,9 @@ body::-webkit-scrollbar {
         font-size: 24px !important;
     }
 }
+
+.animationHoverF8:hover .animationHoverF8Obj {
+    transition: all 400ms;
+    transform: translateX(-4px);
+
+}
