@@ -1,23 +1,41 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+html {
+    font-family: 'Roboto', sans-serif;
+}
+
+.top_100-8 {
+    top: calc(100% + 8px);
+}
+
+.avt ul {
+    transform-origin: top right;
+    animation: scale ease-in 0.1s;
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.avt:hover ul {
+    display: block;
+}
+
+.avt ul::before {
+    content: '';
+    height: 8px;
+    position: absolute;
+    top: -8px;
+    left: 0;
+    right: 0;
 }
 
 html {
-    font-family: "Roboto", sans-serif;
-}
-
-::selection {
-    background: #d54253;
-}
-
-::-moz-selection {
-    background: #d54253;
-}
-
-::-webkit-selection {
-    background: #d54253;
+    font-family: 'Roboto', sans-serif;
 }
 
 .top_100-8 {
@@ -75,24 +93,24 @@ html {
 }
 
 .board_header div:first-child {
-    border-top-left-radius: 8px;
+    border-top-left-radius: 12px;
 }
 
 .board_header div:last-child {
-    border-top-right-radius: 8px;
+    border-top-right-radius: 12px;
 }
 
 .boardBody:last-child div:first-child {
-    border-bottom-left-radius: 8px;
+    border-bottom-left-radius: 12px;
 }
 
 .boardBody:last-child div:last-child {
-    border-bottom-right-radius: 8px;
+    border-bottom-right-radius: 12px;
 }
 
 .rank-item:last-child {
-    border-bottom-right-radius: 8px;
-    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 12px;
+    border-bottom-left-radius: 12px;
 }
 
 .rank-item::before {
@@ -115,6 +133,15 @@ html {
 }
 
 @media screen and (min-width: 741px) and (max-width: 1070px) {
+    .boardHeaderItem {
+        width: 20%;
+        font-size: 14px;
+    }
+
+    .boardBodyItem {
+        width: 20%;
+    }
+
     .boardWrapper {
         display: flex;
         flex-wrap: wrap;
@@ -131,19 +158,8 @@ html {
     }
 
     .boardWrapperRank {
-        display: block;
         margin-top: 40px;
         justify-content: space-around;
-        padding: 0;
-    }
-
-    .boardWrapperRank p {
-        margin-left: 20px;
-    }
-
-    .boardWrapperRank ul {
-        margin: 0;
-        padding: 0 20px;
     }
 
     .contentFooter {
@@ -151,7 +167,12 @@ html {
     }
 
     .boardRank {
-        display: flex;
+        width: calc(50% - 40px);
+    }
+
+    .boardRank ul,
+    .boardRank ul li {
+        width: 100%;
     }
 }
 
@@ -167,8 +188,25 @@ html {
         flex-grow: 1;
     }
 
+    .boardHeaderItem {
+        width: 20%;
+        font-size: 14px;
+    }
+
+    .boardBodyItem {
+        width: 20%;
+    }
+
     .examButtonInMobile {
         display: block;
+    }
+
+    .board_header div:nth-child(1) {
+        border-top-left-radius: 12px;
+    }
+
+    .boardBody:last-child div:nth-child(1) {
+        border-bottom-left-radius: 12px;
     }
 
     .examButton,
@@ -184,17 +222,15 @@ html {
     }
 
     .boardWrapperRank {
-        margin-top: 30px;
-        width: 100%;
-        padding-right: 30px;
-    }
-
-    .boardTest {
-        width: 100%;
+        margin-top: 40px;
     }
 
     .boardMain {
         width: calc(100% - 8px);
+    }
+
+    .fixHidenMoblie {
+        display: block !important;
     }
 }
 
@@ -218,20 +254,14 @@ html {
 
 @media screen and (max-width: 280px) {
     .logoIcon {
-        font-size: 36px;
+        font-size: 32px;
     }
 
     .logoName {
-        font-size: 26px;
+        font-size: 28px;
     }
 
     .navIcon {
-        font-size: 24px !important;
-    }
-
-    .boardWrapperRank {
-        margin-top: 30px;
-        width: 100%;
-        padding: 4px;
+        font-size: 28px !important;
     }
 }

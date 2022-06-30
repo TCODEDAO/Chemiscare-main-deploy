@@ -78,7 +78,7 @@ export default function LearnPage() {
                 <link rel="shortcut icon" href={favicon} type="image/x-icon" />
                 <title>Học Tập</title>
             </Helmet>
-            <div className="py-[60px] bg-[#13161B] mt-[70px] relative min-h-[100vh]">
+            <div className="pt-[130px] pb-[90px] bg-[#13161B] relative min-h-[100vh] contentWrapper">
                 <Navigation currentUser={currentUser} />
                 <div className="max-w-[1092px] w-[100%] mx-auto">
                     <div className="flex justify-between flex-wrap mb-[100px]">

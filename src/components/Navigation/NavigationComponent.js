@@ -180,7 +180,7 @@ function NavBarLearnPage({ currentUser }) {
                                 </span>
                             </li>
 
-                            <li className={`py-2 hover:text-[#d54253] ${isAdmin === false && "border-b-[1px]"} border-[#51535a] border-solid`}>
+                            <li className={`py-2 hover:text-[#d54253]  border-[#51535a] border-solid`}>
                                 <Link to="/learn/rate">Xếp hạng của tôi</Link>
                             </li>
                             <li className={`py-2 hover:text-[#d54253] ${isAdmin === false && "border-b-[1px]"} border-[#51535a] border-solid`}>

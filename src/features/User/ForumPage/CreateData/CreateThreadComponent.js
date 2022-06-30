@@ -23,7 +23,7 @@ function CreateThreadComponent({ handleHideEditorThread, currentUser }) {
     return (
         <>
 
-            <div className='h-screen w-screen fixed z-[99999]' onDoubleClick={(e) => {
+            <div className='h-screen w-screen fixed z-[999999]' onDoubleClick={(e) => {
                 e.stopPropagation()
                 handleHideEditorThread()
             }}>

@@ -223,3 +223,135 @@ html {
         padding: 4px;
     }
 }
+
+@media screen and (max-width: 1070px) {
+    .nav {
+        display: none;
+    }
+
+    .navIcon {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 741px) and (max-width: 1070px) {
+    .boardWrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .boardMain {
+        width: calc(100% - 40px);
+    }
+
+    .textFooterCenter {
+        display: none;
+    }
+
+    .boardWrapperRank {
+        display: block;
+        margin-top: 40px;
+        justify-content: space-around;
+        padding: 0;
+    }
+
+    .boardWrapperRank p {
+        margin-left: 20px;
+    }
+
+    .boardWrapperRank ul {
+        margin: 0;
+        padding: 0 20px;
+    }
+
+    .contentFooter {
+        justify-content: space-around;
+    }
+
+    .boardRank {
+        display: flex;
+    }
+}
+
+@media screen and (max-width: 740px) {
+    .boardWrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-grow: 1;
+    }
+
+    .board_header {
+        flex-grow: 1;
+    }
+
+    .examButtonInMobile {
+        display: block;
+    }
+
+    .examButton,
+    .serial,
+    .searchIcon,
+    .socialFooter,
+    .textFooterCenter {
+        display: none;
+    }
+
+    .contentFooter {
+        justify-content: center;
+    }
+
+    .boardWrapperRank {
+        margin-top: 30px;
+        width: 100%;
+        padding-right: 30px;
+    }
+
+    .boardTest {
+        width: 100%;
+    }
+
+    .boardMain {
+        width: calc(100% - 8px);
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .avt {
+        margin-left: 8px;
+    }
+
+    .logoIcon {
+        font-size: 36px;
+    }
+
+    .logoName {
+        font-size: 32px;
+    }
+
+    .navIcon {
+        font-size: 32px !important;
+    }
+}
+
+@media screen and (max-width: 280px) {
+    .logoIcon {
+        font-size: 36px;
+    }
+
+    .logoName {
+        font-size: 26px;
+    }
+
+    .navIcon {
+        font-size: 24px !important;
+    }
+
+    .boardWrapperRank {
+        margin-top: 30px;
+        width: 100%;
+        padding: 4px;
+    }
+}

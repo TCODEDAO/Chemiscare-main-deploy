@@ -68,7 +68,7 @@ export default function QuestionComponentManagement() {
         <div className='h-screen w-screen bg-[#ccc] overflow-hidden overflow-y-scroll'>
             <Navigation currentUser={currentUser} />
 
-            <div className='mt-[96px] flex justify-center items-start overflow-y-scroll'>
+            <div className='pt-[130px] pb-[90px] bg-[#13161B] relative min-h-[100vh] contentWrapper flex justify-center items-start overflow-y-scroll'>
 
                 <ul>
                     {questions?.map(question => (

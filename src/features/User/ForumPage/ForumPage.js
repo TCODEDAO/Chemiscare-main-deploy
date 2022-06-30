@@ -84,7 +84,7 @@ export default function BlogComponent() {
 
     return (
         <>
-            <div className=" bg-[#13161B] mt-[70px] relative min-h-[100vh] ">
+            <div className=" pt-[130px] pb-[90px] bg-[#13161B] relative min-h-[100vh] contentWrapper ">
                 <Navigation currentUser={currentUser} />
                 {isEditorShowThread === true && <CreateThreadComponent handleHideEditorThread={handleHideEditorThread} currentUser={currentUser} currentThread={threads} />}
 
@@ -103,8 +103,8 @@ export default function BlogComponent() {
                             <PostList />
 
                         </ul>
-                        <div className="ml-[60px] w-[40%] ">
-                            <p className="mb-[12px]  p-white-forum">CÁC CHỦ ĐỀ ĐƯỢC ĐỀ XUẤT</p>
+                        <div className="ml-[60px] w-[40%] suggestedTopic">
+                            <p className="mb-[12px]  p-white-forum ">CÁC CHỦ ĐỀ ĐƯỢC ĐỀ XUẤT</p>
                             <div className="flex flex-wrap text-[#333] mx-[-8px]">
                                 {threads?.map((thread) => (
                                     <div key={thread._id} className="bg-[#fafafa] select-none hover:bg-[#f2f2f2f2] text-[80%] cursor-pointer px-[10px] py-[8px] rounded-[18px] m-[6px]">{thread.content}</div>

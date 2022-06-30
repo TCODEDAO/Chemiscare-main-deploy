@@ -43,7 +43,7 @@ function RatePage() {
         }
     }, [])
     return (
-        <div className="pt-[20px] mt-[70px] pb-[100px] bg-[#13161B] relative min-h-[100vh]">
+        <div className="pt-[130px] pb-[90px] bg-[#13161B] relative min-h-[100vh] contentWrapper">
             <Navigation currentUser={currentUser} />
             <div className="max-w-[1092px] w-[100%] mx-auto">
                 <div className="flex justify-between flex-wrap">
@@ -52,7 +52,7 @@ function RatePage() {
                         <div className="boardMain w-[100%]">
                             <div className="flex text-white mb-[4px] board_header">
                                 <div className="w-[50%] py-4 bg-[#353945] border-r-[1px] uppercase border-[#111827] text-center font-bold boardHeaderItem">Số thứ tự</div>
-                                <div className="w-[50%] py-4 bg-[#353945] border-r-[1px] uppercase border-[#111827] text-center font-bold boardHeaderItem">Họ tên</div>
+                                <div className="w-[50%] py-4 bg-[#353945] border-r-[1px] uppercase border-[#111827] text-center font-bold boardHeaderItem">Họ & Tên</div>
                                 <div className="w-[50%] py-4 bg-[#353945] border-r-[1px] uppercase border-[#111827] text-center font-bold boardHeaderItem">Thời gian</div>
                                 <div className="w-[50%] py-4 bg-[#353945] border-r-[1px] uppercase border-[#111827] text-center font-bold boardHeaderItem">Điểm</div>
                                 <div className="w-[50%] py-4 bg-[#353945] border-r-[1px] uppercase border-[#111827] text-center font-bold boardHeaderItem">Tên lớp</div>

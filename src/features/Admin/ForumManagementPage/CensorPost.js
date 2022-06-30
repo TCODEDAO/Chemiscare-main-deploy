@@ -87,7 +87,7 @@ function CensorPost() {
     }, [socket])
     return (
         <>
-            <div className="pt-[20px] pb-[80px] bg-[#13161B] mt-[70px] relative min-h-[100vh]">
+            <div className="pt-[130px] pb-[90px] bg-[#13161B] relative min-h-[100vh] contentWrapper">
                 <Navigation currentUser={currentUser} />
 
                 <div className="max-w-[1092px] w-[100%] mx-auto flex flex-col items-center bodyWrapper">

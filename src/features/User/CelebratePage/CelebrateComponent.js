@@ -16,7 +16,7 @@ export default function CelebratePage() {
     }, [currentUser, navigate])
     return (
 
-        <div className="pt-[130px] pb-[100px] bg-[#13161B] relative min-h-[100vh]">
+        <div className="pt-[130px] pb-[90px] bg-[#13161B] relative min-h-[100vh] contentWrapper">
             <Navigation currentUser={currentUser}></Navigation>
             <div className="max-w-[1092px] w-[100%] mx-auto">
                 <div className="flex justify-between flex-wrap">
