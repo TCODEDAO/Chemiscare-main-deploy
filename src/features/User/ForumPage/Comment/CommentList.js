@@ -57,12 +57,12 @@ function CommentList({ postId, postAuthorId }) {
         if (socket) {
             socket.on('CreateCommentReplyFromServerSuccess', msg => {
 
-                getPostById(currentUser, dispatch, axiosJWT, postId, navigate)
+                getPostById(currentUser, dispatch, axiosJWT, postId, navigate, page)
             })
         }
         if (socket) {
             socket.on('SetToChooseAnswerFulfilled', msg => {
-                getPostById(currentUser, dispatch, axiosJWT, postId, navigate)
+                getPostById(currentUser, dispatch, axiosJWT, postId, navigate, page)
             })
         }
 

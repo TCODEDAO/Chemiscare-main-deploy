@@ -1,5 +1,5 @@
 import moment from 'moment';
-import React from 'react'
+import React, { useState } from 'react'
 import { useRef } from 'react';
 import { lazy } from 'react';
 import { useEffect } from 'react';
@@ -22,6 +22,7 @@ function SinglePostComponent() {
     const { postId } = useParams()
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const [loading, setLoading] = useState(false)
     const currentUser = useSelector(state => state?.auth?.login?.currentUser)
     let axiosJWT = createAxios(currentUser, dispatch)
     const socket = useSelector(state => state?.socket?.socket)
@@ -32,7 +33,9 @@ function SinglePostComponent() {
         }
     }, [])
     useEffect(() => {
+        setLoading(true)
         getPostById(currentUser, dispatch, axiosJWT, postId, navigate)
+        setLoading(false)
     }, [])
 
     const post = useSelector(state => state?.post?.posts?.filter(post => post._id === postId))
@@ -152,6 +155,7 @@ function SinglePostComponent() {
                 </div>
             </div>
             <Footer />
+            {loading && <div className='flex justify-center items-center'><img src={loadingGif} alt="" width="20%" /></div>}
         </div>
     )
 }

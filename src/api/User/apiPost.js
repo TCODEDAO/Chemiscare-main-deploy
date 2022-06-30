@@ -39,7 +39,7 @@ const getPostById = async (currentUser, dispatch, axiosJWT, id, navigate, page) 
         const res = await axiosJWT.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/forum/posts/${id}`, {
             headers: { token: `Bearer ${currentUser?.accessToken}` },
         })
-        const comments = await axiosJWT.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/reaction/comments/${id}?limit=${page * 5}`, {
+        const comments = await axiosJWT.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/reaction/comments/${id}?limit=${(page || 1) * 5}`, {
             headers: { token: `Bearer ${currentUser?.accessToken}` },
         })
         const commentReply = comments.data.comments.reduce((previousValue, currentValue) => {
