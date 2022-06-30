@@ -14,7 +14,9 @@ import xss from 'xss'
 import CreateCommentComponent from '../CreateData/CreateCommentComponent';
 import CommentList from '../Comment/CommentList';
 import { addOneComment } from '../../../../redux/User/ReactionSlice';
-import { notifyInfo } from '../../../../components/Alert/AlertComponent';
+import { notifyInfo } from '../../../../components/Alert/AlertComponent'
+import loadingGif from '../../../../assets/images/gif/noBgLoad.gif'
+
 moment.locale('vi')
 const Navigation = lazy(() => import('../../../../components/Navigation/NavigationComponent'))
 const Footer = lazy(() => import('../../../../components/Footer/FooterComponent'))
