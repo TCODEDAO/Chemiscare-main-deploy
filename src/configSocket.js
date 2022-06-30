@@ -1,7 +1,7 @@
 import io from 'socket.io-client'
 
 
-const socket = io("http://192.168.1.103:3000", {
+const socket = io("https://chemiscare-backend-test.herokuapp.com", {
     transports: ['websocket', 'polling', 'flashsocket']
 })
 export default socket
