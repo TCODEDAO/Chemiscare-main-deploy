@@ -14,6 +14,8 @@ import { notifyInfo, notifyWelcome } from '../../../components/Alert/AlertCompon
 
 import { setTask } from '../../../redux/User/QuizSlice'
 import { getAllResultQuizById, getResultQuizById, getRound, increaseRound } from '../../../api/User/apiQuestion'
+import loadingGif from '../../../assets/images/gif/noBgLoad.gif'
+import { useState } from 'react'
 
 
 
@@ -21,8 +23,10 @@ import { getAllResultQuizById, getResultQuizById, getRound, increaseRound } from
 const Navigation = lazy(() => import('../../../components/Navigation/NavigationComponent'))
 const Footer = lazy(() => import('../../../components/Footer/FooterComponent'))
 export default function LearnPage() {
+
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const [loading, setLoading] = useState(false)
     const currentUser = useSelector((state) => state?.auth?.login?.currentUser)
 
 
@@ -45,8 +49,10 @@ export default function LearnPage() {
         }
 
         if (currentUser) {
+            setLoading(true)
             await getRound(dispatch, axiosJWT, currentUser)
             getAllResultQuizById(currentUser, dispatch, axiosJWT)
+            setLoading(false)
             notifyWelcome(`Chào mừng bạn!`)
             return
         }
@@ -56,7 +62,10 @@ export default function LearnPage() {
         }
     }, [])
     const handleSubmitTaskAndNextRound = () => {
+        setLoading(true)
+
         increaseRound(dispatch, axiosJWT, currentUser, currentRound)
+        setLoading(false)
 
     }
 
@@ -88,11 +97,11 @@ export default function LearnPage() {
                                     <div className="flex text-[#111827] boardBody">
                                         <div className="flex items-center justify-center w-[140px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem serial  ">1</div>
                                         <div className="flex items-center justify-center w-[200px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem">
-                                            {(currentUserProcess[0]?.isCompleteRender === true || currentRound > 3) ? <button className="bg-[#3f3f46] text-white disabled:opacity-25 rounded-md examButton " disabled>Bạn đã hoàn thành bài 1, vui lòng chờ bài mới.</button> : <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton" onClick={() => {
+                                            {(currentUserProcess[0]?.isCompleteRender === true || currentRound > 3) ? <button className="bg-[#3f3f46] text-white disabled:opacity-25 rounded-md examButton " disabled>Bạn đã hoàn thành bài 1.</button> : <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton" onClick={() => {
                                                 dispatch(setTask(1))
                                                 navigate('/learn/game/start')
                                             }}>Làm bài 1 </button>}
-                                            {(currentUserProcess[0]?.isCompleteRender === true || currentRound > 3) ? <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButtonInMobile hidden fixHidenMoblie" disabled>Bạn đã hoàn thành bài 1, vui lòng chờ bài mới.</button> : <button className="examButtonInMobile hidden bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton fixHidenMoblie" onClick={() => {
+                                            {(currentUserProcess[0]?.isCompleteRender === true || currentRound > 3) ? <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButtonInMobile hidden fixHidenMoblie" disabled>Bạn đã hoàn thành bài 1.</button> : <button className="examButtonInMobile hidden bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton fixHidenMoblie" onClick={() => {
                                                 dispatch(setTask(1))
                                                 navigate('/learn/game/start')
                                             }}>Làm </button>}
@@ -106,13 +115,13 @@ export default function LearnPage() {
                                     <div className="flex text-[#111827] boardBody">
                                         <div className="flex items-center justify-center w-[140px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem serial  ">2</div>
                                         <div className="flex items-center justify-center w-[200px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem">
-                                            {(currentUserProcess[1]?.isCompleteRender === true || currentRound > 3) ? <button className="bg-[#3f3f46] text-white disabled:opacity-25 rounded-md examButton " disabled>Bạn đã hoàn thành bài 2, vui lòng chờ bài mới.</button> : <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton" onClick={() => {
+                                            {(currentUserProcess[1]?.isCompleteRender === true || currentRound > 3) ? <button className="bg-[#3f3f46] text-white disabled:opacity-25 rounded-md examButton " disabled>Bạn đã hoàn thành bài 2.</button> : <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton" onClick={() => {
                                                 dispatch(setTask(2))
                                                 navigate('/learn/game/start')
 
 
                                             }}>Làm bài 2</button>}
-                                            {(currentUserProcess[1]?.isCompleteRender === true || currentRound > 3) ? <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButtonInMobile hidden fixHidenMoblie" disabled>Bạn đã hoàn thành bài 2, vui lòng chờ bài mới.</button> : <button className="examButtonInMobile hidden bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton fixHidenMoblie" onClick={() => {
+                                            {(currentUserProcess[1]?.isCompleteRender === true || currentRound > 3) ? <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButtonInMobile hidden fixHidenMoblie" disabled>Bạn đã hoàn thành bài 2.</button> : <button className="examButtonInMobile hidden bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton fixHidenMoblie" onClick={() => {
                                                 dispatch(setTask(2))
                                                 navigate('/learn/game/start')
 
@@ -126,13 +135,13 @@ export default function LearnPage() {
                                     </div>
 
                                     <div className="flex text-[#111827] boardBody">
-                                        <div className="flex items-center justify-center w-[140px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem serial  rounded-bl-[12px]">1</div>
+                                        <div className="flex items-center justify-center w-[140px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem serial  rounded-bl-[12px]">3</div>
                                         <div className="flex items-center justify-center w-[200px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem">
-                                            {(currentUserProcess[2]?.isCompleteRender === true || currentRound > 3) ? <button className="bg-[#3f3f46] text-white disabled:opacity-25 rounded-md examButton " disabled>Bạn đã hoàn thành bài 3, vui lòng chờ bài mới.</button> : <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton" onClick={() => {
+                                            {(currentUserProcess[2]?.isCompleteRender === true || currentRound > 3) ? <button className="bg-[#3f3f46] text-white disabled:opacity-25 rounded-md examButton " disabled>Bạn đã hoàn thành bài 3.</button> : <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton" onClick={() => {
                                                 dispatch(setTask(3))
                                                 navigate('/learn/game/start')
                                             }}>Làm bài 3 </button>}
-                                            {(currentUserProcess[2]?.isCompleteRender === true || currentRound > 3) ? <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButtonInMobile hidden fixHidenMoblie" disabled>Bạn đã hoàn thành bài 1, vui lòng chờ bài mới.</button> : <button className="examButtonInMobile hidden bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton fixHidenMoblie" onClick={() => {
+                                            {(currentUserProcess[2]?.isCompleteRender === true || currentRound > 3) ? <button className="bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButtonInMobile hidden fixHidenMoblie" disabled>Bạn đã hoàn thành bài 3.</button> : <button className="examButtonInMobile hidden bg-[#3f3f46] text-white px-3 py-2 rounded-md hover:bg-[#4e4e57] examButton fixHidenMoblie" onClick={() => {
                                                 dispatch(setTask(3))
                                                 navigate('/learn/game/start')
                                             }}>Làm </button>}
@@ -158,14 +167,17 @@ export default function LearnPage() {
                                 </div>
 
                                 <div>
-                                    {userProcess.map((userProcess, index) => (
-                                        <div className="flex text-[#111827] boardBody " key={userProcess._id}>
-                                            <> <div className="flex items-center justify-center w-[140px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem serial">{index + 1}</div>
-                                                <div className="flex items-center justify-center w-[200px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem ">{userProcess.round}</div>
-                                                <div className="flex items-center justify-center w-[140px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem ">{userProcess.time} giây</div>
-                                                <div className="flex items-center justify-center w-[180px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem ">{userProcess.score}</div></>
-                                        </div>
-                                    ))}
+                                    {userProcess.map((userProcess, index) => {
+                                        console.log(index)
+                                        return (
+                                            < div className="flex text-[#111827] boardBody " key={userProcess._id} >
+
+                                                <> <div className="flex items-center justify-center w-[140px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem serial">{index + 1}</div>
+                                                    <div className="flex items-center justify-center w-[200px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem ">{userProcess.round}</div>
+                                                    <div className="flex items-center justify-center w-[140px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem ">{userProcess.time} giây</div>
+                                                    <div className="flex items-center justify-center w-[180px] px-5 py-2 bg-[#fafafa] border-[1px] border-[#111827] boardBodyItem ">{userProcess.score}</div></>
+                                            </div>)
+                                    })}
 
 
 
@@ -217,6 +229,8 @@ export default function LearnPage() {
                         </div> */}
                     </div>
                 </div>
+                {loading && <div className='flex justify-center items-center'><img src={loadingGif} alt="" width="20%" /></div>}
+
                 <Footer />
             </div>
 
