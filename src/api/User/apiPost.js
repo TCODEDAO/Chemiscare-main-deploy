@@ -44,7 +44,7 @@ const getPostById = async (currentUser, dispatch, axiosJWT, id, navigate, page) 
         })
         const commentReply = comments.data.comments.reduce((previousValue, currentValue) => {
             return previousValue + currentValue.reply.length
-        }, 1)
+        }, 0)
         const allCommentAndReplyCount = comments?.data?.length + commentReply
         dispatch(setCountComments(allCommentAndReplyCount))
         dispatch(setComments(comments.data.comments))

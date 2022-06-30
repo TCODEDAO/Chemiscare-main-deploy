@@ -38,6 +38,13 @@ const registerUser = async (user, dispatch) => {
 
     }
 }
+const checkIsAdmin = async (currentUser) => {
+
+    const res = await axios.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/auth/checkIsAdminChemiscare/${currentUser?._id}`)
+
+    return res.data.isAdmin
+
+}
 const logOutUser = async (dispatch, navigate, accessToken, axiosJWT, id) => {
     dispatch(logOutStart())
     try {
@@ -75,4 +82,4 @@ const updateDetailInfomation = async (dispatch, navigate, axiosJWT, currentUser,
         navigate('/auth')
     }
 }
-export { registerUser, loginUser, logOutUser, updateDetailInfomation }
+export { registerUser, loginUser, logOutUser, updateDetailInfomation, checkIsAdmin }

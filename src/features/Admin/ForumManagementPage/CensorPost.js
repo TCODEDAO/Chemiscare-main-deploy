@@ -12,6 +12,7 @@ import xss from 'xss'
 //style
 import Avatar from '../../../components/Avatar/AvatarComponent'
 import './CensorPost.css'
+import { checkIsAdmin } from '../../../api/User/apiAuth'
 const Navigation = lazy(() => import('../../../components/Navigation/NavigationComponent'))
 const Footer = lazy(() => import('../../../components/Footer/FooterComponent'))
 function CensorPost() {
@@ -26,15 +27,20 @@ function CensorPost() {
 
     const axiosJWT = createAxios(currentUser, dispatch)
 
-    useEffect(() => {
+    useEffect(async () => {
         if (!currentUser) {
             navigate('/auth')
         }
-        if (currentUser?.isAdmin !== true) {
-            navigate('/learn')
-            notifyInfo('Bạn không có quyền truy cập!')
-        }
+
+
         if (currentUser) {
+            const isAdmin = await checkIsAdmin(currentUser)
+
+            if (isAdmin === false) {
+
+                navigate('/learn')
+                notifyInfo('Bạn không có quyền truy cập!')
+            }
             getAllThreadApproved(currentUser, dispatch, axiosJWT)
             getAllThread(currentUser, dispatch, axiosJWT)
             getAllPost(currentUser, dispatch, axiosJWT)

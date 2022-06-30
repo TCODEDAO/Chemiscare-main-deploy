@@ -184,52 +184,10 @@ export default function LearnPage() {
                                 </div>
                             </div>
                         </div>
-                        {/* <div className="boardWrapper boardWrapperRank">
-                            <div className="boardRank">
-                                <p className="text-white font-bold text-2xl leading-5 mb-[20px]">Xếp hạng</p>
-                                <ul className="">
-                                    <li className="w-[260px] rounded-t-[6px]  bg-[#353945] text-center text-white font-bold py-4 mb-[4px]">Xếp hạng cao nhất quốc gia</li>
-                                    <li className="w-[260px] bg-[#fafafa] p-2 relative">
-                                        <p><span className="font-bold">Học Viên</span>: Trịnh Văn Sơn</p>
-                                        <p><span className="font-bold">SBD</span>: 2412315</p>
-                                        <p><span className="font-bold">Trường</span>: THCS An Sinh-Đông Triều-Quảng Ninh</p>
-                                    </li>
-                                    <li className="w-[260px] bg-[#fafafa] p-2 relative rank-item">
-                                        <p><span className="font-bold">Học Viên</span>: Vũ Văn Tú</p>
-                                        <p><span className="font-bold">SBD</span>: 2432321</p>
-                                        <p><span className="font-bold">Trường</span>: THCS Mạo Khê 2-Đông Triều-Quảng Ninh</p>
-                                    </li>
-                                    <li className="w-[260px] bg-[#fafafa] p-2 relative rank-item">
-                                        <p><span className="font-bold">Học Viên</span>:Vũ Thị Nhi</p>
-                                        <p><span className="font-bold">SBD</span>: 2434311</p>
-                                        <p><span className="font-bold">Trường</span>: THCS Bình Dương-Đông Triều-Quảng Ninh</p>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="boardRank">
-                                <ul className="mt-[40px]">
-                                    <li className="w-[260px] rounded-t-[6px]  bg-[#353945] text-center text-white font-bold py-4 mb-[4px]">Xếp hạng cao nhất tỉnh</li>
-                                    <li className="w-[260px] bg-[#fafafa] p-2 relative">
-                                        <p><span className="font-bold">Học Viên</span>: Trịnh Văn Sơn</p>
-                                        <p><span className="font-bold">SBD</span>: 2434351</p>
-                                        <p><span className="font-bold">Trường</span>: THCS An Sinh-Đông Triều-Quảng Ninh</p>
-                                    </li>
-                                    <li className="w-[260px] bg-[#fafafa] p-2 relative rank-item">
-                                        <p><span className="font-bold">Học Viên</span>: Nguyễn Phúc Thanh</p>
-                                        <p><span className="font-bold">SBD</span>: 2434342</p>
-                                        <p><span className="font-bold">Trường</span>: THCS Thủy An-Đông Triều-Quảng Ninh</p>
-                                    </li>
-                                    <li className="w-[260px] bg-[#fafafa] p-2 relative rank-item">
-                                        <p><span className="font-bold">Học Viên</span>: Vũ Văn Tuấn</p>
-                                        <p><span className="font-bold">SBD</span>: 2231232</p>
-                                        <p><span className="font-bold">Trường</span>: THCS Hoàng Quế-Đông Triều-Quảng Ninh</p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div> */}
+
                     </div>
                 </div>
-                {loading && <div className='flex justify-center items-center'><img src={loadingGif} alt="" width="20%" /></div>}
+                {loading && <div className='flex bg-[#ffffff3e] fixed top-0 right-0 left-0 bottom-0 justify-center items-center z-[999999]'><img src={loadingGif} alt="" width="20%" /></div>}
 
                 <Footer />
             </div>
