@@ -142,6 +142,8 @@ export default function Realistic() {
                                 style={{ ...style }}
                                 className="h-screen w-screen flex justify-center items-center overflow-hidden "
                             >
+                                <audio className='hidden' autoPlay src="https://github.com/TCODEDAO/upload-an-image-chemiscare-user/blob/main/104026230-%5BAudioTrimmer.com%5D%20(1).mp3?raw=true"></audio>
+
                                 <div className="min-w-[495px] min-h-[347px] bg-[#636e72] rounded-[40px] flex flex-col justify-evenly items-center">
                                     <div className="congrats">
                                         <h1 className="h1Congrats">

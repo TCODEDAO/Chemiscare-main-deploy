@@ -1,11 +1,11 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect, useRef, useState } from 'react'
 import Avatar from '../Avatar/AvatarComponent'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
 
 import { createAxios } from '../../utils/axiosJWT'
-import { logOutUser } from '../../api/User/apiAuth'
+import { checkIsAdmin, logOutUser } from '../../api/User/apiAuth'
 import { notifyErorr, notifyInfo, notifySuccess } from '../Alert/AlertComponent'
 // import { notifyErorr, notifyInfo, notifySuccess } from '../Alert/AlertComponents'
 import './NavigationComponent.css'
@@ -15,6 +15,16 @@ function NavBarLearnPage({ currentUser }) {
     const navigate = useNavigate()
     const axiosJWT = createAxios(currentUser, dispatch)
     const id = currentUser?._id
+    const [isAdmin, setIsAdmin] = useState(false)
+
+
+    useEffect(async () => {
+        if (currentUser) {
+            const isAdmin = await checkIsAdmin(currentUser)
+            setIsAdmin(isAdmin)
+        }
+
+    }, [])
     const handleLogOut = async () => {
 
         try {
@@ -170,16 +180,16 @@ function NavBarLearnPage({ currentUser }) {
                                 </span>
                             </li>
 
-                            <li className={`py-2 hover:text-[#d54253] ${currentUser?.isAdmin === false && "border-b-[1px]"} border-[#51535a] border-solid`}>
+                            <li className={`py-2 hover:text-[#d54253] ${isAdmin === false && "border-b-[1px]"} border-[#51535a] border-solid`}>
                                 <Link to="/learn/rate">Xếp hạng của tôi</Link>
                             </li>
-                            <li className={`py-2 hover:text-[#d54253] ${currentUser?.isAdmin === false && "border-b-[1px]"} border-[#51535a] border-solid`}>
+                            <li className={`py-2 hover:text-[#d54253] ${isAdmin === false && "border-b-[1px]"} border-[#51535a] border-solid`}>
                                 <Link to="/user/userPage">Trang cá nhân</Link>
                             </li>
-                            {currentUser?.isAdmin && <li className={`py-2 hover:text-[#d54253] `}>
+                            {isAdmin && <li className={`py-2 hover:text-[#d54253] `}>
                                 <Link to="/admin/question">Quản lí câu hỏi</Link>
                             </li>}
-                            {currentUser?.isAdmin && <li className={`py-2 hover:text-[#d54253] border-b-[1px] border-[#51535a] border-solid`}>
+                            {isAdmin && <li className={`py-2 hover:text-[#d54253] border-b-[1px] border-[#51535a] border-solid`}>
                                 <Link to="/admin/forum/posts">Quản lí bài viết</Link>
                             </li>}
                             <li

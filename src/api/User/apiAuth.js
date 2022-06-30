@@ -16,7 +16,6 @@ const loginUser = async (user, dispatch, navigate) => {
         navigate('/learn')
     } catch (err) {
         dispatch(loginFailed())
-        console.log(err)
         notifyErorr(err.response.data.message)
 
 
@@ -77,8 +76,8 @@ const updateDetailInfomation = async (dispatch, navigate, axiosJWT, currentUser,
         notifySuccess(res.data.message)
         setTimeout(() => { navigate('/learn') }, 1000)
     } catch (err) {
-        console.log(err)
-        notifyErorr(err)
+
+        notifyErorr(err.response.data.message)
         navigate('/auth')
     }
 }

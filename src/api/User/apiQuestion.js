@@ -10,6 +10,7 @@ const getQuestionAndAnswers = async (currentUser, dispatch, axiosJWT, navigate) 
                 headers: { token: `Bearer ${currentUser?.accessToken}` },
             },
         )
+        console.log(res.data)
         dispatch(getQuestionSuccess(res.data))
 
     } catch (err) {

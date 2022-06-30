@@ -12,7 +12,10 @@ import { timeIncrease } from '../../../../../redux/User/QuizSlice'
 import { createNewResultQuiz } from '../../../../../api/User/apiQuestion'
 import { createAxios } from '../../../../../utils/axiosJWT'
 
-
+function playSound(url) {
+    var a = new Audio(url);
+    a.play();
+}
 export default function QuestionComponent() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -60,6 +63,7 @@ export default function QuestionComponent() {
             if (timeLeft !== 'Bắt đầu') {
 
                 setTimeLeft(timeLeft - 1)
+
             }
         }, 1000)
 
@@ -129,6 +133,7 @@ export default function QuestionComponent() {
         setIsQuizCount(true)
 
     }
+
 
     //Check is login
     const currentUser = useSelector(state => state.auth.login.currentUser)
@@ -220,7 +225,13 @@ export default function QuestionComponent() {
 
                                 ...stylesloadingToGame
                             }
-                            } className="text-9xl">{renderNumber && renderNumber}</animated.span>
+                            } className="text-9xl">{renderNumber && renderNumber}
+                                {
+                                    playSound("https://github.com/TCODEDAO/upload-an-image-chemiscare-user/blob/main/104026230-%5BAudioTrimmer.com%5D%20(1).mp3?raw=true")
+                                }
+
+
+                            </animated.span>
                         </div>
 
                         : isQuizCount === false ? showQuizContainer((style, item) => item ?
@@ -228,6 +239,7 @@ export default function QuestionComponent() {
                                 ...style
                             }} className='h-screen w-screen fixBgGame bg-no-repeat bg-cover bg-[#191a28] relative' >
 
+                                <audio className='hidden' autoPlay loop src="https://github.com/TCODEDAO/upload-an-image-chemiscare-user/blob/main/NhacNenChemiscare.mp3?raw=true"></audio>
                                 <ScoreComponent min={minutes.current} sec={sec.current} level={task} />
                                 <div className="gradientBoxQuestion  flex justify-center">
                                     <div className='gradientBoxQuestionContent flex justify-center items-center'>
