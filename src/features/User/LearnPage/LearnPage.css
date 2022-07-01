@@ -248,3 +248,53 @@ html {
         padding: 4px;
     }
 }
+
+.tutorial_board_ask_wrapper {
+    animation: surfing ease-in 0.2s;
+}
+
+.tutorial_board_ask_closeBtn {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    background-color: #d54253;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.tutorial_wrapper {
+    animation: surfing ease-in 0.2s;
+}
+
+.tutorial_board_comfirmBtn {
+    animation: appear ease-in 0.3s;
+}
+
+@keyframes appear {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes surfing {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}

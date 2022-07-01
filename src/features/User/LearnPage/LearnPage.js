@@ -1,5 +1,5 @@
 import './LearnPage.css'
-import React, { useEffect, lazy } from 'react'
+import React, { useEffect, lazy, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
@@ -17,7 +17,8 @@ import { getAllResultQuizById, getResultQuizById, getRound, increaseRound } from
 import loadingGif from '../../../assets/images/gif/noBgLoad.gif'
 import { useState } from 'react'
 
-
+//Intro 
+import Tour from 'reactour'
 
 
 const Navigation = lazy(() => import('../../../components/Navigation/NavigationComponent'))
@@ -72,19 +73,82 @@ export default function LearnPage() {
     const userProcess = useSelector(state => state?.quiz?.allResultHistory)
     const currentUserProcess = useSelector(state => state?.quiz?.result)
 
+    const tutorial_board_ask_wrapper = useRef(null)
+    const tutorial_btn_show = useRef(null)
+    const tutorial_wrapper = useRef(null)
+
+    useEffect(() => {
+        console.log(tutorial_board_ask_wrapper, tutorial_btn_show, tutorial_wrapper)
+
+        tutorial_board_ask_wrapper.current.style.marginTop = `-${(tutorial_btn_show.clientWidth - tutorial_wrapper.clientHeight) / 2}px`
+        tutorial_wrapper.current.style.marginRight = `-${(tutorial_wrapper.clientWidth - tutorial_btn_show.clientHeight) / 2}px`
+    }
+        , [tutorial_board_ask_wrapper, tutorial_btn_show, tutorial_wrapper])
+
+
+    const [isStepEnabled, setIsStepEnabled] = useState(false)
+
+    const steps = [
+        {
+            selector: '',
+            content: () => {
+                return (
+                    <div className='flex  items-center flex-col text-[14px]'>
+                        <span>Chào mừng bạn đã đến với phần hướng dẫn nhanh của chúng tôi!</span>
+                        <button
+                            style={{
+
+                            }}
+                            onClick={() => navigate('/help/usage')}
+                        >
+                            <span className='hover:underline font-[10px] '>Nếu bạn muốn biết thêm chi tiết về các tính năng, vui lòng bấm vào đây!{" "}</span>
+
+                        </button>
+                    </div>)
+            },
+        },
+        {
+            selector: '.navigation-react-tour',
+            content: 'Đây là thanh điều hướng của website, bạn có thể nhấn vào 1 trong các thành phần để chuyển hướng sang trang muốn sử dụng, nhấp vào hình đại diện để xem.',
+        },
+        {
+            selector: '.container-react-tour',
+            content: 'Đây là thành phần chính của website, bạn có thể thực hiện các thao tác trong đây.',
+
+        },
+    ]
+
     return (
         <>
+
             <Helmet>
                 <link rel="shortcut icon" href={favicon} type="image/x-icon" />
                 <title>Học Tập</title>
             </Helmet>
-            <div className="pt-[130px] pb-[90px] bg-[#13161B] relative min-h-[100vh] contentWrapper">
+            <Tour
+                className='h-[30%] w-[60%] flex justify-around flex-col items-center '
+                steps={steps}
+                accentColor="#f05123"
+                rounded={6}
+                isOpen={isStepEnabled}
+                onRequestClose={() => {
+                    setIsStepEnabled(false)
+                }}
+
+                badgeContent={(curr, tot) => `Bước ${curr} trên ${tot}`}
+                lastStepNextButton={"Xong"}
+                nextButton={"Tiếp tục"}
+                prevButton={"Quay lại"}
+                scrollDuration={100}
+
+            />
+            <div className="pt-[70px] pb-[90px] bg-[#13161B] relative min-h-[100vh] contentWrapper">
                 <Navigation currentUser={currentUser} />
-                <div className="max-w-[1092px] w-[100%] mx-auto">
-                    <div className="flex justify-between flex-wrap mb-[100px]">
+                <div className="max-w-[1092px] w-[100%] mx-auto container-react-tour">
+                    <div className="flex justify-between flex-wrap mb-[100px] ">
                         <div className="boardWrapper">
                             <div className="boardMain">
-                                <p className="text-white font-bold text-2xl leading-5 mb-[20px] block">Đề thi dành cho học sinh lớp {currentUser?.detailUserInfomation?.grade}</p>
+                                <p className="text-white font-bold text-2xl leading-5 mb-[20px] block ">Đề thi dành cho học sinh lớp {currentUser?.detailUserInfomation?.grade}</p>
                                 <p className='text-white font-bold text-2xl leading-5 mb-[20px] inline-block'>Vòng thi hiện tại: {currentRound}</p>
                                 {currentRound < 4 ? Boolean(currentUserProcess[0] && currentUserProcess[1] && currentUserProcess[2]) && <button className='inline-block m-4 text-white bg-[#54a0ff] hover:bg-[#1dd1a1]  outline-none rounded-3xl transition-all duration-300 p-3' onClick={handleSubmitTaskAndNextRound}>Nộp bài</button> : <div className='text-white'>Vui lòng xem lịch thi để biết thêm thông tin về vòng thi mới!</div>}
                                 <div className="flex text-white mb-[4px] board_header">
@@ -189,6 +253,35 @@ export default function LearnPage() {
                 {loading && <div className='flex bg-[#ffffff3e] fixed top-0 right-0 left-0 bottom-0 justify-center items-center z-[999999]'><img src={loadingGif} alt="" width="8%" /></div>}
 
                 <Footer />
+                <div className="fixed right-[0px] top-[40%] z-[99999]">
+                    <div className="tutorial_wrapper abcxyz" ref={el => tutorial_wrapper.current = el} onClick={() => {
+                        tutorial_board_ask_wrapper.current.style.display = 'block'
+                        tutorial_wrapper.current.style.display = 'none'
+                    }}>
+                        <div ref={el => tutorial_btn_show.current = el} className="cursor-pointer flex items-center justify-center rotate-[-90deg] rounded-tr-[4px] text-[14px] rounded-tl-[4px] text-[#fff] bg-[#d54253] px-[10px] py-[12px]">
+                            <i className="mr-[4px] text-[16px] rotate-[90deg] fa-solid fa-circle-question"></i>
+                            <span className="">Hướng dẫn</span>
+                        </div>
+                    </div>
+                    <div className="tutorial_board_ask_wrapper absolute top-0 right-[20px] hidden" ref={el => tutorial_board_ask_wrapper.current = el}>
+                        <div className="cursor-pointer" onClick={() => {
+                            tutorial_board_ask_wrapper.current.style.display = 'none'
+                            tutorial_wrapper.current.style.display = 'block';
+
+                        }}>
+                            <i className="fa-solid fa-xmark text-white"></i>
+                        </div>
+                        <div className="tutorial_board_ask shadow-[0px_2px_8px_2px_#333] rounded-[8px] px-[40px] py-[28px] text-[#000] w-[260px] bg-[#fff] flex flex-col justify-center items-center">
+                            <p className="text-center mb-[8px] text-[18px]">Bạn vẫn còn thắc mắc khi sử dụng Website của chúng tôi?</p>
+                            <button className="tutorial_board_comfirmBtn py-[10px] px-[12px] bg-[#d54253] hover:bg-[#d54253] rounded-[8px] text-[#fff]" onClick={() => {
+                                tutorial_board_ask_wrapper.current.style.display = 'none'
+                                tutorial_wrapper.current.style.display = 'block';
+
+                                setIsStepEnabled(true)
+                            }}>Xem hướng dẫn</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </>

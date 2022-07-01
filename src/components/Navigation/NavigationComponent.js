@@ -38,7 +38,7 @@ function NavBarLearnPage({ currentUser }) {
 
     return (
 
-        <div className="fixed h-[70px] bg-[#1f232b] top-0 left-0 right-0 z-[99]">
+        <div className="fixed h-[70px] bg-[#1f232b] top-0 left-0 right-0 z-[99] navigation-react-tour">
             <div className="max-w-[1092px] w-[100%] h-full flex items-center justify-between mx-auto">
                 <Link to="/" className="flex items-center">
                     <i className="fa-solid fa-atom text-[40px] text-white mr-1 logoIcon"></i>
