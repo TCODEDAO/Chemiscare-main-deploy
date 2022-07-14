@@ -16,7 +16,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import LoadingComponent from './components/Loading/LoadingComponent';
 
 
-//
+//Seo
 
 // const root = ReactDOM.createRoot()
 ReactDOM.render(

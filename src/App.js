@@ -10,14 +10,16 @@ import './App.css';
 import NotFound from './components/NotFound/NotFoundComponent'
 import { ToastContainer } from 'react-toastify'
 import LoadingComponent from './components/Loading/LoadingComponent';
-
+import { Helmet } from 'react-helmet';
 
 function App() {
 
 
   return (
     <div className='App'>
-
+<Helmet>
+<meta name="robots" content="index, follow" />
+</Helmet>
       <Suspense fallback={<LoadingComponent />} >
         <Routes>
           {publicRoutes.map((route) => {
