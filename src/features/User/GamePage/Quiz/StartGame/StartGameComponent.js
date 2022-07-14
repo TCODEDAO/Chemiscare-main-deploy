@@ -75,6 +75,7 @@ export default function HomeComponent() {
         >
             <Helmet>
                 <title>Quiz</title>
+                <meta name="robots" content="noindex" />
             </Helmet>
 
             <div className=" w-[940px] min-h-[350px] py-[30px] px-[38px] rounded-[16px] bg-white shadow-[0_0_50px_0_rgba(0,0,0,0.2)]">
