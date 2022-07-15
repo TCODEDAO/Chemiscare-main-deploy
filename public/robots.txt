@@ -1,3 +1,7 @@
-# https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Allow:/
+Allow:/learn
+Allow:/auth
+Allow:/forum
+Allow:/rate
+Allow:/celebrate
