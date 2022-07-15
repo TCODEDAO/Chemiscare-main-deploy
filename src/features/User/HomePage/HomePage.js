@@ -40,7 +40,6 @@ export default function HomePage() {
         <>
             <Helmet>
                 <title>Bắt đầu với Chemiscare</title>
-                <meta name="robots" content="noindex" />
             </Helmet>
             <Favicon url={favicon} />
             <div className="h-[100vh] bg-[#F6EBDC] flex">

@@ -123,7 +123,6 @@ export default function LearnPage() {
 
             <Helmet>
                 <link rel="shortcut icon" href={favicon} type="image/x-icon" />
-                <meta name="robots" content="noindex" />
                 <title>Học Tập</title>
             </Helmet>
             <Tour
