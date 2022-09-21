@@ -2,7 +2,7 @@ import { notifyErorr } from "../../components/Alert/AlertComponent"
 import { setResultAllUser } from "../../redux/User/QuizSlice"
 
 
-const getAllResultAndSort = async (axiosJWT, currentUser, dispatch, navigate, page) => {
+const getAllResultAndSort = async (axiosJWT, currentUser, dispatch) => {
     try {
         const res = await axiosJWT.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/result`, {
             headers: { token: `Bearer ${currentUser?.accessToken}` },

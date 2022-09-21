@@ -19,6 +19,7 @@ function NavBarLearnPage({ currentUser }) {
 
 
     useEffect(async () => {
+       
         if (currentUser) {
             const isAdmin = await checkIsAdmin(currentUser)
             setIsAdmin(isAdmin)
@@ -154,7 +155,7 @@ function NavBarLearnPage({ currentUser }) {
                     </div>
                     {/* <!-- <span className="cursor-pointer px-5 text-[18px] text-[#868991] hover:text-[#d54253]">Đăng nhập</span> */}
                     {/* <span className="cursor-pointer px-5 py-[10px] text-[18px] text-[#000] rounded-[9px] bg-white hover:bg-[#fafafa]">Đăng ký</span> --> */}
-                    <div className="text-white relative cursor-pointer w-[40px] h-[40px] ml-5 bg-[#B8BCC6] rounded-[50%] text-[22px] items-center justify-center flex hover:bg-[#D44253]  avt">
+                  {currentUser ?  <div className="text-white relative cursor-pointer w-[40px] h-[40px] ml-5 bg-[#B8BCC6] rounded-[50%] text-[22px] items-center justify-center flex hover:bg-[#D44253]  avt">
                         <Avatar
                             size="50px"
                             round="50%"
@@ -199,7 +200,7 @@ function NavBarLearnPage({ currentUser }) {
                                 Đăng xuất
                             </li>
                         </ul>
-                    </div>
+                    </div> : <button>Đăng nhập</button>} 
                 </div>
             </div>
         </div>

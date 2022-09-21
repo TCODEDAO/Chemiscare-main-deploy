@@ -67,7 +67,6 @@ const updateDetailInfomation = async (dispatch, navigate, axiosJWT, currentUser,
 
         const res = await axiosJWT.post(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/users/detail/${currentUser?._id}`, data, { headers: { token: `Bearer ${currentUser?.accessToken}` } })
         const dataResponse = res.data
-        const { isSuccess, message } = dataResponse
         const newUser = { ...dataResponse.user }
 
         await createUserLearningProcess(currentUser, axiosJWT)

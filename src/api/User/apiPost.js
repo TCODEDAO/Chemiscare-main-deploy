@@ -1,7 +1,8 @@
+
 import axios from 'axios'
 import { notifyErorr, notifySuccess } from '../../components/Alert/AlertComponent'
 import { adminGetPostsSuccess, adminGetThreadSuccess } from '../../redux/Admin/ForumManagementSlice'
-import { addPostSuccess, getPostFailed, getPostStart, getPostSuccess, getThreadSuccess, setThread, } from '../../redux/User/PostSlice'
+import { addPostSuccess, getPostFailed, getPostStart, getPostSuccess, getThreadSuccess,  } from '../../redux/User/PostSlice'
 import { setComments, setCountComments } from '../../redux/User/ReactionSlice'
 
 
@@ -55,12 +56,10 @@ const getPostById = async (currentUser, dispatch, axiosJWT, id, navigate, page) 
         navigate('/forum')
     }
 }
-const getAllThreadApproved = async (currentUser, dispatch, axiosJWT) => {
+const getAllThreadApproved = async ( dispatch) => {
     try {
 
-        const res = await axiosJWT.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/forum/thread/approved`, {
-            headers: { token: `Bearer ${currentUser?.accessToken}` },
-        })
+        const res = await axios.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/forum/thread/approved`)
 
         dispatch(getThreadSuccess(res.data.data))
     } catch (err) {

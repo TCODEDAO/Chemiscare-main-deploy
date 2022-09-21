@@ -13,7 +13,7 @@ import { createAxios } from '../../../utils/axiosJWT'
 import { notifyInfo, notifyWelcome } from '../../../components/Alert/AlertComponent'
 
 import { setTask } from '../../../redux/User/QuizSlice'
-import { getAllResultQuizById, getResultQuizById, getRound, increaseRound } from '../../../api/User/apiQuestion'
+import { getAllResultQuizById, getRound, increaseRound } from '../../../api/User/apiQuestion'
 import loadingGif from '../../../assets/images/gif/noBgLoad.gif'
 import { useState } from 'react'
 
@@ -78,7 +78,7 @@ export default function LearnPage() {
     const tutorial_wrapper = useRef(null)
 
     useEffect(() => {
-        console.log(tutorial_board_ask_wrapper, tutorial_btn_show, tutorial_wrapper)
+      
 
         tutorial_board_ask_wrapper.current.style.marginTop = `-${(tutorial_btn_show.clientWidth - tutorial_wrapper.clientHeight) / 2}px`
         tutorial_wrapper.current.style.marginRight = `-${(tutorial_wrapper.clientWidth - tutorial_btn_show.clientHeight) / 2}px`

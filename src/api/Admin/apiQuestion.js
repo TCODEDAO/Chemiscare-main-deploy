@@ -21,7 +21,7 @@ const getAllQuestion = async (currentUser, dispatch, axiosJWT) => {
 }
 const createNewQuestion = async (currentUser, axiosJWT, data) => {
     try {
-        const res = await axiosJWT.post(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/questions/create-question`, data, {
+         await axiosJWT.post(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/questions/create-question`, data, {
             headers: { token: `Bearer ${currentUser?.accessToken}` },
         })
         notifySuccess("Thêm câu hỏi thành công")

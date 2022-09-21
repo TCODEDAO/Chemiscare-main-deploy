@@ -8,30 +8,24 @@ import './ForumPage.css'
 
 
 import { notifyErorr, notifyInfo } from '../../../components/Alert/AlertComponent'
-import { createAxios } from '../../../utils/axiosJWT'
 import CreateThreadComponent from './CreateData/CreateThreadComponent'
-import { getAllThreadApproved, getPostById } from '../../../api/User/apiPost'
+import { getAllThreadApproved,  } from '../../../api/User/apiPost'
 
 const Navigation = lazy(() => import('../../../components/Navigation/NavigationComponent'))
 const Footer = lazy(() => import('../../../components/Footer/FooterComponent'))
 const PostList = lazy(() => import('./PostList/PostListComponent'))
 export default function BlogComponent() {
-    const navigate = useNavigate()
     const dispatch = useDispatch()
     const currentUser = useSelector(state => state?.auth?.login?.currentUser)
     const threads = useSelector(state => state?.post?.thread?.content)
     const socket = useSelector(state => state?.socket?.socket)
 
-    let axiosJWT = createAxios(currentUser, dispatch)
 
     useEffect(() => {
-        if (!currentUser) {
-            navigate('/auth')
-            notifyInfo('Bạn cần đăng nhập để vào diễn đàn.')
-        }
-        if (currentUser) {
-            getAllThreadApproved(currentUser, dispatch, axiosJWT)
-        }
+    
+
+            getAllThreadApproved(dispatch)
+        
     }, [])
 
     //Toggle Editor
@@ -41,6 +35,11 @@ export default function BlogComponent() {
         setIsEditorShowThread(true)
     }
     const handleHideEditorThread = useCallback(() => {
+        if (!currentUser) {
+           
+            notifyInfo('Bạn cần đăng nhập để vào học!')
+            return
+        }
         setIsEditorShowThread(false)
 
     }, [])
@@ -50,7 +49,7 @@ export default function BlogComponent() {
     useEffect(() => {
         if (socket) {
             socket.on('ApprovedSuccessThread', () => {
-                getAllThreadApproved(currentUser, dispatch, axiosJWT)
+                getAllThreadApproved(dispatch)
             })
             socket.on('createNewThreadFailedAdmin', msg => {
                 notifyErorr(msg.message)
@@ -61,7 +60,7 @@ export default function BlogComponent() {
         return () => {
             if (socket) {
                 socket.off('ApprovedSuccessThread', () => {
-                    getAllThreadApproved(currentUser, dispatch, axiosJWT)
+                    getAllThreadApproved( dispatch)
                 })
                 socket.off('createNewThreadFailedAdmin', msg => {
                     notifyErorr(msg.message)
@@ -76,7 +75,7 @@ export default function BlogComponent() {
     useEffect(() => {
         if (socket) {
             socket.on('RemoveSuccessThreadAdminRealSuccess', msg => {
-                getAllThreadApproved(currentUser, dispatch, axiosJWT)
+                getAllThreadApproved( dispatch)
             })
         }
 
