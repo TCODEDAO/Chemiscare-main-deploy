@@ -6,15 +6,12 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getPostById } from '../../../../api/User/apiPost';
-import { createAxios } from '../../../../utils/axiosJWT';
 import 'moment/locale/vi'
 import './SinglePostComponent.css'
 import Avatar from '../../../../components/Avatar/AvatarComponent';
 import xss from 'xss'
 import CreateCommentComponent from '../CreateData/CreateCommentComponent';
 import CommentList from '../Comment/CommentList';
-import { addOneComment } from '../../../../redux/User/ReactionSlice';
-import { notifyInfo } from '../../../../components/Alert/AlertComponent'
 import loadingGif from '../../../../assets/images/gif/noBgLoad.gif'
 
 moment.locale('vi')
@@ -26,19 +23,15 @@ function SinglePostComponent() {
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
     const currentUser = useSelector(state => state?.auth?.login?.currentUser)
-    let axiosJWT = createAxios(currentUser, dispatch)
     const socket = useSelector(state => state?.socket?.socket)
     useEffect(() => {
-        if (!currentUser) {
-            navigate('/auth')
-            notifyInfo('Bạn cần đăng nhập để tiếp tục')
-        }
+
     }, [])
     useEffect(() => {
         setLoading(true)
-        getPostById(currentUser, dispatch, axiosJWT, postId, navigate)
+        getPostById( dispatch, postId, navigate)
         setLoading(false)
-    }, [])
+    }, [dispatch,navigate,postId])
 
     const post = useSelector(state => state?.post?.posts?.filter(post => post._id === postId))
 
@@ -110,7 +103,7 @@ function SinglePostComponent() {
                                 <div className="mr-[4px]">
                                     {post[0]?.userId?.avatar ? <img className="w-[50px] h-[50px] object-cover rounded-[50%]"
                                         src={post[0]?.userId?.avatar}
-                                        alt="" /> : <Avatar name={post[0]?.userId?.fullName}
+                                        alt="" /> : <Avatar name={post[0]?.userId.fullName?.split(' ')[post[0]?.userId?.fullName?.split(' ').length -1]}
                                             size="50px" />}
                                 </div>
                                 <div>

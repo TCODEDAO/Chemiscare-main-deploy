@@ -35,11 +35,7 @@ export default function BlogComponent() {
         setIsEditorShowThread(true)
     }
     const handleHideEditorThread = useCallback(() => {
-        if (!currentUser) {
-           
-            notifyInfo('Bạn cần đăng nhập để vào học!')
-            return
-        }
+       
         setIsEditorShowThread(false)
 
     }, [])

@@ -1,19 +1,13 @@
-import React, { lazy, useEffect } from 'react'
+import React, { lazy } from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 import './CelebrateComponent.css'
 
 
 const Navigation = lazy(() => import('../../../components/Navigation/NavigationComponent'))
 const Footer = lazy(() => import('../../../components/Footer/FooterComponent'))
 export default function CelebratePage() {
-    const navigate = useNavigate()
     const currentUser = useSelector((state) => state.auth && state.auth.login && state.auth.login.currentUser)
-    useEffect(() => {
-        if (!currentUser) {
-            navigate('/auth')
-        }
-    }, [currentUser, navigate])
+    
     return (
 
         <div className="pt-[130px] pb-[90px] bg-[#13161B] relative min-h-[100vh] contentWrapper">

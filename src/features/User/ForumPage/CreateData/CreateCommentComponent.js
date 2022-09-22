@@ -10,13 +10,43 @@ function CreateCommentComponent({ currentUser, postId, socket, DefaultReply, set
             setContentComment(`${DefaultReply && DefaultReply}:  `)
         }
     }, [])
+   
+    const handleSendComment = () => {
+        if(!currentUser){
+            notifyInfo('Bạn cần đăng nhập để tiếp tục bình luận!')
+        }
+
+        const data = {
+            userId: currentUser?._id,
+            postId: postId,
+            content: contentComment,
+            createdAt: createdAt
+
+        }
+        if (contentComment === '') {
+            notifyInfo('Bạn cần thêm thông tin cho bình luận!')
+         
+        }
+        if (contentComment.length < 20) {
+            notifyInfo('Bình luận của bạn quá ngắn!')
+
+        }
+
+        socket.emit('CreateCommentFromClient', { data: data, send: send })
+        setContentComment('')
+        if (setReply) {
+
+            setReply(false)
+        }
+    }
+    
     return (
         <div className="mb-[10px] min-w-[100px]">
             <div className="flex items-end mb-[8px]">
                 <div className="mr-[8px]">
                     {currentUser?.avatar ? <img className="w-[40px] h-[40px] object-cover rounded-[50%]"
                         src={currentUser?.avatar}
-                        alt="" /> : <Avatar name={currentUser?.fullName}
+                        alt="" /> : <Avatar name={currentUser?.fullName || 'Guest'}
                             size="40px" />}
                 </div>
                 <div className="grow">
@@ -33,30 +63,7 @@ function CreateCommentComponent({ currentUser, postId, socket, DefaultReply, set
                     }
                 }}>HỦY</span>
                 <span
-                    className="px-[20px] py-[8px] text-white font-medium bg-[#ccc] cursor-pointer rounded-[20px]" onClick={() => {
-                        const data = {
-                            userId: currentUser?._id,
-                            postId: postId,
-                            content: contentComment,
-                            createdAt: createdAt
-
-                        }
-                        if (contentComment === '') {
-                            notifyInfo('Bạn cần thêm thông tin cho bình luận!')
-                            return
-                        }
-                        if (contentComment.length < 20) {
-                            notifyInfo('Bình luận của bạn quá ngắn!')
-                            return
-                        }
-
-                        socket.emit('CreateCommentFromClient', { data: data, send: send })
-                        setContentComment('')
-                        if (setReply) {
-
-                            setReply(false)
-                        }
-                    }}>BÌNH
+                    className="px-[20px] py-[8px] text-white font-medium bg-[#ccc] cursor-pointer rounded-[20px]" onClick={()=>handleSendComment()}>BÌNH
                     LUẬN</span>
             </div>
         </div>

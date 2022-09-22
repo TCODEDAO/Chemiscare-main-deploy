@@ -19,30 +19,23 @@ const getAllPost = async (currentUser, dispatch, axiosJWT) => {
     }
 }
 
-const getAllPostApproved = async (currentUser, dispatch, axiosJWT) => {
+const getAllPostApproved = async (dispatch) => {
     dispatch(getPostStart())
     try {
 
-        const res = await axiosJWT.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/forum/posts/approved`, {
-            headers: { token: `Bearer ${currentUser?.accessToken}` },
-        })
+        const res = await axios.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/forum/posts/approved`)
 
         dispatch(getPostSuccess(res.data.data))
     } catch (err) {
-        console.log(err)
         dispatch(getPostFailed())
         notifyErorr(err.response.data.message)
     }
 }
 
-const getPostById = async (currentUser, dispatch, axiosJWT, id, navigate, page) => {
+const getPostById = async ( dispatch, id, navigate, page) => {
     try {
-        const res = await axiosJWT.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/forum/posts/${id}`, {
-            headers: { token: `Bearer ${currentUser?.accessToken}` },
-        })
-        const comments = await axiosJWT.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/reaction/comments/${id}?limit=${(page || 1) * 5}`, {
-            headers: { token: `Bearer ${currentUser?.accessToken}` },
-        })
+        const res = await axios.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/forum/posts/${id}`)
+        const comments = await axios.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/reaction/comments/${id}?limit=${(page || 1) * 5}`, )
         const commentReply = comments.data.comments.reduce((previousValue, currentValue) => {
             return previousValue + currentValue.reply.length
         }, 0)
@@ -51,12 +44,11 @@ const getPostById = async (currentUser, dispatch, axiosJWT, id, navigate, page) 
         dispatch(setComments(comments.data.comments))
         dispatch(addPostSuccess(res.data.data))
     } catch (err) {
-        console.log(err)
         notifyErorr(err.response.data.message)
         navigate('/forum')
     }
 }
-const getAllThreadApproved = async ( dispatch) => {
+const getAllThreadApproved = async (dispatch) => {
     try {
 
         const res = await axios.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/forum/thread/approved`)

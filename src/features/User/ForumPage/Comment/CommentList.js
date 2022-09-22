@@ -1,10 +1,9 @@
-import moment from 'moment'
+
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { getPostById } from '../../../../api/User/apiPost'
-import Avatar from '../../../../components/Avatar/AvatarComponent'
-import { addOneComment, setComments } from '../../../../redux/User/ReactionSlice'
+import { addOneComment } from '../../../../redux/User/ReactionSlice'
 import { createAxios } from '../../../../utils/axiosJWT'
 
 import loadingGif from '../../../../assets/images/gif/noBgLoad.gif'
@@ -30,14 +29,14 @@ function CommentList({ postId, postAuthorId }) {
 
     useEffect(() => {
         socket.on('CreateCommentFromServerSuccess', data => {
-            getPostById(currentUser, dispatch, axiosJWT, postId, navigate, page)
+            getPostById( dispatch, postId, navigate, page)
             dispatch(addOneComment(data))
         })
     }, [socket])
 
     useEffect(() => {
         setLoading(true)
-        getPostById(currentUser, dispatch, axiosJWT, postId, navigate, page)
+        getPostById( dispatch, postId, navigate, page)
         setLoading(false)
     }, [postId, page])
     //infiniti scroll
@@ -57,12 +56,12 @@ function CommentList({ postId, postAuthorId }) {
         if (socket) {
             socket.on('CreateCommentReplyFromServerSuccess', msg => {
 
-                getPostById(currentUser, dispatch, axiosJWT, postId, navigate, page)
+                getPostById( dispatch, postId, navigate, page)
             })
         }
         if (socket) {
             socket.on('SetToChooseAnswerFulfilled', msg => {
-                getPostById(currentUser, dispatch, axiosJWT, postId, navigate, page)
+                getPostById( dispatch, postId, navigate, page)
             })
         }
 

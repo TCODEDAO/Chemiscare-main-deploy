@@ -25,12 +25,12 @@ function RatePage() {
 
         if (!currentUser) {
             navigate('/auth')
-            notifyInfo('Bạn cần đăng nhập để vào học!')
+            notifyInfo('Bạn cần đăng nhập để xem trang này!')
             return
         }
         if (!currentUser.detailUserInfomation || !currentUser?.detailUserInfomation?.grade) {
             navigate('/auth/detail')
-            notifyInfo('Bạn cần thêm thông tin để vào học!')
+            notifyInfo('Bạn cần đăng nhập để xem trang này!')
             return
         }
 

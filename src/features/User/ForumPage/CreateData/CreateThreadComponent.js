@@ -3,9 +3,9 @@ import { useSpring, animated, config } from '@react-spring/web'
 import { useDispatch, useSelector } from 'react-redux'
 
 import './CreateThreadComponent.css'
+import { notifyInfo } from '../../../../components/Alert/AlertComponent'
 function CreateThreadComponent({ handleHideEditorThread, currentUser }) {
     const [styles, api] = useSpring(() => ({ to: { opacity: 1, y: '0px', x: '-50%', scale: 0.75 }, from: { opacity: 0, y: '-30px', scale: 0.9, x: '-50%' }, config: config.wobbly, delay: 200 }))
-    const dispatch = useDispatch()
     const socket = useSelector(state => state?.socket?.socket)
 
 
@@ -14,7 +14,11 @@ function CreateThreadComponent({ handleHideEditorThread, currentUser }) {
     const [content, setContent] = useState('')
 
     const handleCreateNewThread = () => {
-
+        if (!currentUser) {
+           
+            notifyInfo('Bạn cần đăng nhập để tạo các chủ đề!')
+            return 
+        }
         socket.emit('createNewThread', { content: content, userId: currentUser?._id })
 
 

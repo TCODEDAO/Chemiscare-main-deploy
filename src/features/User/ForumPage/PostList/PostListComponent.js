@@ -1,18 +1,19 @@
-import React, { lazy, useEffect, useState } from 'react'
+import React, {  useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { adminDeletePost, getAllPost, getAllPostApproved } from '../../../../api/User/apiPost'
-import { createAxios } from '../../../../utils/axiosJWT'
+import { adminDeletePost, getAllPostApproved } from '../../../../api/User/apiPost'
 import moment from 'moment'
 import 'moment/locale/vi'
 import xss from 'xss'
 import { Link } from 'react-router-dom'
+import { createAxios } from '../../../../utils/axiosJWT'
+import Avatar from '../../../../components/Avatar/AvatarComponent'
 
 
 
 moment.locale('vi')
 const loadAnimate = require('../../../../assets/images/gif/noBgLoad.gif')
-const PostExcerpt = ({ post, currentUser, socket, axiosJWT }) => {
 
+const PostExcerpt = ({ post, currentUser, socket, axiosJWT }) => {
     const [showBox, setShowBox] = useState(false)
     return (
         <li className="my-[8px] list-none w-[100%] rounded-[16px] p-[24px] border-solid border-[#2a2c34] border-[1px] bg-[#1e2029]" onClick={(e) => {
@@ -23,14 +24,20 @@ const PostExcerpt = ({ post, currentUser, socket, axiosJWT }) => {
             <div className="flex justify-between">
                 <div className="flex items-center cursor-pointer">
                     <div className="mr-[4px]">
-                        <img className="w-[28px] h-[28px] object-cover rounded-[50%]" src={post?.userId?.avatar} alt="" />
+                        {post?.userId?.avatar ? <img className="w-[28px] h-[28px] object-cover rounded-[50%]" src={post?.userId?.avatar} alt="" /> :  <Avatar
+                            size="50px"
+                            round="50%"
+                            textSizeRatio={1.75}
+                            name={post?.userId?.fullName?.split(' ')[post?.userId?.fullName?.split(' ').length -1]}
+                        ></Avatar>}
+                        
                     </div>
                     <p className="font-medium p-white-forum text-white hover:text-[#d54253] ml-2">{post?.userId?.fullName}</p>
                 </div>
                 <div>
                     {/* <i className="cursor-pointer fa-regular fa-bookmark  p-white-forum mr-[8px]"></i> */}
                     {/* <i className="cursor-pointer fa-solid fa-bookmark  p-white-forum mr-[8px] text-[#d54253]" style={{ display: 'none' }}></i> */}
-                    {(currentUser?.isAdmin || currentUser?._id === post?._id) && <i className="cursor-pointer fa-solid fa-ellipsis hover:text-[#d54253] p-white-forum" onClick={(e) => {
+                    { (currentUser?._id === post?.userId?._id) && <i className="cursor-pointer fa-solid fa-ellipsis hover:text-[#d54253] p-white-forum" onClick={(e) => {
 
                         e.stopPropagation()
                         setShowBox(!showBox)
@@ -62,9 +69,8 @@ const PostExcerpt = ({ post, currentUser, socket, axiosJWT }) => {
 
 
 export default function PostListComponent({ filter }) {
+   
     const socket = useSelector(state => state?.socket?.socket)
-
-    const currentUser = useSelector(state => state?.auth?.login?.currentUser)
     const postList = useSelector(state => {
         if (filter) {
             return state?.post?.posts.filter(state => state?.userId?._id === filter)
@@ -72,26 +78,26 @@ export default function PostListComponent({ filter }) {
             return state?.post?.posts
         }
     })
-
     const dispatch = useDispatch()
-    let axiosJWT = createAxios(currentUser, dispatch)
+    const currentUser = useSelector((state) => state?.auth?.login?.currentUser)
+    const axiosJWT = createAxios(currentUser, dispatch)
     useEffect(() => {
-        if (currentUser) {
-            getAllPostApproved(currentUser, dispatch, axiosJWT)
-        }
+        
+            getAllPostApproved(dispatch)
+      
         if (socket) {
             socket.on('ApprovedSuccessPostAdminFromServer', data => {
-                getAllPostApproved(currentUser, dispatch, axiosJWT)
+                getAllPostApproved(dispatch)
             })
         }
         if (socket) {
             socket.on('RemoveSuccessPostAdminFromClientFromServer', data => {
-                getAllPostApproved(currentUser, dispatch, axiosJWT)
+                getAllPostApproved(dispatch)
             })
         }
         if (socket) {
             socket.on('RemoveSuccessPostAdminRealFromServer', data => {
-                getAllPostApproved(currentUser, dispatch, axiosJWT)
+                getAllPostApproved(dispatch)
 
             })
         }
@@ -99,12 +105,12 @@ export default function PostListComponent({ filter }) {
         return () => {
             if (socket) {
                 socket.off('RemoveSuccessPostAdminFromClientFromServer', data => {
-                    getAllPostApproved(currentUser, dispatch, axiosJWT)
+                    getAllPostApproved(dispatch)
                 })
             }
             if (socket) {
                 socket.off('ApprovedSuccessPostAdminFromServer', data => {
-                    getAllPostApproved(currentUser, dispatch, axiosJWT)
+                    getAllPostApproved(dispatch)
                 })
             }
         }
