@@ -14,6 +14,7 @@ moment.locale('vi')
 const loadAnimate = require('../../../../assets/images/gif/noBgLoad.gif')
 
 const PostExcerpt = ({ post, currentUser, socket, axiosJWT }) => {
+    const isAdmin = useSelector((state) => state?.permission?.isAdmin)
     const [showBox, setShowBox] = useState(false)
     return (
         <li className="my-[8px] list-none w-[100%] rounded-[16px] p-[24px] border-solid border-[#2a2c34] border-[1px] bg-[#1e2029]" onClick={(e) => {
@@ -37,7 +38,7 @@ const PostExcerpt = ({ post, currentUser, socket, axiosJWT }) => {
                 <div>
                     {/* <i className="cursor-pointer fa-regular fa-bookmark  p-white-forum mr-[8px]"></i> */}
                     {/* <i className="cursor-pointer fa-solid fa-bookmark  p-white-forum mr-[8px] text-[#d54253]" style={{ display: 'none' }}></i> */}
-                    { (currentUser?._id === post?.userId?._id) && <i className="cursor-pointer fa-solid fa-ellipsis hover:text-[#d54253] p-white-forum" onClick={(e) => {
+                    { ((currentUser?._id === post?.userId?._id)||isAdmin) && <i className="cursor-pointer fa-solid fa-ellipsis hover:text-[#d54253] p-white-forum" onClick={(e) => {
 
                         e.stopPropagation()
                         setShowBox(!showBox)

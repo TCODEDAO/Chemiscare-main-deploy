@@ -20,7 +20,10 @@ function App() {
   const currentUser = useSelector((state) => state?.auth?.login?.currentUser)
   const dispatch = useDispatch()
   useEffect(()=>{
-    checkIsAdmin(currentUser,dispatch)
+    if(currentUser){
+      checkIsAdmin(currentUser,dispatch)
+
+    }
   },[currentUser])
   return (
     <div className='App'>
