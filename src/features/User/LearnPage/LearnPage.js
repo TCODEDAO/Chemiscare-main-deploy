@@ -34,11 +34,8 @@ export default function LearnPage() {
     const axiosJWT = createAxios(currentUser, dispatch)
     const currentRound = useSelector(state => state?.quiz?.round?.currentRound)
 
-    useEffect( () => {
-        const fetchRound = async()=>{
-            await getRound(dispatch, axiosJWT, currentUser)
-
-        }
+    useEffect( async() => {
+       
 
         if (!currentUser) {
             navigate('/auth')
@@ -53,7 +50,7 @@ export default function LearnPage() {
 
         if (currentUser) {
             setLoading(true)
-            fetchRound()
+            await getRound(dispatch, axiosJWT, currentUser)
             getAllResultQuizById(currentUser, dispatch, axiosJWT)
             setLoading(false)
             notifyWelcome(`Chào mừng bạn!`)
