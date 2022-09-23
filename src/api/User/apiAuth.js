@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { notifyErorr, notifySuccess } from '../../components/Alert/AlertComponent'
+import { checkPermissison } from '../../redux/Admin/Permission'
 import { loginFailed, loginStart, loginSuccess, logOutFailed, logOutStart, logOutSuccess, registerFailed, registerStart, registerSuccess } from '../../redux/User/AuthSlice'
 import { createUserLearningProcess } from './apiQuestion'
 
@@ -37,10 +38,10 @@ const registerUser = async (user, dispatch) => {
 
     }
 }
-const checkIsAdmin = async (currentUser) => {
+const checkIsAdmin = async (currentUser,dispatch) => {
 
     const res = await axios.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/auth/checkIsAdminChemiscare/${currentUser?._id}`)
-
+        dispatch(checkPermissison(res.data.isAdmin))
     return res.data.isAdmin
 
 }

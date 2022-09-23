@@ -13,7 +13,7 @@ import SocketSlice from "./socketSlice";
 import QuestionManagementSlice from "./Admin/QuestionManagementSlice"
 import ForumManagementSlice from "./Admin/ForumManagementSlice";
 import ReactionSlice from "./User/ReactionSlice";
-
+import PermissionSlice from "./Admin/Permission"
 
 const rootReducer = combineReducers({
     auth: AuthSlice,
@@ -21,6 +21,7 @@ const rootReducer = combineReducers({
     post: PostSlice,
     socket: SocketSlice,
     reaction: ReactionSlice,
+    permission: PermissionSlice,
     forumManagementSlice: ForumManagementSlice,
     questionManagement: QuestionManagementSlice,
 })

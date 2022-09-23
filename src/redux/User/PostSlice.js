@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, isFulfilled } from "@reduxjs/toolkit"
+import {  createSlice } from "@reduxjs/toolkit"
 
 const postSlice = createSlice({
     name: 'post',

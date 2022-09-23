@@ -11,15 +11,21 @@ import NotFound from './components/NotFound/NotFoundComponent'
 import { ToastContainer } from 'react-toastify'
 import LoadingComponent from './components/Loading/LoadingComponent';
 import { Helmet } from 'react-helmet';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkIsAdmin } from './api/User/apiAuth';
+
 
 function App() {
-
-
+  const currentUser = useSelector((state) => state?.auth?.login?.currentUser)
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    checkIsAdmin(currentUser,dispatch)
+  },[currentUser])
   return (
     <div className='App'>
 <Helmet>
-<meta name="robots" content="index, follow" />
-
+    <meta name="robots" content="index, follow" />
 </Helmet>
       <Suspense fallback={<LoadingComponent />} >
         <Routes>
