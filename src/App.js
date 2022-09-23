@@ -19,7 +19,7 @@ function App() {
     <div className='App'>
 <Helmet>
 <meta name="robots" content="index, follow" />
-<meta name="google-site-verification" content="9Nw_sBwTLSdoMmirzBDSKJElbF3ZwxX67YfpThf-OV0" />
+
 </Helmet>
       <Suspense fallback={<LoadingComponent />} >
         <Routes>
