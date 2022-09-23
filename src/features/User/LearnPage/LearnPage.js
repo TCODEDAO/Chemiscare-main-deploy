@@ -63,7 +63,7 @@ export default function LearnPage() {
         return () => {
 
         }
-    }, [axiosJWT,dispatch,navigate,currentUser])
+    }, [])
     const handleSubmitTaskAndNextRound = () => {
         setLoading(true)
 
