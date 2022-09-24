@@ -1,15 +1,15 @@
 import React, { lazy, useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-
-
+import { Link } from 'react-router-dom'
+import favicon from '../../../assets/images/icons/forumFavicon.ico'
 
 import './ForumPage.css'
 
 
-import { notifyErorr, notifyInfo } from '../../../components/Alert/AlertComponent'
+import { notifyErorr } from '../../../components/Alert/AlertComponent'
 import CreateThreadComponent from './CreateData/CreateThreadComponent'
 import { getAllThreadApproved,  } from '../../../api/User/apiPost'
+import { Helmet } from 'react-helmet'
 
 const Navigation = lazy(() => import('../../../components/Navigation/NavigationComponent'))
 const Footer = lazy(() => import('../../../components/Footer/FooterComponent'))
@@ -22,10 +22,7 @@ export default function BlogComponent() {
 
 
     useEffect(() => {
-    
-
-            getAllThreadApproved(dispatch)
-        
+            getAllThreadApproved(dispatch)    
     }, [])
 
     //Toggle Editor
@@ -78,7 +75,13 @@ export default function BlogComponent() {
     }, [socket])
 
     return (
-        <>
+        <> 
+        
+        <Helmet>
+                <link rel="shortcut icon" href={favicon} type="image/x-icon" />
+                <title>Chia sẻ chemiscare</title>
+                <meta name="description" content="Học tập hóa học thông qua các bài viết, cách cân bằng phương trình, tự học hóa học, cách học hóa học hiệu quả nhất, hóa học dễ hiểu, chemistry, learning chemistry at chemiscare" />
+            </Helmet>
             <div className=" pt-[130px] pb-[90px] bg-[#13161B] relative min-h-[100vh] contentWrapper ">
                 <Navigation currentUser={currentUser} />
                 {isEditorShowThread === true && <CreateThreadComponent handleHideEditorThread={handleHideEditorThread} currentUser={currentUser} currentThread={threads} />}

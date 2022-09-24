@@ -48,6 +48,23 @@ const getPostById = async ( dispatch, id, navigate, page) => {
         navigate('/forum')
     }
 }
+const getPostBySlug = async ( dispatch, slug, navigate, page) => {
+    try {
+        const res = await axios.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/forum/posts/seo/${slug}`)
+        const comments = await axios.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/reaction/comments/${res.data.data._id}?limit=${(page || 1) * 5}`, )
+        const commentReply = comments.data.comments.reduce((previousValue, currentValue) => {
+            return previousValue + currentValue.reply.length
+        }, 0)
+        const allCommentAndReplyCount = comments?.data?.length + commentReply
+        dispatch(setCountComments(allCommentAndReplyCount))
+        dispatch(setComments(comments.data.comments))
+        dispatch(addPostSuccess(res.data.data))
+        console.log('api get ',res.data.data)
+    } catch (err) {
+        notifyErorr(err.response.data.message)
+        navigate('/forum')
+    }
+}
 const getAllThreadApproved = async (dispatch) => {
     try {
 
@@ -158,4 +175,4 @@ const adminDeletePostReal = async (currentUser, axiosJWT, id, socket) => {
 
     }
 }
-export { getAllPostApproved, getAllPost, getAllThreadApproved, getAllThread, adminAprrovedThread, adminDeleteThread, adminDeleteThreadReal, createPostUser, adminAprrovedPost, adminDeletePost, adminDeletePostReal, getPostById }
+export { getAllPostApproved, getAllPost, getAllThreadApproved, getAllThread, adminAprrovedThread, adminDeleteThread, adminDeleteThreadReal, createPostUser, adminAprrovedPost, adminDeletePost, adminDeletePostReal, getPostById,getPostBySlug }

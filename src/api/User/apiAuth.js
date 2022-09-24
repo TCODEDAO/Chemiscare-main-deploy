@@ -41,7 +41,7 @@ const registerUser = async (user, dispatch) => {
 const checkIsAdmin = async (currentUser,dispatch) => {
 
     const res = await axios.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/auth/checkIsAdminChemiscare/${currentUser?._id}`)
-      await  dispatch(checkPermissison(res.data.isAdmin))
+    await dispatch(checkPermissison(res.data.isAdmin))
     return res.data.isAdmin
 
 }

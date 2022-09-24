@@ -14,19 +14,22 @@ import CreateCommentComponent from '../CreateData/CreateCommentComponent';
 import CommentList from '../Comment/CommentList';
 import loadingGif from '../../../../assets/images/gif/noBgLoad.gif'
 
+import {toHex} from 'base64-mongo-id'
 moment.locale('vi')
 const Navigation = lazy(() => import('../../../../components/Navigation/NavigationComponent'))
 const Footer = lazy(() => import('../../../../components/Footer/FooterComponent'))
 function SinglePostComponent() {
-    const { postId } = useParams()
+    const { postSlug } = useParams()
+    const postId =toHex(postSlug.split('-')[postSlug.split('-').length-1])
+    
+
+    
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
     const currentUser = useSelector(state => state?.auth?.login?.currentUser)
     const socket = useSelector(state => state?.socket?.socket)
-    useEffect(() => {
-
-    }, [])
+   
     useEffect(() => {
         setLoading(true)
         getPostById( dispatch, postId, navigate)

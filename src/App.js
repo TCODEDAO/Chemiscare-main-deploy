@@ -24,7 +24,7 @@ function App() {
       checkIsAdmin(currentUser,dispatch)
 
     }
-  },[currentUser])
+  },[])
   return (
     <div className='App'>
 <Helmet>

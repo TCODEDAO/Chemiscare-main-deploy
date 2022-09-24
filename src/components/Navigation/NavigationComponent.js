@@ -1,12 +1,12 @@
-import React, { memo, useEffect, useRef, useState } from 'react'
+import React, { memo,  } from 'react'
 import Avatar from '../Avatar/AvatarComponent'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
 
 import { createAxios } from '../../utils/axiosJWT'
-import { checkIsAdmin, logOutUser } from '../../api/User/apiAuth'
-import { notifyErorr, notifyInfo, notifySuccess } from '../Alert/AlertComponent'
+import {  logOutUser } from '../../api/User/apiAuth'
+import { notifyErorr, notifySuccess } from '../Alert/AlertComponent'
 // import { notifyErorr, notifyInfo, notifySuccess } from '../Alert/AlertComponents'
 import './NavigationComponent.css'
 function NavBarLearnPage({ currentUser }) {
@@ -15,17 +15,11 @@ function NavBarLearnPage({ currentUser }) {
     const navigate = useNavigate()
     const axiosJWT = createAxios(currentUser, dispatch)
     const id = currentUser?._id
-    const [isAdmin, setIsAdmin] = useState(false)
+   
 
+    const isAdmin = useSelector((state) => state?.permission?.isAdmin)
 
-    useEffect(async () => {
-       
-        if (currentUser) {
-            const isAdmin = await checkIsAdmin(currentUser)
-            setIsAdmin(isAdmin)
-        }
-
-    }, [])
+    
     const handleLogOut = async () => {
 
         try {

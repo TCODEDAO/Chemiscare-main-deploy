@@ -7,15 +7,17 @@ import xss from 'xss'
 import { Link } from 'react-router-dom'
 import { createAxios } from '../../../../utils/axiosJWT'
 import Avatar from '../../../../components/Avatar/AvatarComponent'
-
-
+import {toBase64} from 'base64-mongo-id'
 
 moment.locale('vi')
 const loadAnimate = require('../../../../assets/images/gif/noBgLoad.gif')
 
 const PostExcerpt = ({ post, currentUser, socket, axiosJWT }) => {
+   
     const isAdmin = useSelector((state) => state?.permission?.isAdmin)
     const [showBox, setShowBox] = useState(false)
+ const encodePostId = toBase64(post._id)
+ const postSlug = `${post?.slug}-${encodePostId}`
     return (
         <li className="my-[8px] list-none w-[100%] rounded-[16px] p-[24px] border-solid border-[#2a2c34] border-[1px] bg-[#1e2029]" onClick={(e) => {
             e.stopPropagation()
@@ -55,8 +57,8 @@ const PostExcerpt = ({ post, currentUser, socket, axiosJWT }) => {
             </div>
             <div className="mt-[8px] mb-[16px]">
                 <div>
-                    <Link to={`/forum/post/${post?._id}`}><p className="text-[20px] text-white p-white-forum font-[700] hover:text-[#d54253] cursor-pointer">{post?.title}</p></Link>
-                    <Link to={`/forum/post/${post?._id}`}><p className="mt-[4px] text-white p-white-forum leading-[1.6] text-[15px] font-light" dangerouslySetInnerHTML={{ __html: xss(post?.content?.slice(0, 100)) }}></p></Link>
+                    <Link to={`/forum/post/${postSlug}`}><p className="text-[20px] text-white p-white-forum font-[700] hover:text-[#d54253] cursor-pointer">{post?.title}</p></Link>
+                    <Link to={`/forum/post/${postSlug}`}><p className="mt-[4px] text-white p-white-forum leading-[1.6] text-[15px] font-light" dangerouslySetInnerHTML={{ __html: xss(post?.content?.slice(0, 100)) }}></p></Link>
                 </div>
             </div>
             <div className="flex items-center">

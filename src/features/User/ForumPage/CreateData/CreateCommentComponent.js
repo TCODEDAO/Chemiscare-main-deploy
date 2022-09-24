@@ -14,6 +14,7 @@ function CreateCommentComponent({ currentUser, postId, socket, DefaultReply, set
     const handleSendComment = () => {
         if(!currentUser){
             notifyInfo('Bạn cần đăng nhập để tiếp tục bình luận!')
+            return
         }
 
         const data = {
@@ -25,11 +26,11 @@ function CreateCommentComponent({ currentUser, postId, socket, DefaultReply, set
         }
         if (contentComment === '') {
             notifyInfo('Bạn cần thêm thông tin cho bình luận!')
-         
+         return
         }
         if (contentComment.length < 20) {
             notifyInfo('Bình luận của bạn quá ngắn!')
-
+return
         }
 
         socket.emit('CreateCommentFromClient', { data: data, send: send })

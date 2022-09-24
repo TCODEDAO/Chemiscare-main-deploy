@@ -13,6 +13,7 @@ import xss from 'xss'
 import Avatar from '../../../components/Avatar/AvatarComponent'
 import './CensorPost.css'
 import { checkIsAdmin } from '../../../api/User/apiAuth'
+
 const Navigation = lazy(() => import('../../../components/Navigation/NavigationComponent'))
 const Footer = lazy(() => import('../../../components/Footer/FooterComponent'))
 function CensorPost() {
@@ -34,14 +35,14 @@ function CensorPost() {
 
 
         if (currentUser) {
-            const isAdmin = await checkIsAdmin(currentUser)
+            const isAdmin =await checkIsAdmin(currentUser,dispatch)
 
             if (isAdmin === false) {
 
                 navigate('/learn')
                 notifyInfo('Bạn không có quyền truy cập!')
             }
-            getAllThreadApproved(currentUser, dispatch, axiosJWT)
+            getAllThreadApproved(dispatch)
             getAllThread(currentUser, dispatch, axiosJWT)
             getAllPost(currentUser, dispatch, axiosJWT)
         }
@@ -69,7 +70,7 @@ function CensorPost() {
         if (socket) {
             socket.on('RemoveSuccessThreadAdminRealSuccess', msg => {
                 getAllThread(currentUser, dispatch, axiosJWT)
-                getAllThreadApproved(currentUser, dispatch, axiosJWT)
+                getAllThreadApproved(dispatch)
             })
         }
         if (socket) {
@@ -103,10 +104,13 @@ function CensorPost() {
                                     <div className="flex justify-between">
                                         <div className="flex items-center cursor-pointer">
                                             <div className="mr-[4px]">
-                                                {post?.userId?.avatar ? <img className="w-[28px] h-[28px] object-cover rounded-[50%]"
-                                                    src={post?.userId?.avatar}
-                                                    alt="" /> : <Avatar name={post?.fullName}
-                                                        size="28px" />}
+                                            {post?.userId?.avatar ? <img className="w-[28px] h-[28px] object-cover rounded-[50%]" src={post?.userId?.avatar} alt="" /> :  
+                                            <Avatar
+                                                size="50px"
+                                                round="50%"
+                                                textSizeRatio={1.75}
+                                                name={post?.userId?.fullName?.split(' ')[post?.userId?.fullName?.split(' ').length -1]}
+                                            ></Avatar>}
                                             </div>
                                             <p className="font-medium hover:text-[#d54253] text-white">{post?.userId?.fullName}</p>
                                         </div>
@@ -158,7 +162,7 @@ function CensorPost() {
                                                 onClick={() => {
                                                     adminAprrovedThread(currentUser, axiosJWT, thread._id, socket)
                                                     getAllThread(currentUser, dispatch, axiosJWT)
-                                                    getAllThreadApproved(currentUser, dispatch, axiosJWT)
+                                                    getAllThreadApproved(dispatch)
                                                 }}
                                             >Duyệt
                                             </span>
@@ -181,11 +185,11 @@ function CensorPost() {
                                     <div key={thread._id} className="bg-[#fafafa] select-none hover:bg-[#f2f2f2f2] text-[80%] cursor-pointer px-[10px] py-[8px] rounded-[18px] m-[6px] btn btn--action" onClick={() => {
                                         adminDeleteThread(currentUser, axiosJWT, thread._id, socket)
                                         getAllThread(currentUser, dispatch, axiosJWT)
-                                        getAllThreadApproved(currentUser, dispatch, axiosJWT)
+                                        getAllThreadApproved(dispatch)
                                     }}><span onClick={() => {
                                         adminDeleteThread(currentUser, axiosJWT, thread._id, socket)
                                         getAllThread(currentUser, dispatch, axiosJWT)
-                                        getAllThreadApproved(currentUser, dispatch, axiosJWT)
+                                        getAllThreadApproved(dispatch)
                                     }}>{thread.content}</span></div>
                                 ))}
                             </div>

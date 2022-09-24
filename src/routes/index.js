@@ -38,7 +38,7 @@ const publicRoutes = [
     { id: 7, path: '/learn/game/content', index: true, component: ContainerGameComponent },
     { id: 8, path: '/forum', index: true, component: ForumComponent },
     { id: 9, path: '/forum/user/create', index: true, component: CreatePost },
-    { id: 10, path: '/forum/post/:postId', index: true, component: SinglePostComponent },
+    { id: 10, path: '/forum/post/:postSlug', index: true, component: SinglePostComponent },
     { id: 11, path: '/user/userPage', index: true, component: UserPage },
     { id: 12, path: '/user/userPage/:userId', index: true, component: AnotherPage },
 
