@@ -13,6 +13,7 @@ import xss from 'xss'
 import Avatar from '../../../components/Avatar/AvatarComponent'
 import './CensorPost.css'
 import { checkIsAdmin } from '../../../api/User/apiAuth'
+import { toBase64 } from 'base64-mongo-id'
 
 const Navigation = lazy(() => import('../../../components/Navigation/NavigationComponent'))
 const Footer = lazy(() => import('../../../components/Footer/FooterComponent'))
@@ -86,6 +87,7 @@ function CensorPost() {
         }
 
     }, [socket])
+  
     return (
         <>
             <div className="pt-[130px] pb-[90px] bg-[#13161B] relative min-h-[100vh] contentWrapper">
@@ -99,7 +101,10 @@ function CensorPost() {
                     <div className="w-full flex">
                         <ul className="flex flex-col justify-start w-[60%]">
 
-                            {postsListNotApproved?.map(post => (
+                            {postsListNotApproved?.map(post => {
+                                  const encodePostId = toBase64(post._id)
+                                  const postSlug = `${post?.slug}-${encodePostId}`
+                                return(
                                 <li key={post._id} className="my-[8px] w-[100%] rounded-[16px] p-[24px] border-solid border-[#2a2c34] border-[1px] bg-[#1e2029]">
                                     <div className="flex justify-between">
                                         <div className="flex items-center cursor-pointer">
@@ -129,13 +134,13 @@ function CensorPost() {
                                     <div className="mt-[16px] flex">
                                         <div>
                                             <p className="text-[20px] font-[700] hover:text-[#d54253] text-white cursor-pointer" onClick={() => {
-                                                navigate(`/forum/post/${post?._id}`)
+                                                navigate(`/forum/post/${postSlug}`)
                                             }}>{post?.title}</p>
                                             <p className="mt-[4px] leading-[1.6] text-[15px] text-white font-light" dangerouslySetInnerHTML={{ __html: xss(post?.content?.slice(0, 100)) }}></p>
                                         </div>
                                     </div>
                                 </li>
-                            ))}
+)})}
                             {threadListNotAprroved?.map(thread => (
                                 <li key={thread._id}
                                     className="my-[8px] w-[100%] rounded-[16px] p-[24px] border-solid border-[#2a2c34] border-[1px] bg-[#1e2029]">
