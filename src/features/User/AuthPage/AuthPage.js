@@ -150,7 +150,7 @@ export default function AuthPage() {
                                 required
                             />
                             <i
-                                className="far fa-eye"
+                                className="fa-solid fa-eye"
                                 id="togglePasswordSignUp"
                                 style={{
                                     marginLeft: '250px',
@@ -168,7 +168,16 @@ export default function AuthPage() {
                                             ? 'text'
                                             : 'password'
                                     password.setAttribute('type', type)
-                                    e.target.classList.toggle('fa-eye-slash')
+                                    if(password.getAttribute('type') ===
+                                    'text'){
+                                        e.target.classList.remove('fa-solid','fa-eye')
+                                        e.target.classList.add('fa-solid','fa-eye-slash')
+
+                                    }else{
+                                        e.target.classList.remove('fa-solid','fa-eye-slash')
+                                        e.target.classList.add('fa-solid','fa-eye')
+
+                                    }
                                 }}
                             ></i>
 
@@ -224,7 +233,7 @@ export default function AuthPage() {
                                 }
                             />
                             <i
-                                className="far fa-eye"
+                                className="fa-solid fa-eye"
                                 id="togglePasswordSignIn"
                                 style={{
                                     marginLeft: '250px',
@@ -242,7 +251,16 @@ export default function AuthPage() {
                                             ? 'text'
                                             : 'password'
                                     password.setAttribute('type', type)
-                                    e.target.classList.toggle('fa-eye-slash')
+                                    if(password.getAttribute('type') ===
+                                    'text'){
+                                        e.target.classList.remove('fa-solid','fa-eye')
+                                        e.target.classList.add('fa-solid','fa-eye-slash')
+
+                                    }else{
+                                        e.target.classList.remove('fa-solid','fa-eye-slash')
+                                        e.target.classList.add('fa-solid','fa-eye')
+
+                                    }
                                 }}
                             ></i>
                             {/* <a href="#" className=" hover:text-[#ff4b2b] hover:text-decoration-line">Quên tài khoản của bạn?</a> */}

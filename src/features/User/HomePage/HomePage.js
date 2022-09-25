@@ -19,7 +19,7 @@ export default function HomePage() {
             strings: [
                 'Học hóa miễn phí',
                 'Học hóa dễ dàng',
-                'Tăng trình độ hóa học của bạn',
+                'Học hóa cho người mất gốc',
             ],
             startDelay: 350,
             typeSpeed: 300,
@@ -40,6 +40,8 @@ export default function HomePage() {
         <>
             <Helmet>
                 <title>Bắt đầu với Chemiscare</title>
+                <meta name="description" content="Học hóa miễn phí nâng cao cơ bản cho người mất gốc." />
+                <meta name='keywords' content='CHEMISCARE, hóa học, học hóa mất gốc, mất gốc, chemistry, học miễn phí, diễn đàn'/>
             </Helmet>
             <Favicon url={favicon} />
             <div className="h-[100vh] bg-[#F6EBDC] flex">
@@ -121,7 +123,7 @@ export default function HomePage() {
                     </div>
                     <div className="px-[60px] self-center title">
                         <h1 className="text-[60px] font-extrabold leading-[70px] mainTitle" ><span ref={elSpan}> Tăng trình độ hóa học của bạn</span>tại Chemiscare</h1>
-                        <span className="my-5 block">Chemiscare là một diễn đàn, nơi có những bài thi về hóa học, là sự lựa chọn tuyệt vời để giải đáp các thắc mắc và luyện trình độ hóa học cho tất cả các cấp học</span>
+                        <span className="my-5 block">Chemiscare là một diễn đàn, nơi có những bài thi về hóa học miễn phí, là sự lựa chọn tuyệt vời để giải đáp các thắc mắc và luyện trình độ hóa học cho tất cả các cấp học</span>
                         <a href="# "><button className="w-[200px] h-[50px] bg-[#ff4b2b] hover:bg-[#ff5d41] text-white rounded-[30px] font-bold" onClick={handleRedirect}>Bắt Đầu Miễn Phí</button></a>
                     </div>
                     <div className="h-[80px] grow bg-[#ECDDCB] mx-[-5px]  flex flex-col px-[60px] self-end footer">
