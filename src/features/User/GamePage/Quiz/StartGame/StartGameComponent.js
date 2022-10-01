@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getQuestionAndAnswers } from '../../../../../api/User/apiQuestion'
 import { createAxios } from '../../../../../utils/axiosJWT'
 import { notifyInfo } from '../../../../../components/Alert/AlertComponent'
+import favicon from '../../../../../assets/images/icons/learnFavicon.ico'
 
 export default function HomeComponent() {
     const dispatch = useDispatch()
@@ -28,7 +29,7 @@ export default function HomeComponent() {
 
         fixNavigate.addEventListener('click', (e) => {
             ripplesAnimateBtn(e.target, e)
-            timeOut1 = setTimeout(() => navigate('/learn/game/content'), 2000)
+            timeOut1 = setTimeout(() => navigate('/learn/game/content'), 600)
         })
         fixRectangle.addEventListener('load', () => {
             timeOut2 = setTimeout(() => {
@@ -75,7 +76,8 @@ export default function HomeComponent() {
         >
             <Helmet>
                 <title>Quiz</title>
-                <meta name="robots" content="noindex" />
+                <link rel="shortcut icon" href={favicon} type="image/x-icon" />
+                <meta name="robots" content="index,follow" />
             </Helmet>
 
             <div className=" w-[940px] min-h-[350px] py-[30px] px-[38px] rounded-[16px] bg-white shadow-[0_0_50px_0_rgba(0,0,0,0.2)]">

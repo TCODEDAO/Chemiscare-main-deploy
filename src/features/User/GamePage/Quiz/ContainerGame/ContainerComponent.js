@@ -11,11 +11,9 @@ import { questionsReturn } from './renderData'
 import { timeIncrease } from '../../../../../redux/User/QuizSlice'
 import { createNewResultQuiz } from '../../../../../api/User/apiQuestion'
 import { createAxios } from '../../../../../utils/axiosJWT'
+import { playSound } from '../../../../../utils/playSound'
 
-function playSound(url) {
-    var a = new Audio(url);
-    a.play();
-}
+
 export default function QuestionComponent() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -23,11 +21,16 @@ export default function QuestionComponent() {
     const timePlay = useSelector(state => state?.quiz?.time?.counter)
     const task = useSelector(state => state?.quiz?.task?.currentTask)
 
+    
+
     //LoadingToGame
+    const [playThemeSound,setPlayThemeSound] = useState(false)
     const [isCountDown, setIsCountDown] = useState(true)
     const [flip, setFlip] = useState(false)
     const [isQuizCount, setIsQuizCount] = useState(false)
     const [quizNumberCount, setQuizNumberCount] = useState(0)
+  const [quizCorrectCount,setQuizCorrectCount] = useState(0)
+const [prevQuizCorrectCount,setPrevQuizCorrectCount] = useState(0)
     const [stylesloadingToGame, apiloadingToGame] = useSpring(() => ({
         to: { opacity: 1 },
         from: { opacity: 0 },
@@ -48,7 +51,8 @@ export default function QuestionComponent() {
                 apiloadingToGame.pause()
                 setIsCountDown(false)
                 setIsQuizCount(true)
-            }, 1000)
+                setPlayThemeSound(true)
+            }, 400)
 
 
         }
@@ -62,10 +66,10 @@ export default function QuestionComponent() {
         intervalId = setInterval(() => {
             if (timeLeft !== 'Bắt đầu') {
 
+               
                 setTimeLeft(timeLeft - 1)
-
             }
-        }, 1000)
+        }, 1600)
 
         return () => {
             clearTimeout(showStartTimeOut)
@@ -104,7 +108,9 @@ export default function QuestionComponent() {
     useEffect(() => {
         let hideQuizCount
         if (isQuizCount && quizNumberCount < 11) {
-            setQuizNumberCount(quizNumberCount + 1)
+            setQuizNumberCount((prevState)=>{
+               return prevState + 1
+            })
             hideQuizCount = setTimeout(() => {
                 setIsQuizCount(false)
             }, 500)
@@ -145,8 +151,23 @@ export default function QuestionComponent() {
 
     const refQuestion = useRef(null)
 
-    useEffect(async () => {
+    useEffect(()=>{
+    let counter = 1;
+      let soundrepeat =  setInterval(async() => {
+          if(counter > 1){
+            clearInterval(soundrepeat)
+            return false
+          }
+      await playSound(`Counter`)
+        counter++
+      }, 800);
 
+      return ()=>{
+        clearInterval(soundrepeat)
+      }
+    },[])
+    useEffect(async () => {
+     
         if (!currentUser) {
             notifyInfo('Bạn cần đăng nhập để vào học!')
             navigate('/auth')
@@ -214,8 +235,12 @@ export default function QuestionComponent() {
         }
     }, [counter])
 
+    
     return (
         <>
+
+        {playThemeSound && <audio className='hidden' autoPlay loop src="https://github.com/TCODEDAO/upload-an-image-chemiscare-user/blob/main/NhacNenChemiscare.mp3?raw=true"></audio>}
+        
             {isLandScape === true ? <div className='requestRotate'>Bạn cần xoay ngang màn hình để hoc!</div> :
                 <>
 
@@ -225,12 +250,8 @@ export default function QuestionComponent() {
 
                                 ...stylesloadingToGame
                             }
-                            } className="text-9xl">{renderNumber && renderNumber}
-                                {
-                                    playSound("https://github.com/TCODEDAO/upload-an-image-chemiscare-user/blob/main/104026230-%5BAudioTrimmer.com%5D%20(1).mp3?raw=true")
-                                }
-
-
+                            } className="text-9xl">
+                                {renderNumber && renderNumber}
                             </animated.span>
                         </div>
 
@@ -239,7 +260,7 @@ export default function QuestionComponent() {
                                 ...style
                             }} className='h-screen w-screen fixBgGame bg-no-repeat bg-cover bg-[#191a28] relative' >
 
-                                <audio className='hidden' autoPlay loop src="https://github.com/TCODEDAO/upload-an-image-chemiscare-user/blob/main/NhacNenChemiscare.mp3?raw=true"></audio>
+                               
                                 <ScoreComponent min={minutes.current} sec={sec.current} level={task} />
                                 <div className="gradientBoxQuestion  flex justify-center">
                                     <div className='gradientBoxQuestionContent flex justify-center items-center'>
@@ -247,7 +268,16 @@ export default function QuestionComponent() {
                                     </div>
                                 </div>
 
-                                <AnswerComponent nextQuestion={nextQuestion} correctAnswer={refQuestion.current[quizNumberCount]?.correctAnswer} answerList={refQuestion?.current[quizNumberCount]?.answers} />
+                                <AnswerComponent 
+                                nextQuestion={nextQuestion} 
+                                quizNumberCount={quizNumberCount}
+                                setQuizCorrectCount={setQuizCorrectCount}
+                                quizCorrectCount={quizCorrectCount}
+                                answerList={refQuestion?.current[quizNumberCount]?.answers} 
+                                correctAnswer={refQuestion.current[quizNumberCount]?.correctAnswer} 
+                                prevQuizCorrectCount={prevQuizCorrectCount}
+                                setPrevQuizCorrectCount = {setPrevQuizCorrectCount}
+                                />
 
                                 <div className="progress">
                                     <div className="progress-done" style={{ width: `${quizNumberCount * 10}%` }} >

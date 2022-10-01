@@ -7,6 +7,7 @@ import { animated, useTransition, config } from '@react-spring/web'
 import { notifyInfo } from '../../../../../components/Alert/AlertComponent'
 import { clearDataToNewRound } from '../../../../../redux/User/QuizSlice'
 import './EndComponent.css'
+import { playSound } from '../../../../../utils/playSound'
 const canvasStyles = {
     position: 'fixed',
     pointerEvents: 'none',
@@ -29,6 +30,7 @@ export default function Realistic() {
             notifyInfo('Bạn cần đăng nhập để vào học!')
             navigate('/auth')
         }
+        playSound('Victory')
     }, [])
     const refAnimationInstance = useRef(null)
 

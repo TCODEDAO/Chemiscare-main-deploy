@@ -7,12 +7,44 @@ import React, {
 } from 'react'
 import { useDispatch } from 'react-redux'
 import { socreIncrease } from '../../../../../redux/User/QuizSlice'
+import { playSound } from '../../../../../utils/playSound'
 
 
-function AnswerComponent({ nextQuestion, answerList, correctAnswer }) {
+function AnswerComponent({ 
+    nextQuestion,
+    answerList,
+    correctAnswer,
+    quizNumberCount,
+    setQuizCorrectCount,
+    quizCorrectCount,
+    prevQuizCorrectCount,
+    setPrevQuizCorrectCount
+ }) {
     const dispatch = useDispatch()
     const [answerChoice, setAnswerChoice] = useState(null)
-
+    const musics = {
+            correct:{
+                firstBlood:'firstBlood',
+                doubleKill:'doubleKill',
+                tripleKill:'tripleKill',
+                quadKill:'quadKill',
+                megaKill:'megaKill',
+                secondKill:'2ndKill',
+                thirdKill:'3rdKill',
+                fourthKill:'4thKill',
+                fifthKill:'5thKill',
+                sixthKill:'6thKill',
+                sevenKill:'7thKill'
+            },
+            wrong:{
+                dead:'dead',
+                shutDown:'shutDown'
+            },
+            theme:{
+                winner:'Victory'
+            }
+        }
+       
     useEffect(() => {
         let delayNextQuestion
         if (answerChoice) {
@@ -23,6 +55,34 @@ function AnswerComponent({ nextQuestion, answerList, correctAnswer }) {
                 answerChoiceLowerCase.localeCompare(correctAnswerLowerCase) ===
                 0
             if (isCorrectChoiceAnswer) {
+                setPrevQuizCorrectCount(quizCorrectCount)
+                setQuizCorrectCount(quizCorrectCount+=1)
+                //sound play logic
+               
+                
+                if(quizCorrectCount === quizNumberCount){
+                    if(quizCorrectCount >=6){
+                        playSound(musics.correct.sevenKill)
+                        return
+                    }
+                    playSound( Object.values( musics.correct)[quizCorrectCount-1])
+                   
+                }else{
+                   if(quizNumberCount > 4){
+                       playSound(Object.values(musics.correct)[quizNumberCount])   
+                   }else{
+                    playSound(musics.correct.secondKill)
+                   }
+                }
+                
+                
+
+
+
+
+                
+
+
                 dispatch(socreIncrease())
             }
             delayNextQuestion = setTimeout(() => {
@@ -30,6 +90,7 @@ function AnswerComponent({ nextQuestion, answerList, correctAnswer }) {
             }, 2000)
             return
         }
+        
 
         return () => {
             clearTimeout(delayNextQuestion)
@@ -59,6 +120,21 @@ function AnswerComponent({ nextQuestion, answerList, correctAnswer }) {
                 // answerChoice.style.visibility = 'hiden'
 
                 if (answerChoiceDom.getAttribute('data-id') == answerChoice) {
+                    if( answerChoiceLowerCase?.localeCompare(correctAnswerLowerCase) !== 0){
+                        setQuizCorrectCount(0)
+
+                        if(prevQuizCorrectCount > 2){
+                            playSound(musics.wrong.shutDown)
+                            setPrevQuizCorrectCount(0)
+                        }else{
+                            const randomSong = Object.values(musics.wrong)[Math.round(Math.random()*1)]
+                            playSound(randomSong)
+                            setPrevQuizCorrectCount(0)
+
+                        }
+                        
+
+                    }
                     Object.assign(answerChoiceDom.style, {
                         opacity: '1',
                         visibility: 'visible',
@@ -67,7 +143,7 @@ function AnswerComponent({ nextQuestion, answerList, correctAnswer }) {
                                 correctAnswerLowerCase,
                             ) === 0
                                 ? '#2ecc71'
-                                : '#e74c3c',
+                                :'#e74c3c'
                     })
                 } else {
                     Object.assign(answerChoiceDom.style, {
@@ -79,6 +155,10 @@ function AnswerComponent({ nextQuestion, answerList, correctAnswer }) {
             })
         }
     }, [answerChoice])
+    
+console.log('quizCorrectCount >>>',quizCorrectCount);
+console.log('prevquizCorrectCount >>>',prevQuizCorrectCount);
+    
     return (
         <div className="z-1 relative top-[38%] place-items-center w-screen grid grid-cols-[1fr_1fr]  responsiveAnswerBoxGroup gap-y-[10px]">
             <div
