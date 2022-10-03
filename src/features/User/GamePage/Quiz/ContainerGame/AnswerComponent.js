@@ -63,9 +63,10 @@ function AnswerComponent({
                 if(quizCorrectCount === quizNumberCount){
                     if(quizCorrectCount >=6){
                         playSound(musics.correct.sevenKill)
-                        return
+                    }else{
+
+                        playSound( Object.values( musics.correct)[quizCorrectCount-1])
                     }
-                    playSound( Object.values( musics.correct)[quizCorrectCount-1])
                    
                 }else{
                    if(quizNumberCount > 4){
@@ -75,14 +76,7 @@ function AnswerComponent({
                    }
                 }
                 
-                
-
-
-
-
-                
-
-
+            
                 dispatch(socreIncrease())
             }
             delayNextQuestion = setTimeout(() => {
@@ -156,8 +150,6 @@ function AnswerComponent({
         }
     }, [answerChoice])
     
-console.log('quizCorrectCount >>>',quizCorrectCount);
-console.log('prevquizCorrectCount >>>',prevQuizCorrectCount);
     
     return (
         <div className="z-1 relative top-[38%] place-items-center w-screen grid grid-cols-[1fr_1fr]  responsiveAnswerBoxGroup gap-y-[10px]">

@@ -43,6 +43,7 @@ const quizSlice = createSlice({
             state.time.counter = state.time.counter + 1
         },
         setRound: (state, action) => {
+            console.log(action.payload);
             state.round.currentRound = action.payload
         },
         setTask: (state, action) => {
@@ -57,7 +58,6 @@ const quizSlice = createSlice({
         clearDataToNewRound: (state) => {
             state.score.currentScore = 0
             state.time.counter = 0
-            state.task.currentTask = 0
 
         },
         setResultAllUser: (state, action) => {

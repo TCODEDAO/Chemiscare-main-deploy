@@ -20,7 +20,7 @@ export default function QuestionComponent() {
     const score = useSelector(state => state?.quiz?.score?.currentScore)
     const timePlay = useSelector(state => state?.quiz?.time?.counter)
     const task = useSelector(state => state?.quiz?.task?.currentTask)
-
+const currentRound = useSelector(state=>state?.quiz?.round?.currentRound)
     
 
     //LoadingToGame
@@ -122,7 +122,7 @@ const [prevQuizCorrectCount,setPrevQuizCorrectCount] = useState(0)
             createNewResultQuiz(currentUser, axiosJWT, {
                 score: score,
                 time: timePlay,
-                round: 1,
+                round: currentRound,
                 task: task,
                 isCompleteRender: true,
             })
