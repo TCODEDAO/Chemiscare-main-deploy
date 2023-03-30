@@ -65,6 +65,18 @@ const getPostBySlug = async ( dispatch, slug, navigate, page) => {
         navigate('/forum')
     }
 }
+const editPost = async(currentUser,axiosJWT,postId,data)=>{
+    try {
+    const res = await axiosJWT.patch(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/forum/posts/edit/${postId}`,data, {
+            headers: { token: `Bearer ${currentUser?.accessToken}` },
+        })
+      console.log(res);
+    } catch (err) {
+        console.log(err);
+        notifyErorr('ok')
+    }
+}
+
 const getAllThreadApproved = async (dispatch) => {
     try {
 
@@ -116,6 +128,7 @@ const adminAprrovedThread = async (currentUser, axiosJWT, id, socket) => {
     }
 }
 
+
 const adminDeleteThread = async (currentUser, axiosJWT, id, socket) => {
     try {
         const res = await axiosJWT.patch(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/forum/thread/delete/${id}`, currentUser, {
@@ -124,7 +137,7 @@ const adminDeleteThread = async (currentUser, axiosJWT, id, socket) => {
         socket.emit('RemoveSuccessThreadAdmin', res.data)
     } catch (err) {
         notifyErorr(err.response.data.message)
-
+        
     }
 }
 const adminDeleteThreadReal = async (currentUser, axiosJWT, id, socket) => {
@@ -135,7 +148,7 @@ const adminDeleteThreadReal = async (currentUser, axiosJWT, id, socket) => {
         socket.emit('RemoveSuccessThreadAdminReal', res.data)
     } catch (err) {
         notifyErorr(err.response.data.message)
-
+        
     }
 }
 
@@ -149,7 +162,7 @@ const adminAprrovedPost = async (currentUser, axiosJWT, id, socket) => {
         socket.emit('ApprovedSuccessPostAdminFromClient', res.data)
     } catch (err) {
         notifyErorr(err.response.data.message)
-
+        
     }
 }
 
@@ -161,7 +174,7 @@ const adminDeletePost = async (currentUser, axiosJWT, id, socket) => {
         socket.emit('RemoveSuccessPostAdminFromClient', res.data)
     } catch (err) {
         notifyErorr(err.response.data.message)
-
+        
     }
 }
 const adminDeletePostReal = async (currentUser, axiosJWT, id, socket) => {
@@ -172,7 +185,7 @@ const adminDeletePostReal = async (currentUser, axiosJWT, id, socket) => {
         socket.emit('RemoveSuccessPostAdminReal', res?.data)
     } catch (err) {
         notifyErorr(err.response.data.message)
-
+        
     }
 }
-export { getAllPostApproved, getAllPost, getAllThreadApproved, getAllThread, adminAprrovedThread, adminDeleteThread, adminDeleteThreadReal, createPostUser, adminAprrovedPost, adminDeletePost, adminDeletePostReal, getPostById,getPostBySlug }
+export { getAllPostApproved, getAllPost,editPost, getAllThreadApproved, getAllThread, adminAprrovedThread, adminDeleteThread, adminDeleteThreadReal, createPostUser, adminAprrovedPost, adminDeletePost, adminDeletePostReal, getPostById,getPostBySlug }

@@ -21,7 +21,7 @@ const ContainerGameComponent = lazy(() => import('../features/User/GamePage/Quiz
 const ForumComponent = lazy(() => import('../features/User/ForumPage/ForumPage'))
 //Posts
 const SinglePostComponent = lazy(() => import("../features/User/ForumPage/SinglePost/SinglePostComponent"))
-
+const EditPostComponent = lazy(()=>import("../features/User/ForumPage/EditData/EditPostComponent"))
 
 //Admin
 const QuestionComponentManagement = lazy(() => import('../features/Admin/QuestionManagementPage/QuestionComponentManagement'))
@@ -38,6 +38,7 @@ const publicRoutes = [
     { id: 7, path: '/learn/game/content', index: true, component: ContainerGameComponent },
     { id: 8, path: '/forum', index: true, component: ForumComponent },
     { id: 9, path: '/forum/user/create', index: true, component: CreatePost },
+    { id: 9, path: '/forum/user/posts/edit/:postSlug', index: true, component: EditPostComponent },
     { id: 10, path: '/forum/post/:postSlug', index: true, component: SinglePostComponent },
     { id: 11, path: '/user/userPage', index: true, component: UserPage },
     { id: 12, path: '/user/userPage/:userId', index: true, component: AnotherPage },
