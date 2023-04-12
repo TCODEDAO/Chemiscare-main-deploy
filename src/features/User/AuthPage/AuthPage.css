@@ -2,7 +2,7 @@ html {
     font-family: 'Roboto', sans-serif;
 }
 
-.body {
+.bodyAuth {
     width: 100vw;
     height: 100vh;
     display: flex;

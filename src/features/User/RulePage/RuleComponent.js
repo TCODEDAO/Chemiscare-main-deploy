@@ -5,20 +5,23 @@ import { useSelector } from 'react-redux'
 import './RuleComponent.css'
 
 
-const Navigation = lazy(() => import('../../../components/Navigation/NavigationComponent'))
+const Header = lazy(() => import('../../../components/Header/HeaderComponent'))
 const Footer = lazy(() => import('../../../components/Footer/FooterComponent'))
+const Nav = lazy(() => import('../../../components/Navigation/NavigationComponent'))
+
 export default function Celebrate() {
     const currentUser = useSelector((state) => state.auth.login.currentUser)
 
     return (
         <>
-            <div className="pt-[130px] pb-[90px] bg-[#13161B] relative min-h-[100vh] contentWrapper">
-                <Navigation currentUser={currentUser} />
+            <div>
+                <Header currentUser={currentUser} />
+                <div className="flex mt-[100px] w-[90%] mb-[8px]">
+                    <Nav />
 
-                <div className="max-w-[1092px] w-[100%] mx-auto content">
-                    <div className="text-[#fafafa]">
+                    <div className="m-4">
                         <div className="mb-[20px]">
-                            <p>Bạn đang dự thi khối {currentUser?.detailUserInfomation?.grade}</p>
+                            <p className='mb-[16px] text-[24px] font-bold board_title'>Bạn đang dự thi khối {currentUser?.detailUserInfomation?.grade}</p>
                             <p>
                                 <span className="font-bold opacity-[0.8]">Lưu ý:</span>
                                 Bạn sẽ hoàn thành bài thi thử khi trả lời tất cả các câu hỏi trong đề thi

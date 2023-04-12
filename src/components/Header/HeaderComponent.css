@@ -1,0 +1,350 @@
+/* html {
+    font-family: 'Nunito', sans-serif;
+} */
+/* .logo_text {
+    font-family: "Lobster" !important;
+    font-weight: 900;
+}
+
+
+.top_100-8 {
+    top: calc(100% + 8px);
+}
+
+.avt ul {
+    transform-origin: top right;
+    animation: scale ease-in 0.1s;
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.avt:hover ul {
+    display: block;
+}
+
+.avt ul::before {
+    content: '';
+    height: 8px;
+    position: absolute;
+    top: -8px;
+    left: 0;
+    right: 0;
+}
+
+html {
+    font-family: 'Roboto', sans-serif;
+}
+
+.top_100-8 {
+    top: calc(100% + 8px);
+}
+
+.avt ul {
+    transform-origin: top right;
+    animation: scale ease-in 0.1s;
+}
+
+.navIcon ul {
+    animation: scale ease-in 0.1s;
+    transform-origin: top right;
+}
+
+.navIcon:hover ul {
+    display: flex;
+}
+
+.boder-bot {
+    position: relative;
+}
+
+.boder-bot::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    border-bottom: 1px solid #fafafa;
+    width: 80%;
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.avt:hover ul {
+    display: block;
+}
+
+.avt ul::before {
+    content: "";
+    height: 8px;
+    position: absolute;
+    top: -8px;
+    left: 0;
+    right: 0;
+}
+
+ */
+
+
+/* new */
+/* .footer,
+.user_menu_userName,
+.board_title {
+    font-family: "Roboto";
+}
+
+.nav_item.active {
+    color: #000 !important;
+}
+
+.nav_item.active:hover {
+    background: transparent;
+}
+
+.search_bar::placeholder {
+    color: #777777;
+    font-weight: 300;
+} */
+
+body {
+    font-family: "Nunito";
+    color: #1a1a1a;
+}
+
+.header {
+    box-shadow: 0 2px 4px 0 rgb(219, 219, 219);
+}
+
+.logo_text {
+    font-family: "Lobster";
+    font-weight: 900;
+}
+
+::selection {
+    background: #1473e6;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    background-color: #E0F2FE;
+    overflow: overlay;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #38B6FF;
+    border-radius: 4px;
+}
+.footer,
+.user_menu_userName,
+.board_title {
+    font-family: "Roboto";
+}
+
+.search_bar::placeholder {
+    color: #777777;
+    font-weight: 300;
+}
+
+
+
+.board {
+    box-shadow: 1px 2px 4px rgb(219, 219, 219);
+}
+
+.user_menu {
+    top: calc(100% + 8px);
+    box-shadow: 2px 4px 10px rgb(146, 146, 146);
+}
+
+.tutorial_start_wrapper {
+    right: calc(100% + 32px);
+}
+
+.tutorial_start_wrapper {
+    box-shadow: 2px 4px 10px rgb(146, 146, 146);
+}
+
+.border_top {
+    border-top: 1px solid #e8e8e8;
+}
+
+
+@keyframes surfing {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes appear {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translateY(-4px);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+.theme_mode_dark{
+    transition: all ease-in 0.1s;
+}
+.darkmode{
+    background: #13161B;
+    color: #fff;
+}
+.darkmode .header{
+    background: #1f232b;
+    box-shadow: 0px 0px 0px 0px #000;
+    border-width: 0px;
+}
+.darkmode  .board_col_header,
+.darkmode .slider_background{
+    background: #353945;
+}
+.darkmode .user_menu{
+    background: #3D4048;
+    box-shadow: 0px 0px 0px 0px #000;
+}
+.darkmode .user_menu_item:hover{
+    color: #ddd;
+}
+.darkmode .board{
+    border-color: #51535a;
+    box-shadow: 0px 0px 0px 0px #000;
+}
+.darkmode .search_bar_wrapper{
+    border-color: #ccc;
+}
+.darkmode .search_icon{
+    color: #ccc;
+}
+
+.darkmode .search_bar::placeholder{
+    color: #ccc
+}
+
+@media screen and (max-width: 900px) {
+    .partRight,
+    .suggestedTopic,
+    .header_signUp_btn,
+    .logo_text_onHeader,
+    .viewMyRank_btn {
+        display: none;
+    }
+    .nav_open_btn{
+        display: inline;
+    }
+    .change_theme_mode_btn {
+        margin-right: 16px;
+    }
+
+    .body {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 8px;
+    }
+
+    .body>div {
+        margin: 0;
+    }
+
+    .footer>ul {
+        display: block;
+    }
+
+    .footer>ul li:nth-child(2) {
+        margin: 32px 0;
+    }
+
+    .footer>ul li {
+        width: 100%;
+    }
+
+    .footer {
+        padding: 32px;
+    }
+    .listPost{
+        width: 100%;
+    }
+    .partLeft{
+        width: 100%;
+    }
+    .comment_Content{
+        width: 90%;
+        padding: 16px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .suggestedTopic,
+    .slider_modal,
+    .search_bar_wrapper,
+    .logo_text_onHeader,
+    .viewMyRank_btn {
+        display: none;
+    }
+
+    .change_theme_mode_btn {
+        margin-right: 16px;
+    }
+
+    .body {
+        width: 100%;
+    }
+
+    .footer>ul {
+        display: block;
+        margin-bottom: 64px;
+    }
+
+    .footer>ul li:nth-child(2) {
+        margin: 32px 0;
+    }
+
+    .slider_text {
+        margin: 0;
+    }
+
+    .slider_text p:nth-child(1) {
+        font-size: 40px;
+    }
+
+    .footer {
+        padding: 16px;
+    }
+
+    .slider_background {
+        height: 100%;
+    }
+    .listPost{
+        width: 100%;
+    }
+}

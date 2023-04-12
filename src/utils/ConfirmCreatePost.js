@@ -24,7 +24,7 @@ function ConfirmCreatePost({ handleSubmitPost, handleHideConfirm }) {
     )
     useEffect(() => {
         if (currentUser) {
-            getAllThreadApproved(currentUser, dispatch, axiosJWT)
+            getAllThreadApproved(dispatch)
         }
     }, [])
     const handleSetThreadSelect = (e) => {
@@ -46,7 +46,7 @@ function ConfirmCreatePost({ handleSubmitPost, handleHideConfirm }) {
     useEffect(() => {
         if (socket) {
             socket.on('ApprovedSuccessThread', () => {
-                getAllThreadApproved(currentUser, dispatch, axiosJWT)
+                getAllThreadApproved(dispatch)
             })
         }
 

@@ -1,93 +1,108 @@
-html {
-    font-family: 'Roboto', sans-serif;
+.darkmode .nav_item{
+    color: #ccc;
+}
+.darkmode .nav_item:hover{
+    color: #1a1a1a;
+}
+.active {
+    color: #000 !important;
 }
 
-.top_100-8 {
-    top: calc(100% + 8px);
+.active:hover {
+    background: transparent;
 }
-
-.avt ul {
-    transform-origin: top right;
-    animation: scale ease-in 0.1s;
+.nav_item_wrapper {
+    transition: all ease-in 0.1s;
 }
-
-@keyframes scale {
-    0% {
-        transform: scale(0);
+.nav_onTablet {
+    background: rgba(0, 0, 0, 0.4);
+    
+}
+.nav_onTablet ul{
+    animation: surfing-reverse ease-in 0.05s;
+}   
+.darkmode .nav_onTablet ul{
+    background: #3D4048;
+}
+@media screen and (max-width: 900px) {
+    .header_signUp_btn,
+    .logo_text_onHeader,
+    .viewMyRank_btn {
+        display: none;
+    }
+    .nav_open_btn{
+        display: inline;
+    }
+    .change_theme_mode_btn {
+        margin-right: 16px;
     }
 
-    100% {
-        transform: scale(1);
-    }
-}
-
-.avt:hover ul {
-    display: block;
-}
-
-.avt ul::before {
-    content: '';
-    height: 8px;
-    position: absolute;
-    top: -8px;
-    left: 0;
-    right: 0;
-}
-
-html {
-    font-family: 'Roboto', sans-serif;
-}
-
-.top_100-8 {
-    top: calc(100% + 8px);
-}
-
-.avt ul {
-    transform-origin: top right;
-    animation: scale ease-in 0.1s;
-}
-
-.navIcon ul {
-    animation: scale ease-in 0.1s;
-    transform-origin: top right;
-}
-
-.navIcon:hover ul {
-    display: flex;
-}
-
-.boder-bot {
-    position: relative;
-}
-
-.boder-bot::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 0;
-    border-bottom: 1px solid #fafafa;
-    width: 80%;
-}
-
-@keyframes scale {
-    0% {
-        transform: scale(0);
+    .body {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 8px;
     }
 
-    100% {
-        transform: scale(1);
+    .body>div {
+        margin: 0;
+    }
+
+    .footer>ul {
+        display: block;
+    }
+
+    .footer>ul li:nth-child(2) {
+        margin: 32px 0;
+    }
+
+    .footer>ul li {
+        width: 100%;
+    }
+
+    .footer {
+        padding: 32px;
     }
 }
 
-.avt:hover ul {
-    display: block;
-}
+@media screen and (max-width: 500px) {
 
-.avt ul::before {
-    content: "";
-    height: 8px;
-    position: absolute;
-    top: -8px;
-    left: 0;
-    right: 0;
+    .slider_modal,
+    .search_bar_wrapper,
+    .logo_text_onHeader,
+    .viewMyRank_btn {
+        display: none;
+    }
+
+    .change_theme_mode_btn {
+        margin-right: 16px;
+    }
+
+    .body {
+        width: 100%;
+    }
+
+    .footer>ul {
+        display: block;
+        margin-bottom: 64px;
+    }
+
+    .footer>ul li:nth-child(2) {
+        margin: 32px 0;
+    }
+
+    .slider_text {
+        margin: 0;
+    }
+
+    .slider_text p:nth-child(1) {
+        font-size: 40px;
+    }
+
+    .footer {
+        padding: 16px;
+    }
+
+    .slider_background {
+        height: 100%;
+    }
 }

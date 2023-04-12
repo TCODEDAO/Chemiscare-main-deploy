@@ -2,7 +2,7 @@
 import axios from 'axios'
 import { notifyErorr, notifySuccess } from '../../components/Alert/AlertComponent'
 import { adminGetPostsSuccess, adminGetThreadSuccess } from '../../redux/Admin/ForumManagementSlice'
-import { addPostSuccess, getPostFailed, getPostStart, getPostSuccess, getThreadSuccess,  } from '../../redux/User/PostSlice'
+import { addPostSuccess, getPostFailed, getPostStart, getPostSuccess, getThreadSuccess, } from '../../redux/User/PostSlice'
 import { setComments, setCountComments } from '../../redux/User/ReactionSlice'
 
 
@@ -32,10 +32,10 @@ const getAllPostApproved = async (dispatch) => {
     }
 }
 
-const getPostById = async ( dispatch, id, navigate, page) => {
+const getPostById = async (dispatch, id, navigate, page) => {
     try {
         const res = await axios.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/forum/posts/${id}`)
-        const comments = await axios.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/reaction/comments/${id}?limit=${(page || 1) * 5}`, )
+        const comments = await axios.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/reaction/comments/${id}?limit=${(page || 1) * 5}`,)
         const commentReply = comments.data.comments.reduce((previousValue, currentValue) => {
             return previousValue + currentValue.reply.length
         }, 0)
@@ -48,10 +48,10 @@ const getPostById = async ( dispatch, id, navigate, page) => {
         navigate('/forum')
     }
 }
-const getPostBySlug = async ( dispatch, slug, navigate, page) => {
+const getPostBySlug = async (dispatch, slug, navigate, page) => {
     try {
         const res = await axios.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/forum/posts/seo/${slug}`)
-        const comments = await axios.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/reaction/comments/${res.data.data._id}?limit=${(page || 1) * 5}`, )
+        const comments = await axios.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/reaction/comments/${res.data.data._id}?limit=${(page || 1) * 5}`,)
         const commentReply = comments.data.comments.reduce((previousValue, currentValue) => {
             return previousValue + currentValue.reply.length
         }, 0)
@@ -59,23 +59,23 @@ const getPostBySlug = async ( dispatch, slug, navigate, page) => {
         dispatch(setCountComments(allCommentAndReplyCount))
         dispatch(setComments(comments.data.comments))
         dispatch(addPostSuccess(res.data.data))
-        console.log('api get ',res.data.data)
+        console.log('api get ', res.data.data)
     } catch (err) {
         notifyErorr(err.response.data.message)
         navigate('/forum')
     }
 }
-const editPost = async(currentUser,axiosJWT,postId,data)=>{
-    try {
-    const res = await axiosJWT.patch(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/forum/posts/edit/${postId}`,data, {
-            headers: { token: `Bearer ${currentUser?.accessToken}` },
-        })
-      console.log(res);
-    } catch (err) {
-        console.log(err);
-        notifyErorr('ok')
-    }
-}
+// const editPost = async (currentUser, axiosJWT, postId, data) => {
+//     try {
+//         const res = await axiosJWT.patch(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/forum/posts/edit/${postId}`, data, {
+//             headers: { token: `Bearer ${currentUser?.accessToken}` },
+//         })
+//         console.log(res);
+//     } catch (err) {
+//         console.log(err);
+//         notifyErorr('ok')
+//     }
+// }
 
 const getAllThreadApproved = async (dispatch) => {
     try {
@@ -137,7 +137,7 @@ const adminDeleteThread = async (currentUser, axiosJWT, id, socket) => {
         socket.emit('RemoveSuccessThreadAdmin', res.data)
     } catch (err) {
         notifyErorr(err.response.data.message)
-        
+
     }
 }
 const adminDeleteThreadReal = async (currentUser, axiosJWT, id, socket) => {
@@ -148,7 +148,7 @@ const adminDeleteThreadReal = async (currentUser, axiosJWT, id, socket) => {
         socket.emit('RemoveSuccessThreadAdminReal', res.data)
     } catch (err) {
         notifyErorr(err.response.data.message)
-        
+
     }
 }
 
@@ -162,7 +162,7 @@ const adminAprrovedPost = async (currentUser, axiosJWT, id, socket) => {
         socket.emit('ApprovedSuccessPostAdminFromClient', res.data)
     } catch (err) {
         notifyErorr(err.response.data.message)
-        
+
     }
 }
 
@@ -174,7 +174,7 @@ const adminDeletePost = async (currentUser, axiosJWT, id, socket) => {
         socket.emit('RemoveSuccessPostAdminFromClient', res.data)
     } catch (err) {
         notifyErorr(err.response.data.message)
-        
+
     }
 }
 const adminDeletePostReal = async (currentUser, axiosJWT, id, socket) => {
@@ -185,7 +185,7 @@ const adminDeletePostReal = async (currentUser, axiosJWT, id, socket) => {
         socket.emit('RemoveSuccessPostAdminReal', res?.data)
     } catch (err) {
         notifyErorr(err.response.data.message)
-        
+
     }
 }
-export { getAllPostApproved, getAllPost,editPost, getAllThreadApproved, getAllThread, adminAprrovedThread, adminDeleteThread, adminDeleteThreadReal, createPostUser, adminAprrovedPost, adminDeletePost, adminDeletePostReal, getPostById,getPostBySlug }
+export { getAllPostApproved, getAllPost, getAllThreadApproved, getAllThread, adminAprrovedThread, adminDeleteThread, adminDeleteThreadReal, createPostUser, adminAprrovedPost, adminDeletePost, adminDeletePostReal, getPostById, getPostBySlug }

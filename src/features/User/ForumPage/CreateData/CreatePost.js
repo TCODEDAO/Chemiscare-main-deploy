@@ -17,7 +17,7 @@ import { createAxios } from '../../../../utils/axiosJWT';
 
 
 // Lazy
-const Navigation = lazy(() => import('../../../../components/Navigation/NavigationComponent'))
+const Header = lazy(() => import('../../../../components/Header/HeaderComponent'))
 const Footer = lazy(() => import('../../../../components/Footer/FooterComponent'))
 
 export default function CreatePost() {
@@ -113,7 +113,7 @@ export default function CreatePost() {
     return (
         <>
 
-            <Navigation currentUser={currentUser} />
+            <Header currentUser={currentUser} />
 
             <div className='h-full w-full relative mt-[70px]'>
                 {isConfirmSubmitShow && <ConfirmCreatePost handleSubmitPost={handleSubmitPost} handleHideConfirm={handleHideConfirm} />}

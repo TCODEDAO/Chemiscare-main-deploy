@@ -14,7 +14,7 @@ const loginUser = async (user, dispatch, navigate) => {
         )
         dispatch(loginSuccess(res.data))
         notifySuccess(res.data.message)
-        navigate('/learn')
+        navigate(-1)
     } catch (err) {
         dispatch(loginFailed())
         notifyErorr(err.response.data.message)
@@ -38,7 +38,7 @@ const registerUser = async (user, dispatch) => {
 
     }
 }
-const checkIsAdmin = async (currentUser,dispatch) => {
+const checkIsAdmin = async (currentUser, dispatch) => {
 
     const res = await axios.get(`${process.env.REACT_APP_URL_API_REQUEST}/api/v1/auth/checkIsAdminChemiscare/${currentUser?._id}`)
     await dispatch(checkPermissison(res.data.isAdmin))

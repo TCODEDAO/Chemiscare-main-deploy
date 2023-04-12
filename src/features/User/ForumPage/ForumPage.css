@@ -1,183 +1,327 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    font-family: "Roboto", sans-serif;
-
-}
-
-.p-white-forum {
-    color: white;
-}
-
-::selection {
-    background: #d54253;
-}
-
-::-moz-selection {
-    background: #d54253;
-}
-
-::-webkit-selection {
-    background: #d54253;
-}
-
-.top_100-8 {
-    top: calc(100% + 8px);
-}
-
-.avt ul {
-    transform-origin: top right;
-    animation: scale ease-in 0.1s;
-}
-
-.navIcon ul {
-    animation: scale ease-in 0.1s;
-    transform-origin: top right;
-}
-
-.navIcon:hover ul {
-    display: flex;
-}
-
-@media screen and (max-width: 1070px) {
-    .nav {
-        display: none;
-    }
-
-    .navIcon {
-        display: block;
-    }
-
-    .bodyWrapper {
-        padding: 0 8px;
-    }
-
-    .suggestedTopic {
-        display: none;
-    }
-
-    .listPost {
-        width: 100%;
-    }
-}
-
-@media screen and (min-width: 741px) and (max-width: 1070px) {
-    .postWriterWrapper {
-        width: 70%;
-    }
-
-    .postListWrapper {
-        width: 70%;
-    }
-
-    .textFooterCenter {
-        display: none;
-    }
-
-    .contentFooter {
-        justify-content: space-around;
-    }
-}
-
-@media screen and (max-width: 740px) {
-
-    .searchIcon,
-    .socialFooter,
-    .textFooterCenter {
-        display: none;
-    }
-
-    .contentFooter {
-        justify-content: center;
-    }
-
-    .container {
-        height: 100vh;
-    }
-
-    .postWriterWrapper {
-        width: 100%;
-    }
-
-    .postListWrapper {
-        width: 100%;
-    }
-
-    .bodyWrapper {
-        padding: 0 8px;
-    }
-
-    .commentTime {
+    /* * {
         margin: 0;
-        display: block;
+        padding: 0;
+        box-sizing: border-box;
     }
 
-    .suggestedTopic {
-        display: none;
+    html {
+        font-family: "Roboto", sans-serif;
+
     }
 
-    .listPost {
-        width: 100%;
+    .p-white-forum {
+        color: white;
     }
 
-    .itemPostContent {
-        display: block;
+    ::selection {
+        background: #d54253;
     }
 
-    .itemPostContent_img {
-        width: 100%;
-        margin-top: 8px;
-    }
-}
-
-@media screen and (max-width: 320px) {
-    .avt {
-        margin-left: 8px;
+    ::-moz-selection {
+        background: #d54253;
     }
 
-    .logoIcon {
-        font-size: 36px;
+    ::-webkit-selection {
+        background: #d54253;
     }
 
-    .logoName {
-        font-size: 32px;
+    .top_100-8 {
+        top: calc(100% + 8px);
     }
 
-    .navIcon {
-        font-size: 32px !important;
+    .avt ul {
+        transform-origin: top right;
+        animation: scale ease-in 0.1s;
     }
 
-    .postReact {
-        justify-content: space-between;
-    }
-}
-
-@media screen and (max-width: 280px) {
-    .logoIcon {
-        font-size: 36px;
+    .navIcon ul {
+        animation: scale ease-in 0.1s;
+        transform-origin: top right;
     }
 
-    .logoName {
-        font-size: 26px;
+    .navIcon:hover ul {
+        display: flex;
     }
 
-    .navIcon {
-        font-size: 24px !important;
+    @media screen and (max-width: 1070px) {
+        .nav {
+            display: none;
+        }
+
+        .navIcon {
+            display: block;
+        }
+
+        .bodyWrapper {
+            padding: 0 8px;
+        }
+
+        .suggestedTopic {
+            display: none;
+        }
+
+        .listPost {
+            width: 100%;
+        }
     }
 
-    .postWriterAdd {
-        font-size: 13px;
+    @media screen and (min-width: 741px) and (max-width: 1070px) {
+        .postWriterWrapper {
+            width: 70%;
+        }
+
+        .postListWrapper {
+            width: 70%;
+        }
+
+        .textFooterCenter {
+            display: none;
+        }
+
+        .contentFooter {
+            justify-content: space-around;
+        }
     }
 
-    .postReact {
-        font-size: 14px;
+    @media screen and (max-width: 740px) {
+
+        .searchIcon,
+        .socialFooter,
+        .textFooterCenter {
+            display: none;
+        }
+
+        .contentFooter {
+            justify-content: center;
+        }
+
+        .container {
+            height: 100vh;
+        }
+
+        .postWriterWrapper {
+            width: 100%;
+        }
+
+        .postListWrapper {
+            width: 100%;
+        }
+
+        .bodyWrapper {
+            padding: 0 8px;
+        }
+
+        .commentTime {
+            margin: 0;
+            display: block;
+        }
+
+        .suggestedTopic {
+            display: none;
+        }
+
+        .listPost {
+            width: 100%;
+        }
+
+        .itemPostContent {
+            display: block;
+        }
+
+        .itemPostContent_img {
+            width: 100%;
+            margin-top: 8px;
+        }
     }
 
-    .postInf {
-        font-size: 12px;
+    @media screen and (max-width: 320px) {
+        .avt {
+            margin-left: 8px;
+        }
+
+        .logoIcon {
+            font-size: 36px;
+        }
+
+        .logoName {
+            font-size: 32px;
+        }
+
+        .navIcon {
+            font-size: 32px !important;
+        }
+
+        .postReact {
+            justify-content: space-between;
+        }
     }
-}
+
+    @media screen and (max-width: 280px) {
+        .logoIcon {
+            font-size: 36px;
+        }
+
+        .logoName {
+            font-size: 26px;
+        }
+
+        .navIcon {
+            font-size: 24px !important;
+        }
+
+        .postWriterAdd {
+            font-size: 13px;
+        }
+
+        .postReact {
+            font-size: 14px;
+        }
+
+        .postInf {
+            font-size: 12px;
+        }
+    } */
+
+
+    /* new */
+
+    body {
+        font-family: "Nunito";
+        color: #1a1a1a;
+    }
+
+    .header {
+        box-shadow: 0 2px 4px 0 rgb(219, 219, 219);
+    }
+
+    .logo_text {
+        font-family: "Lobster";
+        font-weight: 900;
+    }
+
+    ::selection {
+        background: #1473e6;
+    }
+
+    ::-webkit-scrollbar {
+        width: 6px;
+        background-color: #E0F2FE;
+        overflow: overlay;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #38B6FF;
+        border-radius: 4px;
+    }
+
+    .footer,
+    .user_menu_userName,
+    .board_title {
+        font-family: "Roboto";
+    }
+
+    .search_bar::placeholder {
+        color: #777777;
+        font-weight: 300;
+    }
+
+    .nav_item.active {
+        color: #000 !important;
+    }
+
+    .nav_item.active:hover {
+        background: transparent;
+    }
+
+    .nav_item_wrapper {
+        transition: all ease-in 0.1s;
+    }
+
+    .board {
+        box-shadow: 1px 2px 4px rgb(219, 219, 219);
+    }
+
+    .user_menu {
+        top: calc(100% + 8px);
+        box-shadow: 2px 4px 10px rgb(146, 146, 146);
+    }
+
+    .tutorial_start_wrapper {
+        right: calc(100% + 32px);
+    }
+
+    .tutorial_start_wrapper {
+        box-shadow: 2px 4px 10px rgb(146, 146, 146);
+    }
+
+    .border_top {
+        border-top: 1px solid #e8e8e8;
+    }
+
+
+    .theme_mode_dark {
+        transition: all ease-in 0.1s;
+    }
+
+    body.darkmode {
+        background: #13161B;
+        color: #fff;
+    }
+
+    .darkmode .header {
+        background: #1f232b;
+        box-shadow: 0px 0px 0px 0px #000;
+        border-width: 0px;
+    }
+
+    .darkmode .board_col_header,
+    .darkmode .slider_background {
+        background: #353945;
+    }
+
+    .darkmode .user_menu {
+        background: #3D4048;
+        box-shadow: 0px 0px 0px 0px #000;
+    }
+
+    .darkmode .user_menu_item:hover {
+        color: #ddd;
+    }
+
+    .darkmode .board {
+        border-color: #51535a;
+        box-shadow: 0px 0px 0px 0px #000;
+    }
+
+    .darkmode .search_bar_wrapper {
+        border-color: #ccc;
+    }
+
+    .darkmode .search_icon {
+        color: #ccc;
+    }
+
+    .darkmode .nav_item {
+        color: #ccc;
+    }
+
+    .darkmode .nav_item:hover {
+        color: #1a1a1a;
+    }
+
+    .darkmode .search_bar::placeholder {
+        color: #ccc
+    }
+    .darkmode .post{
+        background: #1f232b;
+    }
+    .darkmode .post_suggested_topic{
+        background: #E0F2FE;
+    }
+    .darkmode .post_suggested_topic:hover{
+        background: #e9f6ff;
+    }

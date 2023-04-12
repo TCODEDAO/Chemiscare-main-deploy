@@ -98,7 +98,7 @@ export default function AuthPage() {
             <Favicon url={favicon} />
 
 
-            <div className="body">
+            <div className="bodyAuth">
 
                 <div
                     ref={divContainerRef}
@@ -168,14 +168,14 @@ export default function AuthPage() {
                                             ? 'text'
                                             : 'password'
                                     password.setAttribute('type', type)
-                                    if(password.getAttribute('type') ===
-                                    'text'){
-                                        e.target.classList.remove('fa-solid','fa-eye')
-                                        e.target.classList.add('fa-solid','fa-eye-slash')
+                                    if (password.getAttribute('type') ===
+                                        'text') {
+                                        e.target.classList.remove('fa-solid', 'fa-eye')
+                                        e.target.classList.add('fa-solid', 'fa-eye-slash')
 
-                                    }else{
-                                        e.target.classList.remove('fa-solid','fa-eye-slash')
-                                        e.target.classList.add('fa-solid','fa-eye')
+                                    } else {
+                                        e.target.classList.remove('fa-solid', 'fa-eye-slash')
+                                        e.target.classList.add('fa-solid', 'fa-eye')
 
                                     }
                                 }}
@@ -251,14 +251,14 @@ export default function AuthPage() {
                                             ? 'text'
                                             : 'password'
                                     password.setAttribute('type', type)
-                                    if(password.getAttribute('type') ===
-                                    'text'){
-                                        e.target.classList.remove('fa-solid','fa-eye')
-                                        e.target.classList.add('fa-solid','fa-eye-slash')
+                                    if (password.getAttribute('type') ===
+                                        'text') {
+                                        e.target.classList.remove('fa-solid', 'fa-eye')
+                                        e.target.classList.add('fa-solid', 'fa-eye-slash')
 
-                                    }else{
-                                        e.target.classList.remove('fa-solid','fa-eye-slash')
-                                        e.target.classList.add('fa-solid','fa-eye')
+                                    } else {
+                                        e.target.classList.remove('fa-solid', 'fa-eye-slash')
+                                        e.target.classList.add('fa-solid', 'fa-eye')
 
                                     }
                                 }}

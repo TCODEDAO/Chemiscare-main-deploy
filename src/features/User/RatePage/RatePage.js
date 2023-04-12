@@ -1,24 +1,66 @@
-import React, { useEffect } from 'react'
+import React, { lazy, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { notifyInfo } from '../../../components/Alert/AlertComponent'
 
 import './RatePage.css'
-import Navigation from '../../../components/Navigation/NavigationComponent'
-import Footer from '../../../components/Footer/FooterComponent'
+
+
 import { getAllResultAndSort } from '../../../api/User/apiResult'
 import { createAxios } from '../../../utils/axiosJWT'
 
 import 'moment/locale/vi'
 import moment from 'moment'
-
+import { useState } from 'react'
+const Header = lazy(() => import('../../../components/Header/HeaderComponent'))
+const Footer = lazy(() => import('../../../components/Footer/FooterComponent'))
+const Nav = lazy(() => import('../../../components/Navigation/NavigationComponent'))
 moment.locale('vi')
 function RatePage() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const results = useSelector(state => state?.quiz?.resultAllUser)
 
-    console.log(results);
+
+    const [resultRender, setResultRender] = useState({
+        name: [],
+        class: [],
+        school: [],
+        scores: [],
+        times: [],
+    })
+    useEffect(() => {
+        results.forEach((item, index) => {
+            setResultRender((prev) => {
+                return {
+                    name: [...prev.name, item?.userId?.fullName],
+                    times: [...prev.times, item.currentTime],
+                    scores: [...prev.scores, item.currentPoint],
+                    school: [...prev.school, item?.userId?.detailUserInfomation?.location?.school],
+                    class: [...prev.class, item?.userId?.detailUserInfomation?.class],
+
+                }
+            })
+
+
+        })
+        return () => {
+            setResultRender(() => {
+                return {
+                    name: [],
+                    times: [],
+                    scores: [],
+                    school: [],
+                    class: [],
+
+                }
+            })
+        }
+    }, [results])
+
+
+
+
     const currentUser = useSelector((state) => state?.auth?.login?.currentUser)
     const axiosJWT = createAxios(currentUser, dispatch)
     useEffect(async () => {
@@ -43,9 +85,9 @@ function RatePage() {
         }
     }, [])
     return (
-        <div className="pt-[130px] pb-[90px] bg-[#13161B] relative min-h-[100vh] contentWrapper">
-            <Navigation currentUser={currentUser} />
-            <div className="max-w-[1092px] w-[100%] mx-auto">
+        <div className="">
+            <Header currentUser={currentUser} />
+            {/* <div className="max-w-[1092px] w-[100%] mx-auto">
                 <div className="flex justify-between flex-wrap">
                     <div className="boardWrapper w-[100%] boardTest">
                         <p className="text-white font-bold text-2xl leading-5 mb-[20px]">Xếp hạng cá nhân qua các vòng thi</p>
@@ -71,6 +113,49 @@ function RatePage() {
                                     </div>
                                 ))}
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div> */}
+            <div className="flex mt-[100px] w-[90%] mb-[8px]">
+                <Nav />
+                <div className="ml-[40px] w-full pb-[64px]">
+                    <div className="mt-[32px]">
+                        <p className="text-[24px] mb-[16px] font-bold board_title mr-[4px]">
+                            Bảng xếp hạng khối: {currentUser?.detailUserInfomation?.grade}
+                        </p>
+                        <div className="board board_rank flex border-solid border-[1px] border-[#e8e8e8] rounded-[6px] font-bold overflow-hidden w-full">
+                            <ul className="w-[25%]">
+                                <li className="h-[60px] flex items-center justify-center bg-[#E0F2FE] board_col_header">TÊN</li>
+
+                                {resultRender.name.map((name, index) => {
+                                    return <li key={index} className="h-[60px] flex items-center justify-center p-[2px] board_col_item">{name}</li>
+                                })}
+                            </ul>
+                            {/* <ul className="grow">
+                                <li className="h-[60px] flex items-center justify-center bg-[#E0F2FE] board_col_header">LỚP</li>
+                                {resultRender.class.map((item, index) => {
+                                    return <li key={index} className="h-[60px] flex items-center justify-center p-[2px] board_col_item">{item}</li>
+                                })}
+                            </ul> */}
+                            <ul className="w-[25%]">
+                                <li className="h-[60px] flex items-center justify-center bg-[#E0F2FE] board_col_header">TRƯỜNG</li>
+                                {resultRender.school.map((item, index) => {
+                                    return <li key={index} className="h-[60px] flex items-center justify-center p-[2px] board_col_item">{item}</li>
+                                })}
+                            </ul>
+                            <ul className="w-[25%]">
+                                <li className="h-[60px] flex items-center justify-center bg-[#E0F2FE] board_col_header">ĐIỂM</li>
+                                {resultRender.scores.map((item, index) => {
+                                    return <li key={index} className="h-[60px] flex items-center justify-center p-[2px] board_col_item">{item}</li>
+                                })}
+                            </ul>
+                            <ul className="w-[25%]">
+                                <li className="h-[60px] flex items-center justify-center bg-[#E0F2FE] board_col_header">THỜI GIAN</li>
+                                {resultRender.times.map((item, index) => {
+                                    return <li key={index} className="h-[60px] flex items-center justify-center p-[2px] board_col_item">{item} giây</li>
+                                })}
+                            </ul>
                         </div>
                     </div>
                 </div>

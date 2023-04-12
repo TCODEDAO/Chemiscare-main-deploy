@@ -1,204 +1,148 @@
-import React, { memo,  } from 'react'
-import Avatar from '../Avatar/AvatarComponent'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
+import "./NavigationComponent.css"
+import { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
+function NavigationComponent() {
 
-import { createAxios } from '../../utils/axiosJWT'
-import {  logOutUser } from '../../api/User/apiAuth'
-import { notifyErorr, notifySuccess } from '../Alert/AlertComponent'
-// import { notifyErorr, notifyInfo, notifySuccess } from '../Alert/AlertComponents'
-import './NavigationComponent.css'
-function NavBarLearnPage({ currentUser }) {
-    const accessToken = currentUser?.accessToken
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const axiosJWT = createAxios(currentUser, dispatch)
-    const id = currentUser?._id
-   
+    const $ = document.querySelector.bind(document)
+    useEffect(() => {
 
-    const isAdmin = useSelector((state) => state?.permission?.isAdmin)
-
-    
-    const handleLogOut = async () => {
-
-        try {
-            logOutUser(dispatch, navigate, accessToken, axiosJWT, id)
-            notifySuccess('Đăng xuất thành công!')
-        } catch {
-            notifyErorr('Đăng xuất không thành công!')
+        let OffsetTop
+        if ($('.nav_item.active') === null) {
+            $('.nav_item_wrapper').style.top = `358px`;
+            return
         }
-        return
+        if ($('.nav_item.active').offsetTop == false) {
+            if (window.location.pathname === '/learn') {
+                OffsetTop = 70
+                return
+            }
+            if (window.location.pathname === '/forum') {
+                OffsetTop = 358
+                return
+            }
+            if (window.location.pathname.includes('/forum/post')) {
+                OffsetTop = 358
+                return
+            }
+
+        } else {
+            OffsetTop = $('.nav_item.active').offsetTop
+        }
+        $('.nav_item_wrapper').style.top = `${OffsetTop}px`;
+
+    }, [])
+    const getNavLinkClass = (path) => {
+        return window.location.pathname === path ? 'active' : '';
     }
 
+    const navigate = useNavigate()
     return (
+        <div>
+            <nav className="nav_main">
+                <ul className="p-[16px] flex flex-col items-center sticky left-0 top-[100px] navigation-react-tour">
+                    <Link to='/forum'>
+                        <li className="w-[44px] h-[44px] flex items-center justify-center mb-[8px] bg-[#1473e6] rounded-[50%] border-[#1473e6] border-solid border-[1px] text-[#fff] cursor-pointer">
+                            <i className="fa-solid fa-plus"></i>
+                        </li>
+                    </Link>
 
-        <div className="fixed h-[70px] bg-[#1f232b] top-0 left-0 right-0 z-[99] navigation-react-tour">
-            <div className="max-w-[1092px] w-[100%] h-full flex items-center justify-between mx-auto">
-                <Link to="/" className="flex items-center">
-                    <i className="fa-solid fa-atom text-[40px] text-white mr-1 logoIcon"></i>
-                    <span className="font-bold text-[36px] text-white logoName ml-1">
-                        Chemiscare
-                    </span>
-                </Link>
-                <ul className="flex justify-center grow nav">
-                    <li className="" >
-                        <Link
-                            className="p-4 text-[18px] text-[#868991] hover:text-[#d54253]"
-                            to="/learn"
-                        >
-                            <i className="fas fa-graduation-cap"></i>
-                            <span className="pl-1">Học tập</span>
-                        </Link>
+
+                    <li
+                        className={` ${getNavLinkClass("/learn")} flex z-10 items-center justify-center flex-col text-[#404040] w-[68px] h-[68px] rounded-[16px] hover:bg-[#e8f6ff] hover:text-[#1a1a1a] my-[2px] cursor-pointer nav_item`}
+                        onClick={() => navigate('/learn')}
+                    >
+                        <i className="fa-solid fa-house text-[18px] mb-[4px]"></i>
+                        <p className="text-[12px] nav_title font-bold">Home</p>
                     </li>
-                    <li className="" >
-                        <Link
-                            className="p-4 text-[18px] text-[#868991] hover:text-[#d54253]"
-                            to="/forum"
-                        >
-                            <i className="fa-solid fa-people-group"></i>
-                            <span className="pl-1">Diễn Đàn</span>
-                        </Link>
+                    <li
+                        className={` ${getNavLinkClass("/celebrate")} flex z-10 items-center justify-center flex-col text-[#404040] w-[68px] h-[68px] rounded-[16px] hover:bg-[#e8f6ff] hover:text-[#1a1a1a] my-[2px] cursor-pointer nav_item`}
+                        onClick={() => navigate('/celebrate')}
+                    >
+
+                        <i className="fa-solid fa-calendar text-[18px] mb-[4px]"></i>
+                        <p className="text-[12px] nav_title font-bold">Lịch</p>
+
                     </li>
-                    <li className="">
-                        <Link
-                            className="p-4 text-[18px] text-[#868991] hover:text-[#d54253]"
-                            to="/celebrate"
-                        >
-                            <i className="fa-solid fa-calendar"></i>
-                            <span className="pl-1">Lịch Thi</span>
-                        </Link>
+                    <li
+                        className={` ${getNavLinkClass("/rules")} flex z-10 items-center justify-center flex-col text-[#404040] w-[68px] h-[68px] rounded-[16px] hover:bg-[#e8f6ff] hover:text-[#1a1a1a] my-[2px] cursor-pointer nav_item`}
+                        onClick={() => navigate('/rules')}
+                    >
+                        <i className="fa-solid fa-scale-balanced text-[18px] mb-[4px]"></i>
+                        <p className="text-[12px] nav_title font-bold">Thể lệ</p>
                     </li>
-                    <li className="" >
-                        <Link
-                            className="p-4 text-[18px] text-[#868991] hover:text-[#d54253]"
-                            to="/rules"
-                        >
-                            <i className="fa-solid fa-scale-balanced"></i>
-                            <span className="pl-1">Thể Lệ</span>
-                        </Link>
+                    <li
+                        className={` ${getNavLinkClass("/learn/rate")} flex z-10 items-center justify-center flex-col text-[#404040] w-[68px] h-[68px] rounded-[16px] hover:bg-[#e8f6ff] hover:text-[#1a1a1a] my-[2px] cursor-pointer nav_item`}
+                        onClick={() => navigate('/learn/rate')}
+                    >
+                        <i className="fa-solid fa-ranking-star text-[18px] mb-[4px]"></i>
+                        <p className="text-[12px] nav_title font-bold">Hạng</p>
                     </li>
-                    <li>
-                        <Link to="/learn/rate" className=" text-[#868991] text-[18px] hover:text-[#d54253]">
-                            <i className="fa-solid fa-ranking-star"></i>
-                            <span className="pl-1">Xếp Hạng</span>
-                        </Link>
+                    <li
+                        className={` ${getNavLinkClass("/forum")} flex z-10 items-center justify-center flex-col text-[#404040] w-[68px] h-[68px] rounded-[16px] hover:bg-[#e8f6ff] hover:text-[#1a1a1a] my-[2px] cursor-pointer nav_item`}
+                        onClick={() => navigate('/forum')}
+                    >
+                        <i className="fa-solid fa-circle-question text-[18px] mb-[4px]"></i>
+                        <p className="text-[12px] nav_title font-bold">Bài viết</p>
                     </li>
+                    <span className={`      nav_item_wrapper w-[68px] h-[68px] bg-[#E0F2FE] rounded-[16px] absolute`}></span>
                 </ul>
-                <div className="flex items-center">
-                    <div className="relative navIcon hidden">
-                        <i className="fa-solid fa-bars text-[30px]  hover:text-[#d54253] text-[#868991]"></i>
-                        <ul className="justify-between grow absolute top-[100%] right-1 flex-col bg-[#3d4048] text-white rounded-[4px] hidden">
-                            <li className="w-[200px]" >
-                                <Link
-                                    className="px-6 block py-4 boder-bot hover:text-[#d54253]"
-                                    to="/learn"
-                                >
-                                    <i className="text-[18px] fas fa-graduation-cap"></i>
-                                    <span className="text-sm text-[16px] pl-1">
-                                        Học tập
-                                    </span>
-                                </Link>
-                            </li>
-                            <li className="w-[200px]" >
-                                <Link
-                                    className="px-6 block py-4 boder-bot hover:text-[#d54253]"
-                                    to="/forum"
-                                >
-                                    <i className="text-[18px] fa-solid fa-people-group"></i>
-                                    <span className="text-sm text-[16px] pl-1">
-                                        Diễn Đàn
-                                    </span>
-                                </Link>
-                            </li>
-                            <li className="w-[200px]" >
-                                <Link
-                                    className="px-6 block py-4 boder-bot hover:text-[#d54253]"
-                                    to="/learn/rate"
-                                >
-                                    <i className="text-[18px] fa-solid fa-ranking-star  "></i>
-                                    <span className="text-sm text-[16px] pl-1">
-                                        Xếp Hạng
-                                    </span>
-                                </Link>
-                            </li>
-                            <li className="w-[200px]">
-                                <Link
-                                    className="px-6 block py-4 boder-bot hover:text-[#d54253]"
-                                    to="/celebrate"
-                                >
-                                    <span className="text-sm text-[16px]">
-                                        <i className="text-[18px] fa-solid fa-calendar  "></i>
-                                        <span className='pl-1'>Lịch Thi</span>
-                                    </span>
-                                </Link>
-                            </li>
-                            <li className="w-[200px]" >
-                                <Link
-                                    className="px-6 block py-4 boder-bot hover:text-[#d54253]"
-                                    to='/rules'
-                                >
-                                    <i className="text-[18px] fa-solid fa-scale-balanced"></i>
-                                    <span className="text-sm text-[16px] pl-1">
-                                        Thể Lệ
-                                    </span>
-                                </Link>
-                            </li>
+            </nav >
 
-                        </ul>
-                    </div>
-                    {/* <!-- <span className="cursor-pointer px-5 text-[18px] text-[#868991] hover:text-[#d54253]">Đăng nhập</span> */}
-                    {/* <span className="cursor-pointer px-5 py-[10px] text-[18px] text-[#000] rounded-[9px] bg-white hover:bg-[#fafafa]">Đăng ký</span> --> */}
-                  {currentUser ?  <div className="text-white relative cursor-pointer w-[40px] h-[40px] ml-5 bg-[#B8BCC6] rounded-[50%] text-[22px] items-center justify-center flex hover:bg-[#D44253]  avt">
-                        <Avatar
-                            size="50px"
-                            round="50%"
-                            textSizeRatio={1.75}
-                            name={currentUser?.fullName}
-                        ></Avatar>
-                        <ul className="absolute top_100-8 min-w-[200px] bg-[#3D4048] right-0 text-[18px] px-8 text-white py-4 font-normal rounded-[9px] hidden z-10">
-                            <li className="flex py-2 border-b-[1px] border-[#51535a] border-solid items-center">
-                                <div>
-                                    <span className="cursor-pointer w-[40px] h-[40px] bg-[#D44253] rounded-[50%] text-[22px] items-center justify-center flex font-light mr-1">
-                                        <span className="hidden">S</span>
-                                        <Avatar
-                                            name={currentUser?.fullName}
-                                            size="40px"
-                                        ></Avatar>
-                                    </span>
-                                </div>
-                                <span className="leading-[20px] text-[16px]">
-                                    <span className="hover:text-[#d54253] min-w-[100px] block">
-                                        {currentUser?.fullName}
-                                    </span>
-                                    {/* <span className="cursor-text text-[12px] text-[#868991] overflow-hidden block max-w-[200px] min-w-[150px]">@gmail.com</span> */}
-                                </span>
-                            </li>
 
-                            <li className={`py-2 hover:text-[#d54253]  border-[#51535a] border-solid`}>
-                                <Link to="/learn/rate">Xếp hạng của tôi</Link>
-                            </li>
-                            <li className={`py-2 hover:text-[#d54253] ${isAdmin === false && "border-b-[1px]"} border-[#51535a] border-solid`}>
-                                <Link to="/user/userPage">Trang cá nhân</Link>
-                            </li>
-                            {isAdmin && <li className={`py-2 hover:text-[#d54253] `}>
-                                <Link to="/admin/question">Quản lí câu hỏi</Link>
-                            </li>}
-                            {isAdmin && <li className={`py-2 hover:text-[#d54253] border-b-[1px] border-[#51535a] border-solid`}>
-                                <Link to="/admin/forum/posts">Quản lí bài viết</Link>
-                            </li>}
-                            <li
-                                className="py-2 hover:text-[#d54253]"
-                                onClick={handleLogOut}
-                            >
-                                Đăng xuất
-                            </li>
-                        </ul>
-                    </div> : <button>Đăng nhập</button>} 
-                </div>
-            </div>
+
+            <nav className="fixed top-0 bottom-0 left-0 right-0 z-[100] nav_onTablet hidden">
+                <ul className="p-[16px] flex flex-col items-center sticky left-0 top-[100px] navigation-react-tour">
+                    <Link to='/forum'>
+                        <li className="w-[44px] h-[44px] flex items-center justify-center mb-[8px] bg-[#1473e6] rounded-[50%] border-[#1473e6] border-solid border-[1px] text-[#fff] cursor-pointer">
+                            <i className="fa-solid fa-plus"></i>
+                        </li>
+                    </Link>
+
+
+                    <li
+                        className={` ${getNavLinkClass("/learn")} flex z-10 items-center justify-center flex-col text-[#404040] w-[68px] h-[68px] rounded-[16px] hover:bg-[#e8f6ff] hover:text-[#1a1a1a] my-[2px] cursor-pointer nav_item`}
+                        onClick={() => navigate('/learn')}
+                    >
+                        <i className="fa-solid fa-house text-[18px] mb-[4px]"></i>
+                        <p className="text-[12px] nav_title font-bold">Home</p>
+                    </li>
+                    <li
+                        className={` ${getNavLinkClass("/celebrate")} flex z-10 items-center justify-center flex-col text-[#404040] w-[68px] h-[68px] rounded-[16px] hover:bg-[#e8f6ff] hover:text-[#1a1a1a] my-[2px] cursor-pointer nav_item`}
+                        onClick={() => navigate('/celebrate')}
+                    >
+
+                        <i className="fa-solid fa-calendar text-[18px] mb-[4px]"></i>
+                        <p className="text-[12px] nav_title font-bold">Lịch</p>
+
+                    </li>
+                    <li
+                        className={` ${getNavLinkClass("/rules")} flex z-10 items-center justify-center flex-col text-[#404040] w-[68px] h-[68px] rounded-[16px] hover:bg-[#e8f6ff] hover:text-[#1a1a1a] my-[2px] cursor-pointer nav_item`}
+                        onClick={() => navigate('/rules')}
+                    >
+                        <i className="fa-solid fa-scale-balanced text-[18px] mb-[4px]"></i>
+                        <p className="text-[12px] nav_title font-bold">Thể lệ</p>
+                    </li>
+                    <li
+                        className={` ${getNavLinkClass("/learn/rate")} flex z-10 items-center justify-center flex-col text-[#404040] w-[68px] h-[68px] rounded-[16px] hover:bg-[#e8f6ff] hover:text-[#1a1a1a] my-[2px] cursor-pointer nav_item`}
+                        onClick={() => navigate('/learn/rate')}
+                    >
+                        <i className="fa-solid fa-ranking-star text-[18px] mb-[4px]"></i>
+                        <p className="text-[12px] nav_title font-bold">Hạng</p>
+                    </li>
+                    <li
+                        className={` ${getNavLinkClass("/forum")} flex z-10 items-center justify-center flex-col text-[#404040] w-[68px] h-[68px] rounded-[16px] hover:bg-[#e8f6ff] hover:text-[#1a1a1a] my-[2px] cursor-pointer nav_item`}
+                        onClick={() => navigate('/forum')}
+                    >
+                        <i className="fa-solid fa-circle-question text-[18px] mb-[4px]"></i>
+                        <p className="text-[12px] nav_title font-bold">Bài viết</p>
+                    </li>
+                    <span className={`      nav_item_wrapper w-[68px] h-[68px] bg-[#E0F2FE] rounded-[16px] absolute`}></span>
+                </ul>
+            </nav >
         </div>
     )
 }
 
-export default memo(NavBarLearnPage)
+export default NavigationComponent

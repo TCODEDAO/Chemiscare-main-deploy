@@ -43,7 +43,6 @@ const quizSlice = createSlice({
             state.time.counter = state.time.counter + 1
         },
         setRound: (state, action) => {
-            console.log(action.payload);
             state.round.currentRound = action.payload
         },
         setTask: (state, action) => {

@@ -8,7 +8,7 @@ import { createNewQuestion, getAllQuestion } from '../../../api/Admin/apiQuestio
 import { useNavigate } from 'react-router-dom'
 import { notifyInfo } from '../../../components/Alert/AlertComponent'
 
-const Navigation = lazy(() => import('../../../components/Navigation/NavigationComponent'))
+const Header = lazy(() => import('../../../components/Header/HeaderComponent'))
 const Footer = lazy(() => import('../../../components/Footer/FooterComponent'))
 
 export default function QuestionComponentManagement() {
@@ -65,7 +65,7 @@ export default function QuestionComponentManagement() {
 
     return (
         <div className='h-screen w-screen bg-[#ccc] overflow-hidden overflow-y-scroll'>
-            <Navigation currentUser={currentUser} />
+            <Header currentUser={currentUser} />
 
             <div className='pt-[130px] pb-[90px] bg-[#13161B] relative min-h-[100vh] contentWrapper flex justify-center items-start overflow-y-scroll'>
 

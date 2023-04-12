@@ -10,9 +10,9 @@ function CreateCommentComponent({ currentUser, postId, socket, DefaultReply, set
             setContentComment(`${DefaultReply && DefaultReply}:  `)
         }
     }, [])
-   
+
     const handleSendComment = () => {
-        if(!currentUser){
+        if (!currentUser) {
             notifyInfo('Bạn cần đăng nhập để tiếp tục bình luận!')
             return
         }
@@ -26,11 +26,11 @@ function CreateCommentComponent({ currentUser, postId, socket, DefaultReply, set
         }
         if (contentComment === '') {
             notifyInfo('Bạn cần thêm thông tin cho bình luận!')
-         return
+            return
         }
         if (contentComment.length < 20) {
             notifyInfo('Bình luận của bạn quá ngắn!')
-return
+            return
         }
 
         socket.emit('CreateCommentFromClient', { data: data, send: send })
@@ -40,7 +40,9 @@ return
             setReply(false)
         }
     }
-    
+    const $ = document.querySelector.bind(document)
+
+
     return (
         <div className="mb-[10px] min-w-[100px]">
             <div className="flex items-end mb-[8px]">
@@ -52,19 +54,33 @@ return
                 </div>
                 <div className="grow">
                     <input
-                        className="w-full text-white font-light bg-[transparent] py-[8px] outline-none border-solid border-[#2a2c34] border-b-[1.4px]"
-                        type="text" placeholder="Viết bình luận của bạn..." value={contentComment} onChange={e => setContentComment(e.target.value)} />
+                        className="w-full font-light bg-[transparent] py-[8px] outline-none border-solid border-[#2a2c34] border-b-[1.4px] comment_writeInput"
+                        type="text" placeholder="Viết bình luận của bạn..." value={contentComment} onChange={e => {
+                            setContentComment(e.target.value)
+
+                            if ($('.comment_writeInput').value != '') {
+                                $('.comment_sentBtn').style.backgroundColor = '#38B6FF'
+                                $('.comment_sentBtn').classList.add('btn')
+                            } else {
+                                $('.comment_sentBtn').style.backgroundColor = '#ccc'
+                                $('.comment_sentBtn').classList.remove('btn')
+                            }
+
+
+                        }
+
+                        } />
                 </div>
             </div>
             <div className="flex justify-end">
-                <span className="px-[20px] py-[8px] font-medium cursor-pointer text-white" onClick={() => {
+                <p className="px-[20px] py-[8px] font-medium cursor-pointer " onClick={() => {
                     if (setReply) {
 
                         setReply(false)
                     }
-                }}>HỦY</span>
+                }}>HỦY</p>
                 <span
-                    className="px-[20px] py-[8px] text-white font-medium bg-[#ccc] cursor-pointer rounded-[20px]" onClick={()=>handleSendComment()}>BÌNH
+                    className="bg-[#ccc] font-medium cursor-pointer text-[#fff] px-[16px] py-[8px] rounded-full  comment_sentBtn" onClick={() => handleSendComment()}>BÌNH
                     LUẬN</span>
             </div>
         </div>

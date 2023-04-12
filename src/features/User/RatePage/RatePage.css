@@ -1,4 +1,4 @@
-html {
+/* html {
     font-family: 'Roboto', sans-serif;
 }
 
@@ -264,4 +264,16 @@ html {
     .navIcon {
         font-size: 28px !important;
     }
+} */
+
+
+
+.board {
+    box-shadow: 1px 2px 4px rgb(219, 219, 219);
 }
+
+
+.darkmode .board_col_header,
+        .darkmode .slider_background {
+            background: #353945;
+        }

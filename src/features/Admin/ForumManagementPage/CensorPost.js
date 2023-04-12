@@ -15,7 +15,7 @@ import './CensorPost.css'
 import { checkIsAdmin } from '../../../api/User/apiAuth'
 import { toBase64 } from 'base64-mongo-id'
 
-const Navigation = lazy(() => import('../../../components/Navigation/NavigationComponent'))
+const Header = lazy(() => import('../../../components/Header/HeaderComponent'))
 const Footer = lazy(() => import('../../../components/Footer/FooterComponent'))
 function CensorPost() {
     const dispatch = useDispatch()
@@ -91,7 +91,7 @@ function CensorPost() {
     return (
         <>
             <div className="pt-[130px] pb-[90px] bg-[#13161B] relative min-h-[100vh] contentWrapper">
-                <Navigation currentUser={currentUser} />
+                <Header currentUser={currentUser} />
 
                 <div className="max-w-[1092px] w-[100%] mx-auto flex flex-col items-center bodyWrapper">
                     <div className="w-[100%] text-left mb-[60px] text-white">

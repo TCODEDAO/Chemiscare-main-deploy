@@ -5,13 +5,13 @@
 }
 
 html {
-    font-family: "Roboto", sans-serif;
+    font-family: "Nunito",sans-serif;
 }
 
 .top_100-8 {
     top: calc(100% + 8px);
 }
-
+/* 
 .avt ul {
     transform-origin: top right;
     animation: scale ease-in 0.1s;
@@ -297,4 +297,60 @@ html {
     100% {
         transform: translateX(0);
     }
+} */
+
+/* new */
+
+.darkmode  .board_col_header,
+.darkmode .slider_background{
+    background: #353945;
+}
+
+.board {
+    box-shadow: 1px 2px 4px rgb(219, 219, 219);
+}
+
+.tutorial_start_wrapper {
+    right: calc(100% + 32px);
+}
+
+.tutorial_start_wrapper {
+    box-shadow: 2px 4px 10px rgb(146, 146, 146);
+}
+.tutorial_start_btn,
+.btn {
+    box-shadow: 0px 0px 8px #38B6FF;
+}
+
+.footer_social {
+    box-shadow: 0px 0px 8px #fff;
+}
+
+.tutorial_open_btn {
+    animation: surfing ease-in 0.2s;
+}
+
+.tutorial_start_wrapper {
+    animation: surfing ease-in 0.2s;
+}
+
+.tutorial_start_btn {
+    animation: appear ease-in 0.3s;
+}
+.theme_mode_dark{
+    transition: all ease-in 0.1s;
+}
+
+.darkmode{
+    background: #13161B;
+    color: #fff;
+}
+
+.darkmode .board{
+    border-color: #51535a;
+    box-shadow: 0px 0px 0px 0px #000;
+}
+
+.text-black-important{
+color: black !important;
 }

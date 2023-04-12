@@ -10,12 +10,12 @@ function CommentControl({ comment, currentUser, socket, idReply, postAuthorId, i
     return (
         <div>
             <div className="flex items-center">
-                <p className="cursor-pointer hover:text-[#d54253] opacity-[0.9] text-white ">{comment?.isBestAnswer === true && <span className=' font-bold text-[#4cdc7e]'>Câu trả lời được chọn !</span>} </p>
+                <p className="cursor-pointer hover:text-[#d54253] opacity-[0.9]  ">{comment?.isBestAnswer === true && <span className=' font-bold text-[#4cdc7e]'>Câu trả lời được chọn !</span>} </p>
                 {((currentUser?._id === postAuthorId || currentUser?.isAdmin === true) && isRootComment && isBestAnswerHave === false) && <p className='mx-4 font-semibold hover:underline text-[white] cursor-pointer block' onClick={() => {
                     socket.emit('SetToChooseAnswer', comment._id)
                 }}>Đặt làm câu trả lời được chọn</p>}
-                {comment?.isBestAnswer === true && <i className="opacity-[0.9] fa-solid fa-circle text-[4px] mx-[8px] text-white "></i>}
-                <p className="cursor-pointer hover:text-[#d54253] opacity-[0.9] text-white pr-3 " onClick={() => {
+                {comment?.isBestAnswer === true && <i className="opacity-[0.9] fa-solid fa-circle text-[4px] mx-[8px]  "></i>}
+                <p className="cursor-pointer hover:text-[#d54253] opacity-[0.9]  pr-3 " onClick={() => {
                     setReply(true)
                 }}>Trả lời</p>
 
