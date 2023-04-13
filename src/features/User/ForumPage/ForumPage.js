@@ -155,9 +155,9 @@ export default function BlogComponent() {
 
 
                 />
-                <div className="flex mt-[100px] w-[90%] mb-[8px]">
+                <div className="flex mt-[100px] w-[100%] mb-[8px]">
                     <Nav />
-                    <div className="ml-[40px] w-full pb-[64px] container-react-forum">
+                    <div className="w-full pb-[64px] container-react-forum">
                         <div className="mt-[32px]">
                             <div className="w-[100%] text-left mb-[60px]">
                                 <p className="font-[900] text-[38px]">Bài viết nổi bật</p>

@@ -24,6 +24,10 @@
 .darkmode .nav_onTablet ul{
     background: #3D4048;
 }
+
+@media screen and (max-width: 1000px) {
+.nav_main{display: none !important;}
+}
 @media screen and (max-width: 900px) {
     .header_signUp_btn,
     .logo_text_onHeader,

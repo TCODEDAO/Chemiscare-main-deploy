@@ -63,32 +63,32 @@ function NavigationComponent() {
         elm.classList.remove(status);
         elm.classList.add('hidden');
     }
-    useEffect(() => {
-        window.addEventListener("resize", () => {
-            if (window.screen.width <= 1000) {
-                $('.nav_main').style.display = "none";
-            } else {
-                $('.nav_main').style.display = "block";
-            }
-        })
+    // useEffect(() => {
+    //     window.addEventListener("resize", () => {
+    //         if (window.screen.width <= 1000) {
+    //             $('.nav_main').style.display = "none";
+    //         } else {
+    //             $('.nav_main').style.display = "block";
+    //         }
+    //     })
 
-        return () => {
-            window.removeEventListener("resize", () => {
-                if (window.screen.width <= 1000) {
-                    $('.nav_main').style.display = "none";
-                } else {
-                    $('.nav_main').style.display = "block";
-                }
-            })
-        }
-    }, [])
+    //     return () => {
+    //         window.removeEventListener("resize", () => {
+    //             if (window.screen.width <= 1000) {
+    //                 $('.nav_main').style.display = "none";
+    //             } else {
+    //                 $('.nav_main').style.display = "block";
+    //             }
+    //         })
+    //     }
+    // }, [])
 
     const navigate = useNavigate()
     return (
         <div>
             <nav className="nav_main">
                 <ul className="p-[16px] flex flex-col items-center sticky left-0 top-[100px] navigation-react-tour">
-                    <Link to='/forum'>
+                    <Link to='/forum/user/create'>
                         <li className="w-[44px] h-[44px] flex items-center justify-center mb-[8px] bg-[#1473e6] rounded-[50%] border-[#1473e6] border-solid border-[1px] text-[#fff] cursor-pointer">
                             <i className="fa-solid fa-plus"></i>
                         </li>
@@ -177,7 +177,7 @@ function NavigationComponent() {
                         <p className="text-[18px] nav_title font-bold">Bài viết</p>
                     </li>
                     <li
-                        onClick={() => navigate('/forum')}
+                        onClick={() => navigate('/forum/user/create')}
 
                         className={`cursor-pointer flex text-[40px] py-[16px] px-[8px] rounded-[6px] hover:bg-[#e8f6ff] hover:text-[#1a1a1a] border_top  ${getNavLinkClass("/forum")}`}>
                         <i className="fa-solid fa-plus text-[24px] mr-[6px]"></i>
