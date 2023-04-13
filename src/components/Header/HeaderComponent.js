@@ -99,9 +99,9 @@ function HeaderComponent({ currentUser }) {
                     <img
                         src={logoChemiscare}
                         alt=''
-                        className='logo_img w-[44px] h-[44px] mr-[8px] rounded-[8px]'
+                        className='logo_img w-[44px] h-[44px] mr-[8px] rounded-[8px] inline-block'
                     />
-                    <p className='font-bold text-[24px] logo_text logo_text_onHeader'>
+                    <p className='font-bold text-[24px] logo_text logo_text_onHeader inline-block'>
                         {" "}
                         Chemiscare{" "}
                     </p>
@@ -182,12 +182,14 @@ function HeaderComponent({ currentUser }) {
                                         <Link to='/learn/rate'>Xếp hạng</Link>
                                     </p>
                                 </li>
-                                <li className='flex cursor-pointer user_menu_item hover:text-[#000] items-center px-[20px] py-[12px]'>
-                                    <p className='text-[16px]'>
-                                        {" "}
-                                        <Link to='/forum/'>Viết blog</Link>
-                                    </p>
-                                </li>
+                                <Link to='/forum/'>
+                                    <li className='flex cursor-pointer user_menu_item hover:text-[#000] items-center px-[20px] py-[12px]'>
+                                        <p className='text-[16px]'>
+                                            {" "}
+                                            Viết blog
+                                        </p>
+                                    </li>
+                                </Link>
                                 {isAdmin && (
                                     <li className='flex cursor-pointer user_menu_item hover:text-[#000] items-center px-[20px] py-[12px]'>
                                         <Link to='/admin/question'>

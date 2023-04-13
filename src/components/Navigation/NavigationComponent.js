@@ -63,7 +63,25 @@ function NavigationComponent() {
         elm.classList.remove(status);
         elm.classList.add('hidden');
     }
+    useEffect(() => {
+        window.addEventListener("resize", () => {
+            if (window.screen.width <= 1000) {
+                $('.nav_main').style.display = "none";
+            } else {
+                $('.nav_main').style.display = "block";
+            }
+        })
 
+        return () => {
+            window.removeEventListener("resize", () => {
+                if (window.screen.width <= 1000) {
+                    $('.nav_main').style.display = "none";
+                } else {
+                    $('.nav_main').style.display = "block";
+                }
+            })
+        }
+    }, [])
 
     const navigate = useNavigate()
     return (

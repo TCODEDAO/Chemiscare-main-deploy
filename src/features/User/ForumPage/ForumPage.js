@@ -125,6 +125,8 @@ export default function BlogComponent() {
         elm.classList.remove(status);
         elm.classList.add('hidden');
     }
+    const styleBtnTurtorial = { transform: `translateX(48.5px)` }
+
     return (
         <>
 
@@ -183,6 +185,7 @@ export default function BlogComponent() {
                 </div>
                 <div className="fixed top-[40%] right-0 z-10">
                     <div className="tutorial_open_btn cursor-pointer"
+                        style={styleBtnTurtorial}
                         onClick={(e) => {
                             if ($('.tutorial_start_wrapper').classList.contains('hidden')) {
                                 handleOpen($('.tutorial_start_wrapper'), 'flex');

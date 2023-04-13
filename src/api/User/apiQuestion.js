@@ -5,7 +5,7 @@ import { getQuestionFailed, getQuestionSuccess, setHistoryResult, setResult, set
 const getQuestionAndAnswers = async (currentUser, dispatch, axiosJWT, navigate) => {
     try {
         const res = await axiosJWT.get(
-            `${process.env.REACT_APP_URL_API_REQUEST}/api/v1/questions/${currentUser?.detailUserInfomation?.grade}`,
+            `${process.env.REACT_APP_URL_API_REQUEST}/api/v1/questions/9`,
             {
                 headers: { token: `Bearer ${currentUser?.accessToken}` },
             },
