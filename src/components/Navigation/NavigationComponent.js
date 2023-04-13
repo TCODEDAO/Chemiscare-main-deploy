@@ -179,7 +179,7 @@ function NavigationComponent() {
                     <li
                         onClick={() => navigate('/forum/user/create')}
 
-                        className={`cursor-pointer flex text-[40px] py-[16px] px-[8px] rounded-[6px] hover:bg-[#e8f6ff] hover:text-[#1a1a1a] border_top  ${getNavLinkClass("/forum")}`}>
+                        className={`cursor-pointer flex text-[40px] py-[16px] px-[8px] rounded-[6px] hover:bg-[#e8f6ff] hover:text-[#1a1a1a] border_top  ${getNavLinkClass("/forum/user/create")}`}>
                         <i className="fa-solid fa-plus text-[24px] mr-[6px]"></i>
                         <p className="text-[18px] nav_title font-bold">Viết bài</p>
                     </li>
