@@ -33,3 +33,371 @@
         transform: rotate(360deg);
     }
 }
+
+body {
+    font-family: "Nunito";
+    color: #1a1a1a;
+}
+.loading .itemPostContent_img,
+.loading .post_inf_readTime,
+.loading .post_inf_postTime,
+.loading .post_inf_des,
+.loading .post_inf_title,
+.loading .post_author_name,
+.loading .post_author_avt{
+    background: #b8e3ff;
+}
+.darkmode.loading .itemPostContent_img,
+.darkmode.loading .post_inf_readTime,
+.darkmode.loading .post_inf_postTime,
+.darkmode.loading .post_inf_des,
+.darkmode.loading .post_inf_title,
+.darkmode.loading .post_author_name,
+.darkmode.loading .post_author_avt{
+    background: #475569;
+}
+.loading .post_author_avt{
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+}
+.loading .post_author_name{
+    width: 38%;
+    height: 20px;
+    border-radius: 100px;
+}
+.loading .post_inf_title{
+    height: 30px;
+    width: 80%;
+    border-radius: 100px;
+}
+.loading .post_inf_des{
+    height: 60px;
+    width: 100%;
+    border-radius: 8px;
+}
+.loading .post_inf_postTime{
+    height: 20px;
+    width: 22%;
+    border-radius: 100px;
+}
+.loading .post_inf_readTime{
+    height: 20px;
+    width: 22%;
+    border-radius: 100px;
+}
+.loading .post_interact,
+.loading .post_inf_seperateDot{
+    color: #475569;
+}
+.header {
+    box-shadow: 0 2px 4px 0 rgb(219, 219, 219);
+}
+
+.logo_text {
+    font-family: "Lobster";
+    font-weight: 900;
+}
+
+::selection {
+    background: #1473e6;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    background-color: #E0F2FE;
+    overflow: overlay;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #38B6FF;
+    border-radius: 4px;
+}
+
+.footer,
+.user_menu_userName,
+.board_title {
+    font-family: "Roboto";
+}
+
+.search_bar::placeholder {
+    color: #777777;
+    font-weight: 300;
+}
+
+.nav_item.active {
+    color: #000 !important;
+}
+
+.nav_item.active:hover {
+    background: transparent;
+}
+
+.nav_item_wrapper {
+    transition: all ease-in 0.1s;
+}
+
+.board {
+    box-shadow: 1px 2px 4px rgb(219, 219, 219);
+}
+
+.user_menu {
+    top: calc(100% + 8px);
+    box-shadow: 2px 4px 10px rgb(146, 146, 146);
+}
+
+.tutorial_start_wrapper {
+    right: calc(100% + 32px);
+}
+
+.tutorial_start_wrapper {
+    box-shadow: 2px 4px 10px rgb(146, 146, 146);
+}
+
+.border_top {
+    border-top: 1px solid rgba(232, 232, 232, 0.2);
+}
+
+.btn {
+    box-shadow: 0px 0px 8px #38B6FF;
+}
+
+.footer_social {
+    box-shadow: 0px 0px 8px #fff;
+}
+
+.tutorial_open_btn {
+    animation: surfing ease-in 0.2s;
+}
+
+.tutorial_start_wrapper {
+    animation: surfing ease-in 0.2s;
+}
+
+.tutorial_start_btn {
+    animation: appear ease-in 0.3s;
+}
+
+.nav_onTablet {
+    background: rgba(0, 0, 0, 0.4);
+    
+}
+.nav_onTablet ul{
+    animation: surfing-reverse ease-in 0.05s;
+}
+@keyframes surfing {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+@keyframes surfing-reverse {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+@keyframes appear {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translateY(-4px);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.theme_mode_dark {
+    transition: all ease-in 0.1s;
+}
+
+body.darkmode {
+    background: #13161B;
+    color: #fff;
+}
+
+.darkmode .header {
+    background: #1f232b;
+    box-shadow: 0px 0px 0px 0px #000;
+    border-width: 0px;
+}
+
+.darkmode .board_col_header,
+.darkmode .slider_background {
+    background: #353945;
+}
+
+.darkmode .user_menu {
+    background: #3D4048;
+    box-shadow: 0px 0px 0px 0px #000;
+}
+
+.darkmode .user_menu_item:hover {
+    color: #ddd;
+}
+
+.darkmode .board {
+    border-color: #51535a;
+    box-shadow: 0px 0px 0px 0px #000;
+}
+
+.darkmode .search_bar_wrapper {
+    border-color: #ccc;
+}
+
+.darkmode .search_icon {
+    color: #ccc;
+}
+
+.darkmode .nav_item {
+    color: #ccc;
+}
+
+.darkmode .nav_item:hover {
+    color: #1a1a1a;
+}
+
+.darkmode .search_bar::placeholder {
+    color: #ccc
+}
+.darkmode .nav_onTablet ul{
+    background: #3D4048;
+}
+.darkmode .post{
+    background: #1f232b;
+}
+.darkmode .post_suggested_topic{
+    background: #E0F2FE;
+}
+.darkmode .post_suggested_topic:hover{
+    background: #e9f6ff;
+}
+.darkmode .comment_detail {
+    background: #353945;
+}
+
+.darkmode .comment_Content {
+    background: #1f232b;
+}
+.comment_sentBtn {
+    transition: all ease-in 0.05s;
+}
+.nav_onTablet li.active{
+    background: #e9f6ff;
+    color: #1a1a1a;
+}
+@media screen and (max-width: 900px) {
+    .tutorial_wrapper,
+    .partRight,
+    .suggestedTopic,
+    .header_signUp_btn,
+    .logo_text_onHeader,
+    .viewMyRank_btn {
+        display: none;
+    }
+    .nav_open_btn{
+        display: inline;
+    }
+    .change_theme_mode_btn {
+        margin-right: 16px;
+    }
+
+    .body {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 8px;
+    }
+
+    .body>div {
+        margin: 0;
+    }
+
+    .footer>ul {
+        display: block;
+    }
+
+    .footer>ul li:nth-child(2) {
+        margin: 32px 0;
+    }
+
+    .footer>ul li {
+        width: 100%;
+    }
+
+    .footer {
+        padding: 32px;
+    }
+    .listPost{
+        width: 100%;
+    }
+    .partLeft{
+        width: 100%;
+    }
+    .comment_Content{
+        width: 90%;
+        padding: 16px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .suggestedTopic,
+    .slider_modal,
+    .search_bar_wrapper,
+    .logo_text_onHeader,
+    .viewMyRank_btn {
+        display: none;
+    }
+
+    .change_theme_mode_btn {
+        margin-right: 16px;
+    }
+
+    .body {
+        width: 100%;
+    }
+
+    .footer>ul {
+        display: block;
+        margin-bottom: 64px;
+    }
+
+    .footer>ul li:nth-child(2) {
+        margin: 32px 0;
+    }
+
+    .slider_text {
+        margin: 0;
+    }
+
+    .slider_text p:nth-child(1) {
+        font-size: 40px;
+    }
+
+    .footer {
+        padding: 16px;
+    }
+
+    .slider_background {
+        height: 100%;
+    }
+    .listPost{
+        width: 100%;
+    }
+}

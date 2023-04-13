@@ -46,20 +46,20 @@ export default function LearnPage() {
         //     notifyInfo('Bạn cần đăng nhập để vào học!')
         //     return
         // }
-        // if (!currentUser.detailUserInfomation || !currentUser?.detailUserInfomation?.grade) {
-        //     navigate('/auth/detail')
-        //     notifyInfo('Bạn cần thêm thông tin để vào học!')
-        //     return
-        // }
+        if (!currentUser?.detailUserInfomation || !currentUser?.detailUserInfomation?.grade) {
+            navigate('/auth/detail')
+            notifyInfo('Bạn cần thêm thông tin để vào học!')
+            return
+        }
 
         if (currentUser) {
             setLoading(true)
             await getRound(dispatch, axiosJWT, currentUser)
             getAllResultQuizById(currentUser, dispatch, axiosJWT)
             setLoading(false)
-            notifyWelcome(`Chào mừng bạn!`)
             return
         }
+
 
     }, [])
     const handleSubmitTaskAndNextRound = () => {
@@ -161,6 +161,8 @@ export default function LearnPage() {
         elm.classList.remove(status);
         elm.classList.add('hidden');
     }
+
+    const styleBtnTurtorial = { transform: `translateX(48.5px)` }
     return (
         <>
 
@@ -222,7 +224,7 @@ export default function LearnPage() {
                                                 return
                                             }
                                             handleJoinInTask(1)
-                                        }}>Làm bài 1 </button>}
+                                        }}>Làm </button>}
 
                                     </li>
                                     <li className="h-[60px] flex items-center justify-center board_col_item p-[2px]">
@@ -232,7 +234,7 @@ export default function LearnPage() {
                                                 return
                                             }
                                             handleJoinInTask(2)
-                                        }}>Làm bài 2 </button>}
+                                        }}>Làm </button>}
 
                                     </li>
                                     <li className="h-[60px] flex items-center justify-center board_col_item p-[2px]">
@@ -242,7 +244,7 @@ export default function LearnPage() {
                                                 return
                                             }
                                             handleJoinInTask(3)
-                                        }}>Làm bài 3 </button>}
+                                        }}>Làm </button>}
 
                                     </li>
                                 </ul>
@@ -275,9 +277,8 @@ export default function LearnPage() {
 
                                     {UserHistoryShow.round.map((round, index) => {
                                         return <li key={index} className="h-[60px] flex items-center justify-center board_col_item p-[2px]">
-                                            <span
-                                                className="bg-[#38B6FF] hover:bg-[#6dc9ff] text-[#fff] px-[16px] py-[8px] rounded-[6px] btn"
-                                            >{round}</span>
+
+                                            {round}
                                         </li>
                                     })}
                                 </ul>
@@ -303,6 +304,7 @@ export default function LearnPage() {
 
             <div className="fixed top-[40%] right-0 z-10">
                 <div className="tutorial_open_btn cursor-pointer"
+                    style={styleBtnTurtorial}
                     onClick={(e) => {
                         if ($('.tutorial_start_wrapper').classList.contains('hidden')) {
                             handleOpen($('.tutorial_start_wrapper'), 'flex');

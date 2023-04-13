@@ -9,17 +9,7 @@ html {
 
 }
 
-::selection {
-    background: #d54253;
-}
 
-::-moz-selection {
-    background: #d54253;
-}
-
-::-webkit-selection {
-    background: #d54253;
-}
 
 body::-webkit-scrollbar {
     display: none;

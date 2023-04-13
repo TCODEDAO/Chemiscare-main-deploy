@@ -66,8 +66,7 @@ function RatePage() {
     useEffect(async () => {
 
         if (!currentUser) {
-            navigate('/auth')
-            notifyInfo('Bạn cần đăng nhập để xem trang này!')
+            notifyInfo('Bạn cần đăng nhập để xem được kết quả của mình tại trang này!')
             return
         }
         if (!currentUser.detailUserInfomation || !currentUser?.detailUserInfomation?.grade) {
@@ -77,7 +76,7 @@ function RatePage() {
         }
 
         if (currentUser) {
-            getAllResultAndSort(axiosJWT, currentUser, dispatch, navigate, 2)
+            getAllResultAndSort(axiosJWT, dispatch, navigate, 2)
         }
 
         return () => {

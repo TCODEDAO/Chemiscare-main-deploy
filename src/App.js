@@ -14,22 +14,25 @@ import { Helmet } from 'react-helmet';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkIsAdmin } from './api/User/apiAuth';
+import { notifyWelcome } from './components/Alert/AlertComponent';
 
 
 function App() {
   const currentUser = useSelector((state) => state?.auth?.login?.currentUser)
   const dispatch = useDispatch()
-  useEffect(()=>{
-    if(currentUser){
-      checkIsAdmin(currentUser,dispatch)
+  useEffect(() => {
+    if (currentUser) {
+      checkIsAdmin(currentUser, dispatch)
 
     }
-  },[])
+  }, [])
+
+  useEffect(() => { notifyWelcome(`Chào mừng bạn!`) }, [])
   return (
     <div className='App'>
-<Helmet>
-    <meta name="robots" content="index, follow" />
-</Helmet>
+      <Helmet>
+        <meta name="robots" content="index, follow" />
+      </Helmet>
       <Suspense fallback={<LoadingComponent />} >
         <Routes>
           {publicRoutes.map((route) => {

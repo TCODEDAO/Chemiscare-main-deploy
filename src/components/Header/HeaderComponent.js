@@ -89,13 +89,13 @@ function HeaderComponent({ currentUser }) {
         e.classList.remove(status)
         e.classList.add("hidden")
     }
-
     return (
 
         <header className='header-react-tour header flex fixed top-0 left-0 right-0 py-[8px] border-solid border-[1px] border-[#e8ebed] items-center px-[20px] justify-between bg-[#fff] z-[100] box-'>
-            <Link to='/learn'>
-                {" "}
-                <div className='flex items-center'>
+
+            {" "}
+            <div className='flex items-center'>
+                <Link to='/learn'>
                     <img
                         src={logoChemiscare}
                         alt=''
@@ -105,8 +105,15 @@ function HeaderComponent({ currentUser }) {
                         {" "}
                         Chemiscare{" "}
                     </p>
-                </div>
-            </Link>
+                </Link>
+                <i className="p-2 z-50 fa-solid fa-bars text-[24px] hidden nav_open_btn cursor-pointer"
+
+                    onClick={() => {
+                        handleOpen($('.nav_onTablet'), 'block');
+                    }}></i>
+            </div>
+
+
             {/* <div className='w-[400px] flex items-center border-[#e8e8e8] border-[2px] border-solid rounded-[20px] pl-[8px] pr-[16px] overflow-hidden search_bar_wrapper'>
                 <i className='fa-solid fa-magnifying-glass search_icon mr-[8px] text-[#777]'></i>
                 <input
