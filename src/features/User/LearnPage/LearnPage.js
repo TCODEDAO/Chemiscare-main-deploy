@@ -46,10 +46,14 @@ export default function LearnPage() {
         //     notifyInfo('Bạn cần đăng nhập để vào học!')
         //     return
         // }
-        if (!currentUser?.detailUserInfomation || !currentUser?.detailUserInfomation?.grade) {
-            navigate('/auth/detail')
-            notifyInfo('Bạn cần thêm thông tin để vào học!')
-            return
+        if (currentUser) {
+
+
+            if (!currentUser?.detailUserInfomation || !currentUser?.detailUserInfomation?.grade) {
+                navigate('/auth/detail')
+                notifyInfo('Bạn cần thêm thông tin để vào học!')
+                return
+            }
         }
 
         if (currentUser) {

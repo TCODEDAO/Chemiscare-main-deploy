@@ -69,11 +69,11 @@ function RatePage() {
             notifyInfo('Bạn cần đăng nhập để xem được kết quả của mình tại trang này!')
             return
         }
-        if (!currentUser.detailUserInfomation || !currentUser?.detailUserInfomation?.grade) {
-            navigate('/auth/detail')
-            notifyInfo('Bạn cần đăng nhập để xem trang này!')
-            return
-        }
+        // if (!currentUser.detailUserInfomation || !currentUser?.detailUserInfomation?.grade) {
+        //     navigate('/auth/detail')
+        //     notifyInfo('Bạn cần đăng nhập để xem trang này!')
+        //     return
+        // }
 
         if (currentUser) {
             getAllResultAndSort(axiosJWT, dispatch, navigate, 2)
