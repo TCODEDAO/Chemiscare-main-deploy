@@ -155,7 +155,7 @@ export default function BlogComponent() {
 
 
                 />
-                <div className="flex mt-[100px] w-[100%] mb-[8px]">
+                <div className="flex body mt-[100px] w-[90%] mb-[8px]">
                     <Nav />
                     <div className="w-full pb-[64px] container-react-forum">
                         <div className="mt-[32px]">
