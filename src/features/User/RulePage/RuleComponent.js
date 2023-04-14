@@ -16,7 +16,7 @@ export default function Celebrate() {
         <>
             <div>
                 <Header currentUser={currentUser} />
-                <div className="flex mt-[100px] w-[90%] mb-[8px]">
+                <div className="flex mt-[100px] w-[90%] mb-[8px] body">
                     <Nav />
 
                     <div className="m-4">

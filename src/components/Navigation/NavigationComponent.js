@@ -85,8 +85,8 @@ function NavigationComponent() {
 
     const navigate = useNavigate()
     return (
-        <div>
-            <nav className="nav_main">
+        <div className=''>
+            <nav className="nav_main h-full">
                 <ul className="p-[16px] flex flex-col items-center sticky left-0 top-[100px] navigation-react-tour">
                     <Link to='/forum/user/create'>
                         <li className="w-[44px] h-[44px] flex items-center justify-center mb-[8px] bg-[#1473e6] rounded-[50%] border-[#1473e6] border-solid border-[1px] text-[#fff] cursor-pointer">

@@ -116,7 +116,7 @@ function RatePage() {
                     </div>
                 </div>
             </div> */}
-            <div className="flex mt-[100px] w-[90%] mb-[8px]">
+            <div className="flex mt-[100px] w-[90%] mb-[8px] body">
                 <Nav />
                 <div className="ml-[40px] w-full pb-[64px]">
                     <div className="mt-[32px]">

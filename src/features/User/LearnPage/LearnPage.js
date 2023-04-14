@@ -85,7 +85,7 @@ export default function LearnPage() {
         scores: [],
     })
     useEffect(() => {
-        userProcess.forEach((item, index) => {
+        userProcess?.forEach((item, index) => {
             setUserHistoryShow((prev) => {
                 return {
                     id: [...prev.id, index + 1],

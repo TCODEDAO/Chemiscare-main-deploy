@@ -18,7 +18,7 @@ export default function CelebratePage() {
 
                 <Nav />
 
-                <div className="ml-[40px] w-full pb-[64px]">
+                <div className="ml-[40px] w-full pb-[64px] body">
                     <div className="mt-[32px]">
                         <p className="mb-[16px] text-[24px] font-bold board_title">Lịch thi khối 8</p>
                         <div className="board flex border-solid border-[1px] border-[#e8e8e8] rounded-[6px] font-bold overflow-hidden">

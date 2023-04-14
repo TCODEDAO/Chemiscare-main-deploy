@@ -18,6 +18,7 @@ import { createAxios } from '../../../../utils/axiosJWT';
 
 // Lazy
 const Header = lazy(() => import('../../../../components/Header/HeaderComponent'))
+const Nav = lazy(() => import('../../../../components/Navigation/NavigationComponent'))
 const Footer = lazy(() => import('../../../../components/Footer/FooterComponent'))
 
 export default function CreatePost() {
@@ -114,50 +115,51 @@ export default function CreatePost() {
         <>
 
             <Header currentUser={currentUser} />
+            <div className="flex mt-[100px] w-[90%] mb-[8px] body">
+                <Nav />
+                <div className='h-full w-full relative mt-[70px]'>
+                    {isConfirmSubmitShow && <ConfirmCreatePost handleSubmitPost={handleSubmitPost} handleHideConfirm={handleHideConfirm} />}
+                    <button className='relative left-[80%] mt-[1%] mb-[10px] bg-[#f4742577] text-white rounded-3xl p-2 ' style={{ backgroundColor: ` ${Boolean(title) && Boolean(content) && '#f47425'} ` }} onClick={() => {
+                        if (Boolean(title) && Boolean(content)) {
+                            handleShowConfirm()
+                        }
+                    }}>Xuất bản</button>
+                    <input value={title} onChange={e => setTitle(e.target.value)} type="text" placeholder='Tiêu đề' className=' p-2 outline-none border-none w-full placeholder:text-[40px] placeholder:font-semibold text-[40px] ' maxLength={50} />
+                    <Editor
+                        apiKey='r3u127an0pxiu2t96wuv3b8z7fqx3sf9huowyykivlqdew00'
+                        onInit={(evt, editor) => editorRef.current = editor}
+                        initialValue=""
+                        init={{
+                            height: 500,
 
-            <div className='h-full w-full relative mt-[70px]'>
-                {isConfirmSubmitShow && <ConfirmCreatePost handleSubmitPost={handleSubmitPost} handleHideConfirm={handleHideConfirm} />}
-                <button className='relative left-[80%] mt-[1%] mb-[10px] bg-[#f4742577] text-white rounded-3xl p-2 ' style={{ backgroundColor: ` ${Boolean(title) && Boolean(content) && '#f47425'} ` }} onClick={() => {
-                    if (Boolean(title) && Boolean(content)) {
-                        handleShowConfirm()
-                    }
-                }}>Xuất bản</button>
-                <input value={title} onChange={e => setTitle(e.target.value)} type="text" placeholder='Tiêu đề' className=' p-2 outline-none border-none w-full placeholder:text-[40px] placeholder:font-semibold text-[40px] ' maxLength={50} />
-                <Editor
-                    apiKey='r3u127an0pxiu2t96wuv3b8z7fqx3sf9huowyykivlqdew00'
-                    onInit={(evt, editor) => editorRef.current = editor}
-                    initialValue=""
-                    init={{
-                        height: 500,
-
-                        menubar: true,
-                        automatic_uploads: true,
-                        setup: function (editor) {
-                            editor.on('init', () => {
-                                notifySuccess('Tải công cụ biên tập thành công')
-                            })
-                        },
-                        images_upload_url: 'postAcceptor.php',
-                        images_upload_handler: handle_upload_image,
-                        branding: false,
-                        language: 'vi',
-                        language_url: '/langs/vi.js',
-                        skin: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'oxide-dark' : 'oxide'),
-                        content_css: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default'),
-                        plugins: [
-                            'advlist', 'autolink', 'lists', 'link', 'charmap', 'preview', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                            'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount', 'image', 'emoticons', 'code'
-                        ],
-                        toolbar: 'undo redo | image code | blocks |  charmap emoticons | preview  | ' +
-                            'bold italic forecolor | alignleft aligncenter ' +
-                            'alignright alignjustify | bullist numlist outdent indent | ' +
-                            'removeformat | help'
-                    }}
-                    onEditorChange={setContent}
-                />
-                <Footer />
+                            menubar: true,
+                            automatic_uploads: true,
+                            setup: function (editor) {
+                                editor.on('init', () => {
+                                    notifySuccess('Tải công cụ biên tập thành công')
+                                })
+                            },
+                            images_upload_url: 'postAcceptor.php',
+                            images_upload_handler: handle_upload_image,
+                            branding: false,
+                            language: 'vi',
+                            language_url: '/langs/vi.js',
+                            skin: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'oxide-dark' : 'oxide'),
+                            content_css: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default'),
+                            plugins: [
+                                'advlist', 'autolink', 'lists', 'link', 'charmap', 'preview', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                                'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount', 'image', 'emoticons', 'code'
+                            ],
+                            toolbar: 'undo redo | image code | blocks |  charmap emoticons | preview  | ' +
+                                'bold italic forecolor | alignleft aligncenter ' +
+                                'alignright alignjustify | bullist numlist outdent indent | ' +
+                                'removeformat | help'
+                        }}
+                        onEditorChange={setContent}
+                    />
+                    <Footer />
+                </div>
             </div>
-
         </>
     )
 }

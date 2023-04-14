@@ -20,17 +20,17 @@ export default function QuestionComponent() {
     const score = useSelector(state => state?.quiz?.score?.currentScore)
     const timePlay = useSelector(state => state?.quiz?.time?.counter)
     const task = useSelector(state => state?.quiz?.task?.currentTask)
-const currentRound = useSelector(state=>state?.quiz?.round?.currentRound)
-    
+    const currentRound = useSelector(state => state?.quiz?.round?.currentRound)
+
 
     //LoadingToGame
-    const [playThemeSound,setPlayThemeSound] = useState(false)
+    const [playThemeSound, setPlayThemeSound] = useState(false)
     const [isCountDown, setIsCountDown] = useState(true)
     const [flip, setFlip] = useState(false)
     const [isQuizCount, setIsQuizCount] = useState(false)
     const [quizNumberCount, setQuizNumberCount] = useState(0)
-  const [quizCorrectCount,setQuizCorrectCount] = useState(0)
-const [prevQuizCorrectCount,setPrevQuizCorrectCount] = useState(0)
+    const [quizCorrectCount, setQuizCorrectCount] = useState(0)
+    const [prevQuizCorrectCount, setPrevQuizCorrectCount] = useState(0)
     const [stylesloadingToGame, apiloadingToGame] = useSpring(() => ({
         to: { opacity: 1 },
         from: { opacity: 0 },
@@ -66,7 +66,7 @@ const [prevQuizCorrectCount,setPrevQuizCorrectCount] = useState(0)
         intervalId = setInterval(() => {
             if (timeLeft !== 'Bắt đầu') {
 
-               
+
                 setTimeLeft(timeLeft - 1)
             }
         }, 1600)
@@ -108,8 +108,8 @@ const [prevQuizCorrectCount,setPrevQuizCorrectCount] = useState(0)
     useEffect(() => {
         let hideQuizCount
         if (isQuizCount && quizNumberCount < 11) {
-            setQuizNumberCount((prevState)=>{
-               return prevState + 1
+            setQuizNumberCount((prevState) => {
+                return prevState + 1
             })
             hideQuizCount = setTimeout(() => {
                 setIsQuizCount(false)
@@ -151,23 +151,23 @@ const [prevQuizCorrectCount,setPrevQuizCorrectCount] = useState(0)
 
     const refQuestion = useRef(null)
 
-    useEffect(()=>{
-    let counter = 1;
-      let soundrepeat =  setInterval(async() => {
-          if(counter > 1){
-            clearInterval(soundrepeat)
-            return false
-          }
-      await playSound(`Counter`)
-        counter++
-      }, 800);
+    useEffect(() => {
+        let counter = 1;
+        let soundrepeat = setInterval(async () => {
+            if (counter > 1) {
+                clearInterval(soundrepeat)
+                return false
+            }
+            await playSound(`Counter`)
+            counter++
+        }, 800);
 
-      return ()=>{
-        clearInterval(soundrepeat)
-      }
-    },[])
+        return () => {
+            clearInterval(soundrepeat)
+        }
+    }, [])
     useEffect(async () => {
-     
+
         if (!currentUser) {
             notifyInfo('Bạn cần đăng nhập để vào học!')
             navigate('/auth')
@@ -235,12 +235,12 @@ const [prevQuizCorrectCount,setPrevQuizCorrectCount] = useState(0)
         }
     }, [counter])
 
-    
+
     return (
         <>
 
-        {playThemeSound && <audio className='hidden' autoPlay loop src="https://github.com/TCODEDAO/upload-an-image-chemiscare-user/blob/main/NhacNenChemiscare.mp3?raw=true"></audio>}
-        
+            {playThemeSound && <audio className='hidden' autoPlay loop src="https://github.com/TCODEDAO/upload-an-image-chemiscare-user/blob/main/themesound.mp3?raw=true"></audio>}
+
             {isLandScape === true ? <div className='requestRotate'>Bạn cần xoay ngang màn hình để hoc!</div> :
                 <>
 
@@ -260,7 +260,7 @@ const [prevQuizCorrectCount,setPrevQuizCorrectCount] = useState(0)
                                 ...style
                             }} className='h-screen w-screen fixBgGame bg-no-repeat bg-cover bg-[#191a28] relative' >
 
-                               
+
                                 <ScoreComponent min={minutes.current} sec={sec.current} level={task} />
                                 <div className="gradientBoxQuestion  flex justify-center">
                                     <div className='gradientBoxQuestionContent flex justify-center items-center'>
@@ -268,15 +268,15 @@ const [prevQuizCorrectCount,setPrevQuizCorrectCount] = useState(0)
                                     </div>
                                 </div>
 
-                                <AnswerComponent 
-                                nextQuestion={nextQuestion} 
-                                quizNumberCount={quizNumberCount}
-                                setQuizCorrectCount={setQuizCorrectCount}
-                                quizCorrectCount={quizCorrectCount}
-                                answerList={refQuestion?.current[quizNumberCount]?.answers} 
-                                correctAnswer={refQuestion.current[quizNumberCount]?.correctAnswer} 
-                                prevQuizCorrectCount={prevQuizCorrectCount}
-                                setPrevQuizCorrectCount = {setPrevQuizCorrectCount}
+                                <AnswerComponent
+                                    nextQuestion={nextQuestion}
+                                    quizNumberCount={quizNumberCount}
+                                    setQuizCorrectCount={setQuizCorrectCount}
+                                    quizCorrectCount={quizCorrectCount}
+                                    answerList={refQuestion?.current[quizNumberCount]?.answers}
+                                    correctAnswer={refQuestion.current[quizNumberCount]?.correctAnswer}
+                                    prevQuizCorrectCount={prevQuizCorrectCount}
+                                    setPrevQuizCorrectCount={setPrevQuizCorrectCount}
                                 />
 
                                 <div className="progress">
