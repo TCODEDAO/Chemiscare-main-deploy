@@ -13,26 +13,26 @@ function FooterComponent() {
                     <div>
                         <p>
                             Điện thoại:
-                            <span className="hover:opacity-[0.8] cursor-pointer">0388128994</span>
+                            <span className="hover:opacity-[0.8] cursor-pointer">0347500945 hoặc 0388128994</span>
                         </p>
                         <p>
                             Email:
-                            <span className="hover:opacity-[0.8] cursor-pointer">trinhvanson0807@gmail.com</span>
+                            <span className="hover:opacity-[0.8] cursor-pointer">thanhsieudev@gmail.com hoặc trinhvanson0807@gmail.com</span>
                         </p>
                         <p className="whitespace-nowrap">
                             Facebook:
                             <span>
-                                <span className="hover:opacity-[0.8] cursor-pointer underline">Trịnh Văn Sơn</span>
-                                &
                                 <span className="hover:opacity-[0.8] cursor-pointer underline">Nguyễn Phúc Thanh</span>
+                                &
+                                <span className="hover:opacity-[0.8] cursor-pointer underline">Trịnh Văn Sơn</span>
                             </span>
                         </p>
                         <p className="whitespace-nowrap">
                             Github:
                             <span>
-                                <span className="hover:opacity-[0.8] cursor-pointer underline">SownVP</span>
-                                &
                                 <span className="hover:opacity-[0.8] cursor-pointer underline">TCODEDAO</span>
+                                &
+                                <span className="hover:opacity-[0.8] cursor-pointer underline">SownVP</span>
                             </span>
                         </p>
                     </div>
