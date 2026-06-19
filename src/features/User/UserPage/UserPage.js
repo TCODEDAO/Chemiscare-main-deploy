@@ -11,8 +11,6 @@ function UserPage() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const results = useSelector(state => state?.quiz?.resultAllUser)
-
-    console.log(results);
     const currentUser = useSelector((state) => state?.auth?.login?.currentUser)
     const axiosJWT = createAxios(currentUser, dispatch)
     useEffect(async () => {
