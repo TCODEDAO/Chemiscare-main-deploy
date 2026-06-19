@@ -49,7 +49,7 @@ function UserPage() {
                     <div className="w-[100%] text-center mb-[40px]">
                         <div className="relative">
                             <div className="">
-                                <img className="coverImage rounded-br-[16px] rounded-bl-[16px] h-[50vh] w-[100%] object-cover" src="https://wiibook.net/wp-content/uploads/2020/09/list-sach-hay-ve-hoa-hoc-cover-757x470.png" alt="" />
+                                <img className="coverImage rounded-br-[16px] rounded-bl-[16px] h-[50vh] w-[100%] object-cover" src="https://i.pinimg.com/1200x/22/72/2b/22722b33f4d7e9d810c6bce2fe678128.jpg" alt="" />
                             </div>
                             <div className="absolute left-[50%] translate-x-[-50%] translate-y-[50%] bottom-0" >
                                 {currentUser?.avatar ? <img className="h-[180px] w-[180px] object-cover rounded-[50%] shadow-[0_0_0_6px_#13161B]" src={currentUser?.avatar} alt="" /> : <Avatar size="180px" name={currentUser?.fullName}></Avatar>}
