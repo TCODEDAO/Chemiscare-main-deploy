@@ -40,9 +40,9 @@ function UserPage() {
 
 
                 <div className="fixed top-0 right-0 left-0 z-10 flex ">
-                    <div className="cursor-pointer flex animationHoverF8 bg-[rgba(51,51,51,0.8)] items-center py-[10px] px-[20px] text-[20px] m-[8px] rounded-[8px]">
+                    <div onClick={() => navigate(-1)} className="cursor-pointer flex animationHoverF8 bg-[rgba(51,51,51,0.8)] items-center py-[10px] px-[20px] text-[20px] m-[8px] rounded-[8px]">
                         <i className="fa-solid fa-angle-left mr-[4px] text-white animationHoverF8Obj"></i>
-                        <p onClick={() => navigate(-1)} className="text-white">Quay Lại</p>
+                        <p className="text-white">Quay Lại</p>
                     </div>
                 </div>
                 <div className="max-w-[1092px] w-[100%] mx-auto flex bodyWrapper flex-wrap">
