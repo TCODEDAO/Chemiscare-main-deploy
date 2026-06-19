@@ -23,7 +23,12 @@ function CommentCard({ children, comment }) {
             </div>
             <div className="maxWidthClassName">
                 <div className="comment_detail px-[12px] py-[10px] max-w-[30.5rem] rounded-[16px] mb-[8px]">
-                    <p className="font-medium mb-[4px]  ">{comment?.userId?.fullName}</p>
+                    <Link
+                        to={`/user/userPage/${comment?.userId?._id}`}
+                        onClick={(e) => e.stopPropagation()}
+                    >   
+                        <p className="font-medium mb-[4px] ">{comment?.userId?.fullName}</p> 
+                    </Link>
                     <p className="font-light break-words  ">{comment?.content}</p>
                 </div>
                 <div className="flex items-center text-[14px] justify-between mb-[8px]">
