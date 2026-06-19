@@ -17,7 +17,7 @@
 }
 @media screen and (min-height: 700px) {
     #SpeechBubble {
-        top: 16rem !important;
+        top: 18rem !important;
     }
 }
 @media screen and (min-height: 800px) {
