@@ -22,7 +22,11 @@ export default function QuestionComponent() {
     const task = useSelector(state => state?.quiz?.task?.currentTask)
     const currentRound = useSelector(state => state?.quiz?.round?.currentRound)
 
-
+    // control sound
+    const [volume, setVolume] = useState(0.5)
+    const [isMute, setIsMute] = useState(false)
+    const audioRef = useRef(null)
+    
     //LoadingToGame
     const [playThemeSound, setPlayThemeSound] = useState(false)
     const [isCountDown, setIsCountDown] = useState(true)
@@ -140,6 +144,12 @@ export default function QuestionComponent() {
 
     }
 
+    // control sound
+    useEffect(() => {
+    if (audioRef.current) {
+        audioRef.current.volume = isMute ? 0 : volume
+    }
+    }, [volume, isMute])
 
     //Check is login
     const currentUser = useSelector(state => state.auth.login.currentUser)
@@ -239,8 +249,16 @@ export default function QuestionComponent() {
     return (
         <>
 
-            {playThemeSound && <audio className='hidden' autoPlay loop src="https://github.com/TCODEDAO/upload-an-image-chemiscare-user/blob/main/themesound.mp3?raw=true"></audio>}
-
+            // {playThemeSound && <audio className='hidden' autoPlay loop src="https://github.com/TCODEDAO/upload-an-image-chemiscare-user/blob/main/themesound.mp3?raw=true"></audio>}
+            {playThemeSound && (<audio
+            ref={audioRef}
+            className="hidden"
+            autoPlay
+            loop
+            volume={volume}
+            src="https://github.com/TCODEDAO/upload-an-image-chemiscare-user/blob/main/themesound.mp3?raw=true"
+            />)
+            }
             {isLandScape === true ? <div className='requestRotate'>Bạn cần xoay ngang màn hình để hoc!</div> :
                 <>
 
@@ -261,7 +279,15 @@ export default function QuestionComponent() {
                             }} className='h-screen w-screen fixBgGame bg-no-repeat bg-cover bg-[#191a28] relative' >
 
 
-                                <ScoreComponent min={minutes.current} sec={sec.current} level={task} />
+                            <ScoreComponent
+                                min={minutes.current}
+                                sec={sec.current}
+                                level={task}
+                                volume={volume}
+                                setVolume={setVolume}
+                                isMute={isMute}
+                                setIsMute={setIsMute}
+                            />
                                 <div className="gradientBoxQuestion  flex justify-center">
                                     <div className='gradientBoxQuestionContent flex justify-center items-center'>
                                         <span className='text-white inline-block max-w-[500px] text-[16px] select-none' dangerouslySetInnerHTML={{ __html: refQuestion.current[quizNumberCount]?.content }}></span>
