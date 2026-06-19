@@ -126,10 +126,17 @@ function RatePage() {
                         <div className="board board_rank flex border-solid border-[1px] border-[#e8e8e8] rounded-[6px] font-bold overflow-hidden w-full">
                             <ul className="w-[25%]">
                                 <li className="h-[60px] flex items-center justify-center bg-[#E0F2FE] board_col_header">TÊN</li>
-
-                                {resultRender.name.map((name, index) => {
-                                    return <li key={index} className="h-[60px] flex items-center justify-center p-[2px] board_col_item">{name}</li>
-                                })}
+    
+                                   {resultRender.name.map((name, index) => (
+                                    <li key={index} className="h-[60px] flex items-center justify-center p-[2px] board_col_item hover:opacity-80">
+                                        <Link
+                                            to={`/user/userPage/${post?.userId?._id}`}
+                                            onClick={(e) => e.stopPropagation()}
+                                        >
+                                            {name}
+                                        </Link>
+                                    </li>
+                                ))}
                             </ul>
                             {/* <ul className="grow">
                                 <li className="h-[60px] flex items-center justify-center bg-[#E0F2FE] board_col_header">LỚP</li>
