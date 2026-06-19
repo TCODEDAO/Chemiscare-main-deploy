@@ -15,6 +15,11 @@
     transform: scale(0);
     animation-fill-mode: forwards;
 }
+@media screen and (min-height: 650px) {
+    #SpeechBubble {
+        top: 16rem !important;
+    }
+}
 @media screen and (min-height: 700px) {
     #SpeechBubble {
         top: 18rem !important;
@@ -35,9 +40,24 @@
         top: 25rem !important;
     }
 }
+@media screen and (min-height: 1024px) {
+    #SpeechBubble {
+        top: 33rem !important;
+    }
+}
 @media screen and (min-width: 1279px) and (min-height: 400px) and (max-height: 600px) {
     #SpeechBubble {
         top: 201px;
+    }
+}
+@media screen and (min-width: 1024px) and (min-height: 1300px) {
+    #SpeechBubble {
+        top: 39rem !important;
+    }
+}
+@media screen and (min-width: 700px) {
+    #SpeechBubble {
+        width: 522px !important;
     }
 }
 
