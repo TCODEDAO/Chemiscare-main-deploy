@@ -303,6 +303,7 @@ export default function QuestionComponent() {
                                     correctAnswer={refQuestion.current[quizNumberCount]?.correctAnswer}
                                     prevQuizCorrectCount={prevQuizCorrectCount}
                                     setPrevQuizCorrectCount={setPrevQuizCorrectCount}
+                                    volume={volume}
                                 />
 
                                 <div className="progress">
