@@ -23,6 +23,7 @@ function RatePage() {
 
 
     const [resultRender, setResultRender] = useState({
+        ids: [],
         name: [],
         class: [],
         school: [],
@@ -33,6 +34,7 @@ function RatePage() {
         results.forEach((item, index) => {
             setResultRender((prev) => {
                 return {
+                    ids: [...prev.ids, item?.userId?._id],
                     name: [...prev.name, item?.userId?.fullName],
                     times: [...prev.times, item.currentTime],
                     scores: [...prev.scores, item.currentPoint],
@@ -47,6 +49,7 @@ function RatePage() {
         return () => {
             setResultRender(() => {
                 return {
+                    ids: [],
                     name: [],
                     times: [],
                     scores: [],
@@ -130,7 +133,7 @@ function RatePage() {
                                    {resultRender.name.map((name, index) => (
                                     <li key={index} className="h-[60px] flex items-center justify-center p-[2px] board_col_item hover:opacity-80">
                                         <Link
-                                            to={`/user/userPage/${post?.userId?._id}`}
+                                           to={`/user/userPage/${resultRender.ids[index]}`}
                                             onClick={(e) => e.stopPropagation()}
                                         >
                                             {name}
