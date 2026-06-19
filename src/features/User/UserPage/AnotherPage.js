@@ -41,9 +41,9 @@ function AnotherPage() {
             <div className="pb-[80px] bg-[#13161B] relative min-h-[100vh] content_Wrapper">
 
                 <div className="fixed  top-0 right-0 left-0 z-30 flex ">
-                    <div className="cursor-pointer animationHoverF8 flex bg-[rgba(51,51,51,0.8)] items-center py-[10px] px-[20px] text-[20px] m-[8px] rounded-[8px]" onClick={() => navigate(-1)}>
+                    <div onClick={() => navigate(-1)} className="cursor-pointer animationHoverF8 flex bg-[rgba(51,51,51,0.8)] items-center py-[10px] px-[20px] text-[20px] m-[8px] rounded-[8px]" onClick={() => navigate(-1)}>
                         <i className="fa-solid fa-angle-left mr-[4px] text-white animationHoverF8Obj "></i>
-                        <p className='text-white  cursor-pointer ' onClick={() => navigate(-1)} >Quay Lại</p>
+                        <p className='text-white cursor-pointer'>Quay Lại</p>
                     </div>
                 </div>
                 <div className="max-w-[1092px] w-[100%] mx-auto flex bodyWrapper flex-wrap">
