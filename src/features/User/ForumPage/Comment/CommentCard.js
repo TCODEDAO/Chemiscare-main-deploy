@@ -4,6 +4,7 @@ import moment from 'moment'
 import 'moment/locale/vi'
 import Avatar from '../../../../components/Avatar/AvatarComponent'
 
+import { Link } from 'react-router-dom'
 //config language
 moment.locale('vi')
 
