@@ -35,7 +35,14 @@ const PostExcerpt = ({ post, currentUser, socket, axiosJWT }) => {
                         ></Avatar>}
 
                     </div>
-                    <p className="font-medium p-white-forum hover:opacity-80 ml-2">{post?.userId?.fullName}</p>
+                    <Link
+                        to={`/user/userPage/${post?.userId?._id}`}
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <p className="font-medium p-white-forum hover:opacity-80 ml-2">
+                            {post?.userId?.fullName}
+                        </p>
+                    </Link>
                 </div>
                 <div>
                     {/* <i className="cursor-pointer fa-regular fa-bookmark  p-white-forum mr-[8px]"></i> */}
