@@ -1,7 +1,13 @@
 import React, { memo } from 'react'
 import { useSelector } from 'react-redux'
 
-function ScoreComponent({ min, sec, level }) {
+function ScoreComponent({   min,
+                            sec,
+                            level,
+                            volume,
+                            setVolume,
+                            isMute,
+                            setIsMute }) {
     const currentScore = useSelector((state) => state.quiz?.score?.currentScore)
     const currentUser = useSelector((state) => state.auth?.login?.currentUser)
 
@@ -23,6 +29,24 @@ function ScoreComponent({ min, sec, level }) {
             </div>
 
             <div className="pb-1">Cấp độ: {level}</div>
+            <div className="flex flex-col items-center gap-2">
+                <button
+                    className="bg-[#74b9ff] px-3 py-1 rounded-lg text-sm"
+                    onClick={() => setIsMute(!isMute)}
+                >
+                    {isMute ? "🔇" : "🔊"}
+                </button>
+            
+                <input
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value={volume}
+                    onChange={(e) => setVolume(Number(e.target.value))}
+                    className="w-[120px]"
+                />
+            </div>
         </div>
     )
 }
