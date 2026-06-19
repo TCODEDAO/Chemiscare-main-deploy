@@ -26,6 +26,7 @@ function CommentCard({ children, comment }) {
                     <Link
                         to={`/user/userPage/${comment?.userId?._id}`}
                         onClick={(e) => e.stopPropagation()}
+                        className="hover:opacity-80"
                     >   
                         <p className="font-medium mb-[4px] ">{comment?.userId?.fullName}</p> 
                     </Link>
