@@ -249,7 +249,7 @@ export default function QuestionComponent() {
     return (
         <>
 
-            // {playThemeSound && <audio className='hidden' autoPlay loop src="https://github.com/TCODEDAO/upload-an-image-chemiscare-user/blob/main/themesound.mp3?raw=true"></audio>}
+          {/* {playThemeSound && <audio className='hidden' autoPlay loop src="https://github.com/TCODEDAO/upload-an-image-chemiscare-user/blob/main/themesound.mp3?raw=true"></audio>} */}
             {playThemeSound && (<audio
             ref={audioRef}
             className="hidden"
