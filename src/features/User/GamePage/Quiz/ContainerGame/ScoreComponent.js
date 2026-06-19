@@ -30,12 +30,11 @@ function ScoreComponent({   min,
 
             <div className="pb-1">Cấp độ: {level}</div>
             <div className="flex flex-col items-center gap-2">
-                <button
+                <div
                     className="bg-[#74b9ff] px-3 py-1 rounded-lg text-sm"
-                    onClick={() => setIsMute(!isMute)}
                 >
-                    {isMute ? "🔇" : "🔊"}
-                </button>
+                    {"🔊"}
+                </div>
             
                 <input
                     type="range"
