@@ -18,7 +18,8 @@ function AnswerComponent({
     setQuizCorrectCount,
     quizCorrectCount,
     prevQuizCorrectCount,
-    setPrevQuizCorrectCount
+    setPrevQuizCorrectCount,
+    volume
  }) {
     const dispatch = useDispatch()
     const [answerChoice, setAnswerChoice] = useState(null)
@@ -62,17 +63,17 @@ function AnswerComponent({
                 
                 if(quizCorrectCount === quizNumberCount){
                     if(quizCorrectCount >=6){
-                        playSound(musics.correct.sevenKill)
+                        playSound(musics.correct.sevenKill, volume)
                     }else{
 
-                        playSound( Object.values( musics.correct)[quizCorrectCount-1])
+                        playSound( Object.values( musics.correct)[quizCorrectCount-1], volume)
                     }
                    
                 }else{
                    if(quizNumberCount > 4){
-                       playSound(Object.values(musics.correct)[quizNumberCount])   
+                       playSound(Object.values(musics.correct)[quizNumberCount],volume)   
                    }else{
-                    playSound(musics.correct.secondKill)
+                        playSound(musics.correct.secondKill,volume)
                    }
                 }
                 
@@ -118,11 +119,11 @@ function AnswerComponent({
                         setQuizCorrectCount(0)
 
                         if(prevQuizCorrectCount > 2){
-                            playSound(musics.wrong.shutDown)
+                            playSound(musics.wrong.shutDown,volume)
                             setPrevQuizCorrectCount(0)
                         }else{
                             const randomSong = Object.values(musics.wrong)[Math.round(Math.random()*1)]
-                            playSound(randomSong)
+                            playSound(randomSong,volume)
                             setPrevQuizCorrectCount(0)
 
                         }
