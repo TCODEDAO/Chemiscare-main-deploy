@@ -1,8 +1,8 @@
-const playSound = async(name) => {
-    console.log(name);
+export playSound = async(name, volume = 0.5) => {
     const url = `${process.env.REACT_APP_PUBLIC_URL}/sounds/${name}.mp3`
     const a = new Audio(url);
-   await a.play();
+    a.volume = volume
+   await a.play()
 }
 
 export {playSound}
