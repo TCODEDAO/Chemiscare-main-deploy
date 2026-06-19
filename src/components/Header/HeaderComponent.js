@@ -156,9 +156,15 @@ function HeaderComponent({ currentUser }) {
                                         name={currentUser?.fullName}
                                     ></Avatar>
                                     <div className='pl-2'>
-                                        <p className='font-bold text-[16px] user_menu_userName'>
-                                            {currentUser?.fullName}
-                                        </p>
+                                         <Link
+                                            to={`/user/userPage/${currentUser?._id}`}
+                                            onClick={(e) => e.stopPropagation()}
+                                            className="hover:opacity-80"
+                                        > 
+                                            <p className='font-bold text-[16px] user_menu_userName'>
+                                                {currentUser?.fullName}
+                                            </p>
+                                        </Link>
                                         <p className='text-[14px] font-light user_menu_userSchool'>
                                             {
                                                 currentUser
