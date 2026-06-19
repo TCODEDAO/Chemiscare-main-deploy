@@ -15,10 +15,41 @@
     transform: scale(0);
     animation-fill-mode: forwards;
 }
-
+@media screen and (min-height: 700px) {
+    #SpeechBubble {
+        top: 16rem !important;
+    }
+}
+@media screen and (min-height: 800px) {
+    #SpeechBubble {
+        top: 20rem !important;
+    }
+}
+@media screen and (height: 932px) {
+    #SpeechBubble {
+        top: 23rem !important;
+    }
+}
+@media screen and (min-height: 950px) {
+    #SpeechBubble {
+        top: 25rem !important;
+    }
+}
 @media screen and (min-width: 1279px) and (min-height: 400px) and (max-height: 600px) {
     #SpeechBubble {
         top: 201px;
+    }
+}
+
+@media screen and (min-width: 1370px) {
+    #SpeechBubble {
+        left: 26% !important;
+    }
+}
+
+@media screen and (min-height: 932px) {
+    .responsiveStartBtn {
+        top: 56% !important;
     }
 }
 
